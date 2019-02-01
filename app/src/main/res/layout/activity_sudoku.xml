@@ -1,81 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <View
-        android:id="@+id/my_view"
-        android:layout_width="match_parent"
-        android:layout_height="277dp" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="?android:attr/listDivider" />
-
-    <TableLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/keyboard"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stretchColumns="*">>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/keyBoard1"
-                android:text="1" />
-
-            <Button
-                android:id="@+id/keyBoard2"
-                android:text="2" />
-
-            <Button
-                android:id="@+id/keyBoard3"
-                android:text="3" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/keyBoard4"
-                android:text="4" />
-
-            <Button
-                android:id="@+id/keyBoard5"
-                android:text="5" />
-
-            <Button
-                android:id="@+id/keyBoard6"
-                android:text="6" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/keyBoard7"
-                android:text="7" />
-
-            <Button
-                android:id="@+id/keyBoard8"
-                android:text="8" />
-
-            <Button
-                android:id="@+id/keyBoard9"
-                android:text="9" />
-        </TableRow>
-
-    </TableLayout>
-
-</LinearLayout>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/AbsoluteLayout01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <TextView android:id="@+id/txtIntro"
+        android:text="绝对布局"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="20dip"
+        android:layout_y="20dip">
+    </TextView>
+</AbsoluteLayout>
