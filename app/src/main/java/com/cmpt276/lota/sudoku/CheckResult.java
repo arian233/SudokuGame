@@ -8,6 +8,7 @@ public class CheckResult {
 
     public boolean checkValid(Language puzzle[][], int puzzleYIndex, int puzzleXIndex) {
         int check[]=new int[puzzleSize+1];
+
         //check row
         for(int i=0; i<puzzleSize ; i++){
             if(puzzle[puzzleYIndex][i].getNumber()!=0){
@@ -34,13 +35,25 @@ public class CheckResult {
         y*=3;
         for(int j=0; j<3; j++){
             for(int i=0; i<3; i++){
-                if (check[puzzle[y][x+i].getNumber()] == 3 )
-                    return false;
-                else
-                    check[puzzle[y][x+i].getNumber()] = 3;
+                if(puzzle[y+j][x+i].getNumber()!=0){
+                    if (check[puzzle[y+j][x+i].getNumber()] == 3 )
+                        return false;
+                    else
+                        check[puzzle[y+j][x+i].getNumber()] = 3;
+                }
             }
         }
 
+        return true;
+    }
+
+    public boolean checkResult(Language puzzle[][]){
+        for(int j=0; j<puzzleSize ; j++) {
+            for (int i = 0; i < puzzleSize; i++) {
+                if (puzzle[j][i].getNumber() == 0 )
+                    return false;
+            }
+        }
         return true;
     }
 }
