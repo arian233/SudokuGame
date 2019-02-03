@@ -2,7 +2,6 @@ package com.cmpt276.lota.sudoku;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Chronometer;
 
 
@@ -19,8 +18,8 @@ public class SudokuActivity extends Activity {
 
         setContentView(R.layout.activity_sudoku);
         customView = findViewById(R.id.MyCustomView);
-        timer = findViewById(R.id.chronometer);
-        timer.setFormat("time: %s");
+        timer = findViewById(R.id.timer);
+        timer.setFormat("time passed: %s");
         timer.start();
     }
 
