@@ -1,14 +1,24 @@
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.cmpt276.lota.sudoku.MyView
-        android:id="@+id/MyView"
+        android:id="@+id/MyCustomView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/gridTextPaint_Color"
+        android:layout_marginTop="15dp"/>
 
 
-</LinearLayout>
+</RelativeLayout>
+

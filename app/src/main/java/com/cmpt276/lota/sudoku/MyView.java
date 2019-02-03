@@ -3,9 +3,11 @@ package com.cmpt276.lota.sudoku;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
@@ -41,6 +43,18 @@ public class MyView extends View {
 
     public MyView(Context context){
         super(context);
+        this.mContext = context;
+        init();
+    }
+
+    public MyView(Context context,AttributeSet attrs){
+        super(context, attrs);
+        this.mContext = context;
+        init();
+    }
+
+    public MyView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         this.mContext = context;
         init();
     }
