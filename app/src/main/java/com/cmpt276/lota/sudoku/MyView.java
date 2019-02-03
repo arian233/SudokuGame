@@ -2,16 +2,12 @@ package com.cmpt276.lota.sudoku;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-
 
 public class MyView extends View {
 
@@ -41,6 +37,7 @@ public class MyView extends View {
     private Language mPuzzle[][];
 
     private CheckResult mCheckResult;
+    private int SwitchLaguageFlag=1;//1 is 1st lan, -1 is second lan
 
     public MyView(Context context){
         super(context);
@@ -71,7 +68,7 @@ public class MyView extends View {
 
         mGridTextPaint = new Paint();//set for Texts
         mGridTextPaint.setColor(getResources().getColor(R.color.gridTextPaint_Color));
-        mGridTextPaint.setTextSize(mGridWidth*0.3f);
+        mGridTextPaint.setTextSize(mGridWidth*0.25f);
         mGridTextPaint.setTextAlign(Paint.Align.CENTER);
         mGridTextPaint.setAntiAlias(true);
 
@@ -89,12 +86,11 @@ public class MyView extends View {
 
     public void onDraw(Canvas canvas){
 
-
         // Set background
         canvas.drawColor(getResources().getColor(R.color.mBackgroundPaint_Color));
 
         //Draw grids
-        //to draw grids backgroud
+        //to draw grids background
         for (int j = 0; j < 9; j++) {
             for (int i = 0; i < 9; i++) {
                 canvas.drawRect(i*mGridWidth+ mGridLeftBlank, (j+1)*mGridWidth+ mGridLeftBlank, i*mGridWidth+ mGridLeftBlank +mGridWidth, (j+1)*mGridWidth+ mGridLeftBlank +mGridWidth, mBlankGridPaint);
@@ -129,18 +125,24 @@ public class MyView extends View {
             canvas.drawLine((i*3)*mGridWidth+ mGridLeftBlank,mGridWidth+ mGridLeftBlank,(i*3)*mGridWidth+ mGridLeftBlank,mGridWidth+ mGridLeftBlank +9*mGridWidth, mGridLinePaint);
         }
 
-
-        Paint.FontMetrics fontMetrics = mGridTextPaint.getFontMetrics();
-        offX = mGridWidth/2;
-        offY = mGridWidth / 2 - (fontMetrics.ascent + fontMetrics.descent) / 2;
-
         //Draw preset grids text
+        Paint.FontMetrics fontMetrics = mGridTextPaint.getFontMetrics();
+        offX = mGridWidth / 2;//center point
+        offY = mGridWidth / 2 - (fontMetrics.ascent + fontMetrics.descent) / 2;//baseline for text
+
         for (int j = 0; j < mPuzzleSize; j++) {
             for (int i = 0; i < mPuzzleSize; i++) {
-                if( mPuzzle[j][i].getNumber() !=0 && mPuzzle[j][i].getFlag()==-1)
-                    canvas.drawText(mPuzzle[j][i].getLanguageOne(), i*mGridWidth+ mGridLeftBlank +offX, (j+1)*mGridWidth+ mGridLeftBlank +offY, mGridTextPaint);
-                else if( mPuzzle[j][i].getNumber() !=0 && mPuzzle[j][i].getFlag()==1)
-                    canvas.drawText(mPuzzle[j][i].getLanguageTwo(), i*mGridWidth+ mGridLeftBlank +offX, (j+1)*mGridWidth+ mGridLeftBlank +offY, mGridTextPaint);
+                if( mPuzzle[j][i].getNumber() !=0 && mPuzzle[j][i].getFlag()==-1) {
+                    if(SwitchLaguageFlag == 1)
+                        canvas.drawText(mPuzzle[j][i].getLanguageOne(), i * mGridWidth + mGridLeftBlank + offX, (j + 1) * mGridWidth + mGridLeftBlank + offY, mGridTextPaint);
+                    else
+                        canvas.drawText(mPuzzle[j][i].getLanguageTwo(), i * mGridWidth + mGridLeftBlank + offX, (j + 1) * mGridWidth + mGridLeftBlank + offY, mGridTextPaint);
+                }else if( mPuzzle[j][i].getNumber() !=0 && mPuzzle[j][i].getFlag()==1) {
+                    if(SwitchLaguageFlag == 1)
+                        canvas.drawText(mPuzzle[j][i].getLanguageTwo(), i * mGridWidth + mGridLeftBlank + offX, (j + 1) * mGridWidth + mGridLeftBlank + offY, mGridTextPaint);
+                    else
+                        canvas.drawText(mPuzzle[j][i].getLanguageOne(), i * mGridWidth + mGridLeftBlank + offX, (j + 1) * mGridWidth + mGridLeftBlank + offY, mGridTextPaint);
+                }
             }
         }
 
@@ -160,7 +162,10 @@ public class MyView extends View {
 
         //Draw Texts for typeIn buttons
         for (int i = 0; i < 9; i++) {
-            canvas.drawText(lan.get(i+1).getLanguageTwo(), i*mGridWidth+ mGridLeftBlank +offX, (mButtonPosition)*mGridWidth+ mGridLeftBlank +offY, mGridTextPaint);
+            if(SwitchLaguageFlag == 1)
+                canvas.drawText(lan.get(i+1).getLanguageTwo(), i*mGridWidth+ mGridLeftBlank +offX, (mButtonPosition)*mGridWidth+ mGridLeftBlank +offY, mGridTextPaint);
+            else
+                canvas.drawText(lan.get(i+1).getLanguageOne(), i*mGridWidth+ mGridLeftBlank +offX, (mButtonPosition)*mGridWidth+ mGridLeftBlank +offY, mGridTextPaint);
         }
 
         //Draw Check Answer Button
@@ -169,6 +174,10 @@ public class MyView extends View {
         canvas.drawRect(1*mGridWidth+ mGridLeftBlank, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank, 2*mGridWidth+ mGridLeftBlank +mGridWidth, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank +mGridWidth, mTypeInButtonStrokePaint);
         canvas.drawText("Check Answer", 1*mGridWidth+ mGridLeftBlank +offX, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank +offY, mGridTextPaint);
 
+        //Draw switch language Button
+        canvas.drawRect(4*mGridWidth+ mGridLeftBlank, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank, 5*mGridWidth+ mGridLeftBlank +mGridWidth, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank +mGridWidth, mTypeInButtonColorPaint);
+        canvas.drawRect(4*mGridWidth+ mGridLeftBlank, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank, 5*mGridWidth+ mGridLeftBlank +mGridWidth, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank +mGridWidth, mTypeInButtonStrokePaint);
+        canvas.drawText("Switch Language", 4*mGridWidth+ mGridLeftBlank +offX, (mButtonPosition+2)*mGridWidth+ mGridLeftBlank +offY, mGridTextPaint);
 
         mGridLinePaint.setStrokeWidth(2);//set back, for reDraw
         //Log.v("onDraw(Canvas canvas)","" + this.getHeight()+ "   " + this.getWidth());
@@ -210,6 +219,13 @@ public class MyView extends View {
                 toast.show();
                 return false;
             }
+        }
+
+        //when pressed Switch language button
+        if((x <= 5*mGridWidth+ mGridLeftBlank +mGridWidth && x >= 4*mGridWidth+ mGridLeftBlank) && (y >= (mButtonPosition+2)*mGridWidth+ mGridLeftBlank && y<= (mButtonPosition+2)*mGridWidth+ mGridLeftBlank +mGridWidth)){
+            SwitchLaguageFlag *= -1;
+            invalidate();
+            return false;
         }
 
         if( x< mGridLeftBlank || x> 9*mGridWidth+ mGridLeftBlank || y> (mButtonPosition+1)*mGridWidth+ mGridLeftBlank || (y > 10*mGridWidth+ mGridLeftBlank && y < mButtonPosition*mGridWidth+ mGridLeftBlank) || y < mGridWidth+ mGridLeftBlank) {
