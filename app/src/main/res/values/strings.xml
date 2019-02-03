@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Sudoku</string>
+    <string name="app_name">Sudoku Vocabulary</string>
+    <string name="DontTapRepeate_toast">Please don\'t tap preset grids.</string>
+    <string name="FoundRepeat_toast">Found Repetition.</string>
 </resources>
