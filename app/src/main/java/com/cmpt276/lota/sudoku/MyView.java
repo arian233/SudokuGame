@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
@@ -96,12 +96,41 @@ public class MyView extends View {
         mTypeInButtonStrokePaint.setStrokeWidth(7);
 
         mCheckResult = new CheckResult();
+
+        GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener(){
+            @Override
+            public void onLongPress(MotionEvent e) {
+                int x = (int)e.getX();
+                int y = (int)e.getY();
+                int puzzleYIndex=0, puzzleXIndex=0;
+                if( (x <= (9*mGridWidth+ mGridLeftBlank) && x >= mGridLeftBlank)&& ( y >= mGridWidth+ mGridLeftBlank && y <= 10*mGridWidth+ mGridLeftBlank)) {
+                    puzzleYIndex = (y - (y - mGridLeftBlank) % mGridLeftBlank) / mGridWidth - 1;
+                    puzzleXIndex = (x - mGridLeftBlank) / mGridWidth;
+                    if (mPuzzle[puzzleYIndex][puzzleXIndex].getNumber() ==0){
+                        Toast toast =Toast.makeText(mContext,R.string.FailLongPress_toast,Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                    }else{
+                        String str;
+                        if(SwitchLaguageFlag == 1){
+                            str = mPuzzle[puzzleYIndex][puzzleXIndex].getLanguageOne();
+                        }else{
+                            str = mPuzzle[puzzleYIndex][puzzleXIndex].getLanguageTwo();
+                        }
+                        Toast toast =Toast.makeText(mContext,str,Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                    }
+                }
+            }
+        };
     }
 
     public void onDraw(Canvas canvas){
 
         // Set background
         canvas.drawColor(getResources().getColor(R.color.mBackgroundPaint_Color));
+
 
         //Draw grids
         //to draw grids background
@@ -198,6 +227,8 @@ public class MyView extends View {
 
     }
 
+
+
     public boolean onTouchEvent(MotionEvent e) {
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
@@ -251,7 +282,7 @@ public class MyView extends View {
         }else if( mPreviousX != -99 && mPreviousY != -99 ){
 
             if((x <= (9*mGridWidth+ mGridLeftBlank) && x >= mGridLeftBlank) && (y >= mButtonPosition*mGridWidth+ mGridLeftBlank && y<= (mButtonPosition+1)*mGridWidth+ mGridLeftBlank)) {
-                //press grid first
+                //press grid first， now is button
                 if((x <= (mPreviousX*mGridWidth+ mGridLeftBlank) && mPreviousX >= mGridLeftBlank) && (mPreviousY >= mButtonPosition*mGridWidth+ mGridLeftBlank && mPreviousY<= (mButtonPosition+1)*mGridWidth+ mGridLeftBlank))
                     return false;
                 puzzleYIndex = (mPreviousY - (mPreviousY - mGridLeftBlank) % mGridLeftBlank) / mGridWidth - 1;
@@ -259,7 +290,7 @@ public class MyView extends View {
                 lanIndex = (x - mGridLeftBlank) / mGridWidth + 1;
 
             }else if( (x <= (9*mGridWidth+ mGridLeftBlank) && x >= mGridLeftBlank)&& ( y >= mGridWidth+ mGridLeftBlank && y <= 10*mGridWidth+ mGridLeftBlank)) {
-                //press button first
+                //press button first, now is grid
                 if( (mPreviousX <= (9*mGridWidth+ mGridLeftBlank) && mPreviousX >= mGridLeftBlank)&& ( mPreviousY >= mGridWidth+ mGridLeftBlank && mPreviousY <= 10*mGridWidth+ mGridLeftBlank))
                     return false;
                 puzzleYIndex = (y - (y - mGridLeftBlank) % mGridLeftBlank) / mGridWidth - 1;
@@ -269,21 +300,15 @@ public class MyView extends View {
 
             //check repetition
             mPuzzle[puzzleYIndex][puzzleXIndex] = new Language(lan.get(lanIndex).getNumber(), lan.get(lanIndex).getLanguageOne(), lan.get(lanIndex).getLanguageTwo(),1);
-
             if (!mCheckResult.checkValid(mPuzzle,puzzleYIndex,puzzleXIndex)){
                 mPuzzle[puzzleYIndex][puzzleXIndex] = new Language(lan.get(0).getNumber(), lan.get(0).getLanguageOne(), lan.get(0).getLanguageTwo(),0);//invalid input, found repetition
                 Toast toast =Toast.makeText(this.mContext,R.string.FoundRepeat_toast,Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }
-
             copyFlag=1;
-
         }
 
-
-        //bug 不能重点两次 button fixed
-        //bug 点出界 fixed
         invalidate();
         if(copyFlag==0){
             mPreviousX = x;
@@ -295,5 +320,5 @@ public class MyView extends View {
         return false;
     }
 
+
 }
-//Log.v("onTouch","xxxxxxxxxxxxxx:  " + puzzleYIndex+"   "+puzzleXIndex);

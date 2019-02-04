@@ -4,4 +4,5 @@
     <string name="FoundRepeat_toast">Found Repetition.</string>
     <string name="Complete_toast">Congratulations! You finished the puzzle.</string>
     <string name="Fail_toast">Your result is incomplete.</string>
+    <string name="FailLongPress_toast">It\'s a blank grid.</string>
 </resources>
