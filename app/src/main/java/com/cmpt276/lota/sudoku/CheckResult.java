@@ -1,11 +1,20 @@
 package com.cmpt276.lota.sudoku;
 
 public class CheckResult {
-    private int puzzleSize=9;
+    private final int puzzleSize=9;
 
-
+    /**
+     * default constructor.
+     */
     public CheckResult(){}
 
+    /**
+     * to check repetition.
+     * @param puzzle: an 2d array of Language objects
+     * @param puzzleYIndex: the y index of 2d array
+     * @param puzzleXIndex: the x index of 2d array
+     * @return boolean
+     */
     public boolean checkValid(Language puzzle[][], int puzzleYIndex, int puzzleXIndex) {
         int check[]=new int[puzzleSize+1];
 
@@ -43,10 +52,14 @@ public class CheckResult {
                 }
             }
         }
-
         return true;
     }
 
+    /**
+     * to check if there's an empty grid.
+     * @param puzzle: an 2d array of Language objects
+     * @return boolean
+     */
     public boolean checkResult(Language puzzle[][]){
         for(int j=0; j<puzzleSize ; j++) {
             for (int i = 0; i < puzzleSize; i++) {

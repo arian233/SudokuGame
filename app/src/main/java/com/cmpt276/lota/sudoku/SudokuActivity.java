@@ -12,15 +12,12 @@ public class SudokuActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //MyView customView= new MyView(this);
-        //setContentView(customView);
-
         setContentView(R.layout.activity_sudoku);
         customView = findViewById(R.id.MyCustomView);
         timer = findViewById(R.id.timer);
         timer.setFormat("time passed: %s");
         timer.start();
     }
-
 }
+//MyView customView= new MyView(this);
+//setContentView(customView);

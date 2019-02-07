@@ -3,23 +3,34 @@ package com.cmpt276.lota.sudoku;
 import java.util.ArrayList;
 
 public class PuzzleGenerator {
-    private String lan[][];
-    private int lanSize = 10;
-    private int puzzleSize = 9;
+    private String lan[][];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
+    private final int lanSize = 10;
+    private final int puzzleSize = 9;
 
-
+    /**
+     * Constructor: to have a 2d array of preset two languages
+     */
     PuzzleGenerator(){
+        //
         lan = new String[][]{ {"dummy","one", "two","three","four", "five","six","seven", "eight","nine"},{"dummy","一", "二","三","四", "五","六","七", "八","九"} };
     }
 
-    public ArrayList<Language> generateLanguage(ArrayList<Language> languge){
+    /**
+     * to generate 81 Language objects, each one contains the number and two languages.
+     * @param  language: an arraylist of Language objects
+     * @return an arraylist of Language objects
+     */
+    public ArrayList<Language> generateLanguage(ArrayList<Language> language){
         for(int i=0; i<lanSize;i++){
-            languge.add(new Language(i,lan[0][i],lan[1][i],0));
+            language.add(new Language(i,lan[0][i],lan[1][i],0));
         }
-
-        return languge;
+        return language;
     }
 
+    /**
+     * to generate puzzle
+     * @return a generated puzzle
+     */
     public Language[][] generatePuzzle(){
         int tmp[][] = new int[][]{
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -43,5 +54,4 @@ public class PuzzleGenerator {
         }
         return puzzle;
     }
-
 }
