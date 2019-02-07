@@ -4,7 +4,7 @@ public class CheckResult {
     private final int puzzleSize=9;
 
     /**
-     * default constructor.
+     * default constructor
      */
     public CheckResult(){}
 
