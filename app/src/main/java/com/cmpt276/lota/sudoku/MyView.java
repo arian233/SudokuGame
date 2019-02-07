@@ -249,7 +249,7 @@ public class MyView extends View {
         int puzzleYIndex=0, puzzleXIndex=0, lanIndex=0;
         int copyFlag=0;//0 means detect a valid touch; 1 means found a invalid touching position and clear previous touching position( also means a pair of touching completed)
 
-        //check if touched preset grids, it will popup a toast that tells user it's a invalid position to touch(just for iteration1 for testing, toast'll be removed b/c it's annoying).
+        //check if touched preset grids, it will popup a toast that tells the hint(translation of that grid).
         if( (x <= (9*mGridWidth+ mGridLeftBlank) && x >= mGridLeftBlank)&& (y <= 10*mGridWidth+ mGridLeftBlank && y >= mGridWidth+ mGridLeftBlank)){
             puzzleYIndex = (y-(y - mGridLeftBlank) % mGridLeftBlank) / mGridWidth -1;
             puzzleXIndex = (x - mGridLeftBlank) / mGridWidth ;
@@ -262,7 +262,7 @@ public class MyView extends View {
                 else
                     str = mPuzzle[puzzleYIndex][puzzleXIndex].getLanguageOne();
 
-                Toast toast =Toast.makeText(this.mContext,str,Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this.mContext,str,Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 return false;
@@ -320,8 +320,8 @@ public class MyView extends View {
                 lanIndex = (mPreviousX - mGridLeftBlank) / mGridWidth + 1;
             }
 
-            if(puzzleYIndex==9)
-                puzzleYIndex=8;
+            if(puzzleYIndex == 9)
+                puzzleYIndex = 8;
 
             //check repetition
             mPuzzle[puzzleYIndex][puzzleXIndex] = new Language(lan.get(lanIndex).getNumber(), lan.get(lanIndex).getLanguageOne(), lan.get(lanIndex).getLanguageTwo(),1);
