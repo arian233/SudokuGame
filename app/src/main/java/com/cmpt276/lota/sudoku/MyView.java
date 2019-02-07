@@ -18,7 +18,7 @@ public class MyView extends View {
 
     private Context mContext;
     private int mScreenWidth;
-    private int mScreenHeight;// it's useful in the later iteration
+    private int mScreenHeight; // it's useful in the later iteration
     private int mGridWidth;
     private final int mGridLeftBlank =20;//to set for a space between grids and screen edge
 
