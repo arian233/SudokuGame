@@ -253,10 +253,16 @@ public class MyView extends View {
         if( (x <= (9*mGridWidth+ mGridLeftBlank) && x >= mGridLeftBlank)&& (y <= 10*mGridWidth+ mGridLeftBlank && y >= mGridWidth+ mGridLeftBlank)){
             puzzleYIndex = (y-(y - mGridLeftBlank) % mGridLeftBlank) / mGridWidth -1;
             puzzleXIndex = (x - mGridLeftBlank) / mGridWidth ;
-            if(puzzleYIndex==9)
-                puzzleYIndex=8;//in case the very bottom of row 9 being touched and cause crash
-            if(mPuzzle[puzzleYIndex][puzzleXIndex].getFlag()==-1){
-                Toast toast =Toast.makeText(this.mContext,R.string.DontTapRepeate_toast,Toast.LENGTH_SHORT);
+            if(puzzleYIndex == 9)
+                puzzleYIndex = 8;//in case the very bottom of row 9 being touched and cause crash
+            if(mPuzzle[puzzleYIndex][puzzleXIndex].getFlag() == -1){
+                String str;
+                if (SwitchLanguageFlag ==1 )
+                    str = mPuzzle[puzzleYIndex][puzzleXIndex].getLanguageTwo();
+                else
+                    str = mPuzzle[puzzleYIndex][puzzleXIndex].getLanguageOne();
+
+                Toast toast =Toast.makeText(this.mContext,str,Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 return false;
