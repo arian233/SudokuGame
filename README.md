@@ -1,3 +1,4 @@
+
 #### **Sudoku Vocabulary Application** 
 This is a 9*9 Sudoku application that helps the users to learn a second language.
 
@@ -18,14 +19,14 @@ For now, there's only one preset puzzle, and the puzzle generator will be implem
 
 The answer for this preset puzzle is:
 ```
-{ { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 
-  { 4, 5, 6, 7, 8, 9, 1, 2, 3 },
-  { 7, 8, 9, 1, 2, 3, 4, 5, 6 },
-  { 2, 1, 4, 3, 6, 5, 8, 9, 7 },
-  { 3, 6, 5, 8, 9, 7, 2, 1, 4 },
-  { 8, 9, 7, 2, 1, 4, 3, 6, 5 },
-  { 5, 3, 1, 6, 4, 2, 9, 7, 8 },
-  { 6, 4, 2, 9, 7, 8, 5, 3, 1 },
-  { 9, 7, 8, 5, 3, 1, 6, 4, 2 } }
+  { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+  { 4, 5, 6, 7, 8, 9, 1, 2, 3 }
+  { 7, 8, 9, 1, 2, 3, 4, 5, 6 }
+  { 2, 1, 4, 3, 6, 5, 8, 9, 7 }
+  { 3, 6, 5, 8, 9, 7, 2, 1, 4 }
+  { 8, 9, 7, 2, 1, 4, 3, 6, 5 }
+  { 5, 3, 1, 6, 4, 2, 9, 7, 8 }
+  { 6, 4, 2, 9, 7, 8, 5, 3, 1 }
+  { 9, 7, 8, 5, 3, 1, 6, 4, 2 }
 ```
 **This application was created by group IOTA as the first team iteration in CMPT276**
