@@ -1,4 +1,3 @@
-
 #### **Sudoku Vocabulary Application** 
 This is a 9*9 Sudoku application that helps the users to learn a second language.
 
@@ -6,13 +5,14 @@ For now, there's only one preset puzzle, and the puzzle generator will be implem
 
 
 **User Instruction:**
-- Clicking on an empty cell and then select the answer that you want, in the buttons below; alternatively click on the buttons at the bottom of screen then select the desired cell.
-- While playing the sudoku, user can switch the displaying language.
+- Click on an empty cell and then select the answer that you want from the buttons below; alternatively click on the buttons at the bottom of screen then select the desired cell.
+- While playing the sudoku, user can switch between Chinese and English by tappingng on "Switch language" button.
 - The application has the ability to check for repetitions instantly.
 - This application features a timer on the top of the screen.
-- While playing the sudoku, the user can click the cells in the gird to get a short pop message of the hint (translation) of the word.
+- While playing the sudoku, the user can click the cells in the gird to get a short pop up message as translation hint of that word.
 
-**As the planned by the group, we created two versions of the app, we decided to use the more stable version for marking, the other one is still incomplete due to the time constraints.**
+**As the planned by the group, we created two versions of the app however we decided to use the more stable version for marking,
+the other one is still incomplete due to the time constraints.**
 
 
 **The one for marking is in the master branch, and the other version is located at the "Master_1" branch.**
