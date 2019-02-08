@@ -3,7 +3,7 @@ This is a 9*9 Sudoku application that helps the users to learn a second language
 
 For now, there's only one preset puzzle, and the puzzle generator will be implemented in the later iteration.
 
-This app has been test on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". Test environment is MACOS 10.14.2, 10.13 and Windows 10.
+This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". Test environment is MACOS 10.14.2, 10.13 and Windows 10.
 
 This app is only runnable in vertical screen mode for now, may support horizontal mode in the later iteration.
 
