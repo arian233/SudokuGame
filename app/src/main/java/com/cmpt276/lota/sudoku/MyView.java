@@ -8,6 +8,7 @@ import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.Toast;
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class MyView extends View {
 
     private CheckResult mCheckResult;
     private int SwitchLanguageFlag=1;//1 is 1st lan, -1 is second lan
+
+    private Chronometer timer;
 
     public MyView(Context context){
         super(context);
@@ -128,6 +131,21 @@ public class MyView extends View {
 //                }
 //            }
 //        };
+    }
+
+    /**
+     * to set timer
+     * @param timer: a Chronometer object
+     */
+    public void setTimer(Chronometer timer){
+        this.timer=timer;
+    }
+
+    /**
+     * to stop timer
+     */
+    public void stopTimer(){
+        timer.stop();
     }
 
     /**
@@ -277,6 +295,7 @@ public class MyView extends View {
                 Toast toast =Toast.makeText(this.mContext,R.string.Complete_toast,Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
+                stopTimer();
                 return false;
             }else{
                 Toast toast =Toast.makeText(this.mContext,R.string.Fail_toast,Toast.LENGTH_SHORT);

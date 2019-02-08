@@ -15,6 +15,7 @@ public class SudokuActivity extends Activity {
         setContentView(R.layout.activity_sudoku);
         customView = findViewById(R.id.MyCustomView);
         timer = findViewById(R.id.timer);
+        customView.setTimer(timer);
         timer.setFormat("time passed: %s");
         timer.start();
     }
