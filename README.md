@@ -3,13 +3,13 @@ This is a 9*9 Sudoku application that helps the users to learn a second language
 
 For now, there's only one preset puzzle, and the puzzle generator will be implemented in the later iteration.
 
-This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". Test environment is MACOS 10.14.2, 10.13 and Windows 10.
+This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". The test environment is MACOS 10.14.2, 10.13 and Windows 10.
 
 This app is only runnable in vertical screen mode for now, may support horizontal mode in the later iteration.
 
 **User Instruction:**
-- Click on an empty cell and then select the answer that you want from the buttons below; alternatively click on the buttons at the bottom of screen then select the desired cell.
-- While playing the sudoku, user can switch between Chinese and English by tappingng on "Switch language" button.
+- Click on an empty cell and then select the answer that you want from the buttons below; alternatively click on the buttons at the bottom of the screen then select the desired cell.
+- While playing the sudoku, the user can switch between Chinese and English by tapping on "Switch language" button.
 - The application has the ability to check for repetitions instantly.
 - This application features a timer on the top of the screen.
 - While playing the sudoku, the user can click the cells in the gird to get a short pop up message as translation hint of that word.
@@ -20,7 +20,7 @@ the other one is still incomplete due to the time constraints.**
 
 **The one for marking is in the master branch, and the other version is located at the "Master_1" branch.**
 
-The answer for this preset puzzle is:
+The answer to this preset puzzle is:
 ```
   { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
   { 4, 5, 6, 7, 8, 9, 1, 2, 3 }
