@@ -3,16 +3,16 @@ This is a 9*9 Sudoku application that helps the users to learn a second language
 
 For now, there's only one preset puzzle, and the puzzle generator will be implemented in the later iteration.
 
-This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". Test environment is MACOS 10.14.2, 10.13 and Windows 10.
+This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". The test environment is MACOS 10.14.2, 10.13 and Windows 10.
 
-This app is only runnable in portait screen mode for now, may support landscape mode in the later iteration.
+This app is only runnable in portrait screen mode for now, may support landscape mode in the later iteration.
 
 **User Instruction:**
-- Click on an empty cell and then select the answer that you want from the buttons below; alternatively click on the buttons at the bottom of screen then select the desired cell.
-- While playing the sudoku, user can switch between Chinese and English by tapping on "Switch language" button.
+- Click on an empty cell and then select the answer that you want from the buttons below; alternatively click on the buttons at the bottom of the screen then select the desired cell.
+- While playing the sudoku, the user can switch between Chinese and English by tapping on "Switch language" button.
 - The application has the ability to check for repetitions instantly.
-- This application features a timer on the top of the screen and when the user finish the Suduko, the timer will stop.
-- While playing the sudoku, the user can click the cells in the gird to get a short pop up message as translation hint of that word.
+- This application features a timer on the top of the screen.
+- While playing the sudoku, the user can click the preset gird to get a short pop up message as translation hint of that word.
 
 **As the planned by the group, we created two versions of the app however we decided to use the more stable version for marking,
 the other one is still incomplete due to the time constraints.**
