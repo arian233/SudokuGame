@@ -11,7 +11,7 @@ This app is only runnable in portait screen mode for now, may support landscape 
 - Click on an empty cell and then select the answer that you want from the buttons below; alternatively click on the buttons at the bottom of screen then select the desired cell.
 - While playing the sudoku, user can switch between Chinese and English by tapping on "Switch language" button.
 - The application has the ability to check for repetitions instantly.
-- This application features a timer on the top of the screen.
+- This application features a timer on the top of the screen and when the user finish the Suduko, the timer will stop.
 - While playing the sudoku, the user can click the cells in the gird to get a short pop up message as translation hint of that word.
 
 **As the planned by the group, we created two versions of the app however we decided to use the more stable version for marking,
