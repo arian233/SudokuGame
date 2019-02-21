@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">Sudoku Vocabulary</string>
-    <string name="DontTapRepeate_toast">Please don\'t tap preset grids.</string>
+
     <string name="FoundRepeat_toast">Found Repetition.</string>
     <string name="Complete_toast">Congratulations! You finished the puzzle.</string>
     <string name="Fail_toast">Your result is incomplete.</string>
-    <string name="FailLongPress_toast">It\'s a blank grid.</string>
+
+
+
+    <string name="dialog_radio_text">choose an answer</string>
+
+    <string name="switch_language_button">switch language</string>
+    <string name="check_result_button">check result</string>
+
 </resources>
