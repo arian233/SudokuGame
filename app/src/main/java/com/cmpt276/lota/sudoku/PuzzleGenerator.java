@@ -18,18 +18,6 @@ public class PuzzleGenerator {
     }
 
     /**
-     * to generate 81 Language objects, each one contains the number and two languages.
-     * @param  language: an arraylist of Language objects
-     * @return an arraylist of Language objects
-     */
-    public static ArrayList<Language> generateLanguage(ArrayList<Language> language){
-        for(int i=0; i<lanSize;i++){
-            language.add(new Language(i,lan1[i],lan2[i],0));
-        }
-        return language;
-    }
-
-    /**
      * to generate puzzle
      * @return a generated puzzle
      */
@@ -57,7 +45,11 @@ public class PuzzleGenerator {
         return puzzle;
     }
 
-    public String[] getLanOne(){
+    /**
+     * to return LanguageOne array
+     * @return an array of Language one
+     */
+    public static String[] getLanOne(){
         String str[]=new String[puzzleSize];
         for(int i=0; i<puzzleSize;i++){
             str[i]=lan1[i+1];
@@ -65,7 +57,11 @@ public class PuzzleGenerator {
         return str;
     }
 
-    public String[] getLanTwo(){
+    /**
+     * to return LanguageTwo array
+     * @return an array of Language two
+     */
+    public static String[] getLanTwo(){
         String str[]=new String[puzzleSize];
         for(int i=0; i<puzzleSize;i++){
             str[i]=lan2[i+1];
