@@ -28,6 +28,7 @@ public class SudokuActivity extends Activity {
 
     private static int dialogChosenIndex = -1;//-1 is nothing to be chosen
     private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
+    private int highlightedButton = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +122,7 @@ public class SudokuActivity extends Activity {
             if (mPuzzle[y][x].getFlag() != -1) {
                 button.setBackground(getResources().getDrawable(R.drawable.emptybutton));
                 button.setText( "" );
-            }else if (mPuzzle[y][x].getFlag() == -1) {
+            }else{
                 button.setBackground(getResources().getDrawable(R.drawable.presetbutton));
                 button.setText( mPuzzle[y][x].getLanguageOne() );
 
@@ -136,6 +137,9 @@ public class SudokuActivity extends Activity {
                     int buttonId = button.getId();
                     int x = buttonId % mPUZZLESIZE;
                     int y = buttonId / mPUZZLESIZE;
+                    //change highlighted buttons back to origin color
+                    if(highlightedButton != -1)
+                        changeHighlightBack(highlightedButton);
                     //when pressing preset grid, give hint; otherwise show dialog
                     if(mPuzzle[y][x].getFlag() == -1){
                         if(mPuzzle[y][x].getFlag() == -1){
@@ -150,7 +154,9 @@ public class SudokuActivity extends Activity {
                         }
                     }else{
                         showRadioDialog(buttonId);
-
+                        //highlight corresponding row and column
+                        highlightButton(buttonId);
+                        highlightedButton = buttonId;
                     }
                 }
             });
@@ -208,5 +214,43 @@ public class SudokuActivity extends Activity {
             lanDialog = lan1;
         }
     }
+
+    public void highlightButton(int id){
+        int x = id % mPUZZLESIZE;
+        int y = id / mPUZZLESIZE;
+        for(int i = 1; i <= mPUZZLESIZE;i++){
+            Button tobeChangedButton = findViewById((i-1)*9+x);
+            tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.highlightbutton));
+            tobeChangedButton = findViewById(i-1+9*y);
+            tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.highlightbutton));
+        }
+    }
+
+    public void changeHighlightBack(int id){
+        int x = id % mPUZZLESIZE;
+        int y = id / mPUZZLESIZE;
+        for(int i = 1; i<=mPUZZLESIZE; i++){
+            int id2 = (i-1)*9+x;
+            Button tobeChangedButton = findViewById(id2);
+            int x2 = id2 % mPUZZLESIZE;
+            int y2 = id2 / mPUZZLESIZE;
+            if (mPuzzle[y2][x2].getFlag() != -1) {
+                tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.emptybutton));
+            }else{
+                tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+            }
+
+            id2 = i-1+9*y;
+            x2 = id2 % mPUZZLESIZE;
+            y2 = id2 / mPUZZLESIZE;
+            tobeChangedButton = findViewById(id2);
+            if (mPuzzle[y2][x2].getFlag() != -1) {
+                tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.emptybutton));
+            }else{
+                tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+            }
+        }
+    }
+
 
 }
