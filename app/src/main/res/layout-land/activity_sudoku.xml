@@ -45,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_orange_light"
         android:text="@string/switch_language_button"
         android:textColor="?android:attr/colorForegroundInverse"
         app:layout_constraintStart_toEndOf="@+id/grid_layout"
@@ -61,6 +60,17 @@
         android:textColor="?android:attr/colorForegroundInverse"
         app:layout_constraintStart_toEndOf="@+id/grid_layout"
         app:layout_constraintTop_toBottomOf="@+id/switch_button" />
+
+    <Button
+        android:id="@+id/listening_mode_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/listening_mode_button"
+        android:textColor="?android:attr/colorForegroundInverse"
+        app:layout_constraintStart_toEndOf="@+id/grid_layout"
+        app:layout_constraintTop_toBottomOf="@+id/check_result_button" />
 
 </android.support.constraint.ConstraintLayout>
 
