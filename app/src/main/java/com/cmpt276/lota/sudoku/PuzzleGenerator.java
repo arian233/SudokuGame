@@ -10,7 +10,7 @@ public class PuzzleGenerator {
     private static final int puzzleSize = 9;
     private static final int emptyGridNum = 20;
     private static final int regionNum = 3;
-    private ArrayList<ArrayList<Integer>> Available = new ArrayList<ArrayList<Integer>>();
+    private ArrayList<ArrayList<Integer>> available = new ArrayList<ArrayList<Integer>>();
     private Random rand = new Random();
     public static boolean conflict = true; //True if there is a conflict
 
@@ -33,25 +33,25 @@ public class PuzzleGenerator {
         clearGrid(tmp);
 
         while (currentPos < puzzleSize*puzzleSize){
-            if (Available.get(currentPos).size() != 0){ //if arraylist is not empty
-                int i = rand.nextInt(Available.get(currentPos).size()); // get random number
-                int number = Available.get(currentPos).get(i);
+            if (available.get(currentPos).size() != 0){ //if arraylist is not empty
+                int i = rand.nextInt(available.get(currentPos).size()); // get random number
+                int number = available.get(currentPos).get(i);
 
                 if (!checkConflict(tmp, currentPos, number)){
                     conflict = false;
                     int xPos = currentPos % puzzleSize;
                     int yPos = currentPos / puzzleSize;
                     tmp[xPos][yPos] = number;
-                    Available.get(currentPos).remove(i);
+                    available.get(currentPos).remove(i);
 
                     currentPos++;
                 }
                 else{
-                    Available.get(currentPos).remove(i);
+                    available.get(currentPos).remove(i);
                 }
             }else{
                 for (int i = 1; i <= puzzleSize; i++){
-                    Available.get(currentPos).add(i);
+                    available.get(currentPos).add(i);
                 }
                 currentPos--;
             }
@@ -90,7 +90,7 @@ public class PuzzleGenerator {
     }
 
     private void clearGrid(int[][] puzzle){
-        Available.clear();                  //Clears the arrayList
+        available.clear();                  //Clears the arrayList
 
         for (int y = 0; y < puzzleSize; y++){
             for (int x = 0; x < puzzleSize; x++){
@@ -99,9 +99,9 @@ public class PuzzleGenerator {
         }
 
         for (int x = 0; x < puzzleSize*puzzleSize; x++){       // add 1 to 9 to arraylist
-            Available.add(new ArrayList<Integer>());
+            available.add(new ArrayList<Integer>());
             for (int i = 1; i <= puzzleSize; i++){
-                Available.get(x).add(i);
+                available.get(x).add(i);
             }
         }
     }
