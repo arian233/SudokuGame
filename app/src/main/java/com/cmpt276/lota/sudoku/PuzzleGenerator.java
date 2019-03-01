@@ -8,6 +8,8 @@ public class PuzzleGenerator {
     private static String lan2[];
     private static final int lanSize = 10;
     private static final int puzzleSize = 9;
+    private static final int emptyGridNum = 20;
+    private static final int regionNum = 3;
     private ArrayList<ArrayList<Integer>> Available = new ArrayList<ArrayList<Integer>>();
     private Random rand = new Random();
     public static boolean conflict = true; //True if there is a conflict
@@ -30,7 +32,7 @@ public class PuzzleGenerator {
         int currentPos = 0;
         clearGrid(tmp);
 
-        while (currentPos < 81){
+        while (currentPos < puzzleSize*puzzleSize){
             if (Available.get(currentPos).size() != 0){ //if arraylist is not empty
                 int i = rand.nextInt(Available.get(currentPos).size()); // get random number
                 int number = Available.get(currentPos).get(i);
@@ -74,10 +76,10 @@ public class PuzzleGenerator {
     private void removeElments(int[][] puzzle)
     {
         int removeNumber = 0;
-        while(removeNumber < 20)
+        while(removeNumber < emptyGridNum)
         {
-            int x_location = rand.nextInt(9);
-            int y_location = rand.nextInt(9);
+            int x_location = rand.nextInt(puzzleSize);
+            int y_location = rand.nextInt(puzzleSize);
             if (puzzle[x_location][y_location] != 0)
             {
                 puzzle[x_location][y_location] = 0;
@@ -90,24 +92,24 @@ public class PuzzleGenerator {
     private void clearGrid(int[][] puzzle){
         Available.clear();                  //Clears the arrayList
 
-        for (int y = 0; y < 9; y++){
-            for (int x = 0; x < 9; x++){
+        for (int y = 0; y < puzzleSize; y++){
+            for (int x = 0; x < puzzleSize; x++){
                 puzzle[x][y] = -1;
             }
         }
 
-        for (int x = 0; x < 81; x++){       // add 1 to 9 to arraylist
+        for (int x = 0; x < puzzleSize*puzzleSize; x++){       // add 1 to 9 to arraylist
             Available.add(new ArrayList<Integer>());
-            for (int i = 1; i <= 9; i++){
+            for (int i = 1; i <= puzzleSize; i++){
                 Available.get(x).add(i);
             }
         }
     }
 
     public boolean getConflict(int[][] puzzle){
-        for (int currentPos = 0; currentPos < 81; currentPos++) {
-            int xPos = currentPos % 9;
-            int yPos = currentPos / 9;
+        for (int currentPos = 0; currentPos < puzzleSize*puzzleSize; currentPos++) {
+            int xPos = currentPos % puzzleSize;
+            int yPos = currentPos / puzzleSize;
             if (puzzle[xPos][yPos] != -1){
                 if (checkConflict(puzzle, currentPos, puzzle[xPos][yPos])){
                     return true;
@@ -121,8 +123,8 @@ public class PuzzleGenerator {
     }
 
     private boolean checkConflict(int[][] puzzle, int currentPos, final int number){
-        int xPos = currentPos % 9;
-        int yPos = currentPos / 9;
+        int xPos = currentPos % puzzleSize;
+        int yPos = currentPos / puzzleSize;
 
         if (checkHorizontalConflict(puzzle, xPos, yPos, number) || checkVerticalConflict(puzzle, xPos, yPos, number)
                 || checkRegionConflict(puzzle, xPos, yPos, number)){
@@ -159,11 +161,11 @@ public class PuzzleGenerator {
     }
 
     private boolean checkRegionConflict(final int[][] Sudoku, final int xPos, final int yPos, final int number){
-        int xRegion = xPos / 3;
-        int yRegion = yPos / 3;
+        int xRegion = xPos / regionNum;
+        int yRegion = yPos / regionNum;
 
-        for (int x = xRegion * 3; x < xRegion * 3 + 3; x++){
-            for (int y = yRegion * 3; y < yRegion * 3 + 3; y++){
+        for (int x = xRegion * regionNum; x < xRegion * regionNum + regionNum; x++){
+            for (int y = yRegion * regionNum; y < yRegion * regionNum + regionNum; y++){
                 if ((x != xPos || y != yPos) && number == Sudoku[x][y]){
                     return true;
                 }
