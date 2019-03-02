@@ -36,7 +36,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
     private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
     private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
-
+    private int erasedButtonId = -1;//to erase cell
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +86,13 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         eraseButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //eraseAnswer();
+                int x = erasedButtonId % mPUZZLESIZE;
+                int y = erasedButtonId / mPUZZLESIZE;
+                dialogChosenIndex= -1;
+                mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex+1], lan2[dialogChosenIndex+1],0);
+                Button tobeChangedButton = findViewById(erasedButtonId);
+                tobeChangedButton.setText("");
+
             }
         });
 
@@ -141,11 +147,12 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }).create();
         alertDialog.show();
     }
-
+//
     public void changePuzzle(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
         Language saved = mPuzzle[y][x];
+        //dialogChosenIndex = 0
         mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex], lan2[dialogChosenIndex],1);
 
         if (!mCheckResult.checkValid(mPuzzle,y,x)){
@@ -305,6 +312,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                                 toast.show();
                             }
                         }else{
+                            erasedButtonId= buttonId;
                             showRadioDialog(buttonId);
                             //highlight corresponding row and column
                             highlightButton(buttonId);
