@@ -53,7 +53,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
 
         //initializations
         generator = new PuzzleGenerator();
-        mPuzzle = generator.generatePuzzle();
+        mPuzzle = generator.generateGrid();
         lan1 = generator.getLanOne();
         lan2 = generator.getLanTwo();
         lanDialog = lan2;
