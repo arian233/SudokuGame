@@ -61,27 +61,9 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
 
         textToSpeech = new TextToSpeech(this, this);
 
-
-        //initialize listeningModeButton
-        Button listeningModeButton = findViewById(R.id.listening_mode_button);
-        listeningModeButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
-        listeningModeButton.setTextSize(2*mFONTSIZE);
-        listeningModeButton.setPadding(10,10,10,10);
-        listeningModeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listeningModeFlag *= -1;
-                if(listeningModeFlag == 1){
-                    changeButtobTextsforListening();
-                }else {
-                    changeButtonTextforSwitchLanguage();
-                }
-            }
-        });
-
         //initialize checkResultButton
-        Button checkResultButton = findViewById(R.id.check_result_button);
-        checkResultButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+        final Button checkResultButton = findViewById(R.id.check_result_button);
+        checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         checkResultButton.setTextSize(2*mFONTSIZE);
         checkResultButton.setPadding(10,10,10,10);
         checkResultButton.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +74,8 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         });
 
         //initialize switch language Button
-        Button switchButton = findViewById(R.id.switch_button);
-        switchButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+        final Button switchButton = findViewById(R.id.switch_button);
+        switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         switchButton.setTextSize(2*mFONTSIZE);
         switchButton.setPadding(10,10,10,10);
         switchButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +84,31 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                 switchLanguageFlag *= -1;
                 switchLanguageInDialog();
                 changeButtonTextforSwitchLanguage();
+            }
+        });
+
+        //initialize listeningModeButton
+        Button listeningModeButton = findViewById(R.id.listening_mode_button);
+        listeningModeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+        listeningModeButton.setTextSize(2*mFONTSIZE);
+        listeningModeButton.setPadding(10,10,10,10);
+        listeningModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listeningModeFlag *= -1;
+                if(listeningModeFlag == 1){
+                    checkResultButton.setEnabled(false);
+                    switchButton.setEnabled(false);
+                    checkResultButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+                    switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+                    changeButtobTextsforListening();
+                }else {
+                    checkResultButton.setEnabled(true);
+                    switchButton.setEnabled(true);
+                    checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+                    switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+                    changeButtonTextforSwitchLanguage();
+                }
             }
         });
 
