@@ -78,6 +78,17 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                 }
             }
         });
+        //initialize erase button
+        Button eraseButton = findViewById(R.id.erase_button);
+        eraseButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+        eraseButton.setTextSize(2*mFONTSIZE);
+        eraseButton.setPadding(10,10,10,10);
+        eraseButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //eraseAnswer();
+            }
+        });
 
         //initialize checkResultButton
         Button checkResultButton = findViewById(R.id.check_result_button);
