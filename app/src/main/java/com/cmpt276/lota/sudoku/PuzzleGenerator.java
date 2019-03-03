@@ -1,18 +1,21 @@
 package com.cmpt276.lota.sudoku;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.UUID;
 
 public class PuzzleGenerator {
     private static final int lanSize = 10;
     private static final int puzzleSize = 9;
-    private static final int emptyGridNum = 1;
+    private static final int emptyGridNum = 20;
     private static final int regionNum = 3;
     private static String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
     private static String lan2[] = new String[lanSize];
     private ArrayList<ArrayList<Integer>> available = new ArrayList<ArrayList<Integer>>();
-    private Random rand = new Random();
+    private Random rand;
     public static boolean conflict = true; //True if there is a conflict
     private WordListLab wordListLab = WordListLab.getWordListLab();
     /**
@@ -22,18 +25,41 @@ public class PuzzleGenerator {
         lan1[0] = "dummy";
         lan2[0] = "dummy";
         UUID id = wordListLab.getId();
-        if(id != null){
-            ListsOfWords list = wordListLab.getListsOfWords(id);
-            for(int i=1;i<lanSize;i++){
-                lan1[i] = list.getWordLists().get(i-1).getLanguageOne();
-                lan2[i] = list.getWordLists().get(i-1).getLanguageTwo();
-            }
-        }else{
-            for(int i=1;i<lanSize;i++){
-                lan1[i] = wordListLab.getLists().get(0).getWordLists().get(i-1).getLanguageOne();
-                lan2[i] = wordListLab.getLists().get(0).getWordLists().get(i-1).getLanguageTwo();
+        int i = 1;
+        for(int j=0 ; j < 3; j++){
+            if( wordListLab.getNotFamiliarWord() != null && wordListLab.getNotFamiliarWord()[j][0] != "" ){
+                lan1[i] = wordListLab.getNotFamiliarWord()[j][0];
+                lan2[i] = wordListLab.getNotFamiliarWord()[j][1];
+                i++;
             }
         }
+
+        HashSet<Integer> integerHashSet = new HashSet<Integer>();
+        Random random=new Random();
+        int size;
+        if(id != null){
+            size = wordListLab.getListsOfWords(id).getWordLists().size();//to chosen wordslist size
+        }else{
+            size = wordListLab.getListsOfWord().get(0).getWordLists().size();// get 1st wordlist size
+        }
+
+        while(i<lanSize){//filling remaining empty language array(randomly choose words from wordlist)
+            int randomInt=random.nextInt( size );// get a random number between 0~n-1
+            if (!integerHashSet.contains(randomInt)) {
+                integerHashSet.add(randomInt);
+
+                if(id != null){
+                    ListsOfWords list = wordListLab.getListsOfWords(id);//to get words from chosen wordslist
+                    lan1[i] = list.getWordLists().get(randomInt).getLanguageOne();
+                    lan2[i] = list.getWordLists().get(randomInt).getLanguageTwo();
+                }else{
+                    lan1[i] = wordListLab.getListsOfWord().get(0).getWordLists().get(randomInt).getLanguageOne();// get words from 1st wordlist
+                    lan2[i] = wordListLab.getListsOfWord().get(0).getWordLists().get(randomInt).getLanguageTwo();
+                }
+                i++;
+            }
+        }
+
     }
 
     /**
@@ -43,7 +69,7 @@ public class PuzzleGenerator {
         int[][] tmp = new int[puzzleSize][puzzleSize];
         int currentPos = 0;
         clearGrid(tmp);
-
+        rand = new Random();
         while (currentPos < puzzleSize*puzzleSize){
             if (available.get(currentPos).size() != 0){ //if arraylist is not empty
                 int i = rand.nextInt(available.get(currentPos).size()); // get random number
