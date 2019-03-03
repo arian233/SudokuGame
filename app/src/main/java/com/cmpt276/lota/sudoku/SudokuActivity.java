@@ -2,6 +2,7 @@ package com.cmpt276.lota.sudoku;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
@@ -10,14 +11,11 @@ import android.graphics.Color;
 import android.support.v7.widget.GridLayout;
 import android.view.Gravity;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import java.util.Locale;
 
 public class SudokuActivity extends Activity implements TextToSpeech.OnInitListener{
-
-    private static final String KEY_dialogChosenIndex = "dialogChosenIndex";
-    private static final String KEY_switchLanguageFlag = "switchLanguageFlag";
-    private static final String KEY_highlightedButton = "highlightedButton";
 
     private final int mPUZZLESIZE = 9;
     private final int mPUZZLETOTALSIZE = 81;
@@ -36,21 +34,19 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
     private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
     private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
+    private int initialFlag = -1;
+
+    private WordListLab wordListLab = WordListLab.get(SudokuActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sudoku);
+        initialPuzzle();
+        initial();
+    }
 
-        if (savedInstanceState != null) {
-            //timer.start();
-        }
-
-        //set timer
-        timer = findViewById(R.id.timer);
-        timer.setFormat("time passed: %s");
-        timer.start();
-
+    public void initialPuzzle(){
         //initializations
         generator = new PuzzleGenerator();
         mPuzzle = generator.generateGrid();
@@ -58,8 +54,44 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         lan2 = generator.getLanTwo();
         lanDialog = lan2;
         mCheckResult = new CheckResult();
+        if(initialFlag != -1){
+            //initialFlag = -1;
+            switchLanguageFlag = 1;
+            for (int i = 0; i < mPUZZLETOTALSIZE; i++) {
+                Button tobeChangedButton = findViewById(i);
+                int x = i % mPUZZLESIZE;
+                int y = i / mPUZZLESIZE;
+
+                if (mPuzzle[y][x].getFlag() != -1) {
+                    tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.emptybutton));
+                    tobeChangedButton.setText("");
+                } else {
+                    tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+                    tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
+                }
+            }
+        }
+    }
+
+    public void initial(){
+        //set timer
+        timer = findViewById(R.id.timer);
+        timer.setFormat("time passed: %s");
+        timer.start();
 
         textToSpeech = new TextToSpeech(this, this);
+
+        //initialize refreshButton
+        final ImageButton refreshButton = findViewById(R.id.refresh_button);
+        refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+        //refreshButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_refresh));
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialFlag = 1;
+                initialPuzzle();
+            }
+        });
 
         //initialize checkResultButton
         final Button checkResultButton = findViewById(R.id.check_result_button);
@@ -87,6 +119,20 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
             }
         });
 
+        //initialize wordsListsButton
+        final Button wordsListsButton = findViewById(R.id.word_list_button);
+        wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+        wordsListsButton.setTextSize(2*mFONTSIZE);
+        wordsListsButton.setPadding(10,10,10,10);
+        wordsListsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SudokuActivity.this,WordsListsActivity.class );
+                startActivity(intent);
+                initialFlag = 1;
+            }
+        });
+
         //initialize listeningModeButton
         Button listeningModeButton = findViewById(R.id.listening_mode_button);
         listeningModeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
@@ -99,12 +145,16 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                 if(listeningModeFlag == 1){
                     checkResultButton.setEnabled(false);
                     switchButton.setEnabled(false);
+                    wordsListsButton.setEnabled(false);
                     checkResultButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
                     switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+                    wordsListsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
                     changeButtobTextsforListening();
                 }else {
                     checkResultButton.setEnabled(true);
                     switchButton.setEnabled(true);
+                    wordsListsButton.setEnabled(true);
+                    wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
                     checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
                     switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
                     changeButtonTextforSwitchLanguage();
@@ -239,7 +289,6 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                     tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
                 }else if(mPuzzle[y][x].getFlag() == 1){
                     tobeChangedButton.setText(mPuzzle[y][x].getLanguageTwo());
-
                 }
             }else{
                 if(mPuzzle[y][x].getFlag() == -1){
@@ -248,6 +297,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                     tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
                 }
             }
+
         }
     }
 
@@ -339,13 +389,6 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                 Toast.makeText(this, R.string.Fail_sound_toast, Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        //timer.pause();
-        //savedInstanceState.putInt(KEY_switchLanguageFlag, switchLanguageFlag);
     }
 
     @Override
