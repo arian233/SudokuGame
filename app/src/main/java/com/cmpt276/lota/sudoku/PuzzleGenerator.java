@@ -2,27 +2,39 @@ package com.cmpt276.lota.sudoku;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 public class PuzzleGenerator {
-    private static String lan1[];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
-    private static String lan2[];
     private static final int lanSize = 10;
     private static final int puzzleSize = 9;
-    private static final int emptyGridNum = 20;
+    private static final int emptyGridNum = 1;
     private static final int regionNum = 3;
+    private static String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
+    private static String lan2[] = new String[lanSize];
     private ArrayList<ArrayList<Integer>> available = new ArrayList<ArrayList<Integer>>();
     private Random rand = new Random();
     public static boolean conflict = true; //True if there is a conflict
-
+    private WordListLab wordListLab = WordListLab.getWordListLab();
     /**
      * Constructor: to have a 2d array of preset two languages
      */
     PuzzleGenerator(){
-        lan1 = new String[] {"dummy","one", "two","three","four", "five","six","seven", "eight","nine"};
-        lan2 = new String[] {"dummy","一", "二","三","四", "五","六","七", "八","九"};
-
+        lan1[0] = "dummy";
+        lan2[0] = "dummy";
+        UUID id = wordListLab.getId();
+        if(id != null){
+            ListsOfWords list = wordListLab.getListsOfWords(id);
+            for(int i=1;i<lanSize;i++){
+                lan1[i] = list.getWordLists().get(i-1).getLanguageOne();
+                lan2[i] = list.getWordLists().get(i-1).getLanguageTwo();
+            }
+        }else{
+            for(int i=1;i<lanSize;i++){
+                lan1[i] = wordListLab.getLists().get(0).getWordLists().get(i-1).getLanguageOne();
+                lan2[i] = wordListLab.getLists().get(0).getWordLists().get(i-1).getLanguageTwo();
+            }
+        }
     }
-
 
     /**
      * Constructor: to have a 2d array of preset two languages

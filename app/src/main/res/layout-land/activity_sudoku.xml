@@ -82,5 +82,26 @@
         app:layout_constraintStart_toEndOf="@+id/grid_layout"
         app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
 
+    <Button
+        android:id="@+id/word_list_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/words_lists_button"
+        android:textColor="?android:attr/colorForegroundInverse"
+        app:layout_constraintStart_toEndOf="@+id/grid_layout"
+        app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
+
+    <android.support.v7.widget.AppCompatImageButton
+        android:id="@+id/refresh_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintStart_toEndOf="@+id/grid_layout"
+        app:layout_constraintTop_toBottomOf="@+id/word_list_button" />
+
 </android.support.constraint.ConstraintLayout>
 
