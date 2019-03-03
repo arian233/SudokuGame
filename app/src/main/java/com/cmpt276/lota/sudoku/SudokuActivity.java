@@ -1,10 +1,12 @@
 package com.cmpt276.lota.sudoku;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.graphics.Color;
@@ -38,6 +40,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
     private int initialFlag = -1;
 
     private WordListLab wordListLab = WordListLab.get(SudokuActivity.this);
+    private int familiarity[] = new int[mPUZZLESIZE];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         initial();
     }
 
+    //run the code when first run, and when user click refresh button
     public void initialPuzzle(){
         //initializations
         generator = new PuzzleGenerator();
@@ -74,6 +78,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
+    //separate below code b/c those codes only need to be ran once, don't need to be ran when user click refresh button
     public void initial(){
         //set timer
         timer = findViewById(R.id.timer);
@@ -190,6 +195,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         //width/=9;
     }
 
+    //gibe a Dialog for user to input words
     private void showRadioDialog(int id){
         final int buttonId = id;
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -206,15 +212,16 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         alertDialog.show();
     }
 
+    //handle the situdation if user inputs a repeat word
     public void changePuzzle(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
-        Language saved = mPuzzle[y][x];
+        Language saved = mPuzzle[y][x];//backup the origin word in that grid
         mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex], lan2[dialogChosenIndex],1);
 
         if (!mCheckResult.checkValid(mPuzzle,y,x)){
             //invalid input, found repetition
-            mPuzzle[y][x] = saved;
+            mPuzzle[y][x] = saved;//if found repetition, change the grid back to backup word
             Toast toast =Toast.makeText(SudokuActivity.this,R.string.FoundRepeat_toast,Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
@@ -228,6 +235,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
+    //when user switches language, the texts in the dialog changes too
     public void switchLanguageInDialog(){
         if(switchLanguageFlag == 1){
             lanDialog = lan2;
@@ -236,6 +244,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
+    //highlight row and column
     public void highlightButton(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
@@ -247,6 +256,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
+    //change highlihted grid back to normal color
     public void changeHighlightBack(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
@@ -273,6 +283,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
+    //change texts to numbers in listening mode
     public void changeButtobTextsforListening(){
         for(int i=0; i<mPUZZLETOTALSIZE; i++){
             Button tobeChangedButton = findViewById(i);
@@ -284,12 +295,28 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
-
+    //to check final answer and save 3 most unfamiliar words
     public void checkAnswer(){
         Toast toast;
         if(mCheckResult.checkResult(mPuzzle)){
             toast =Toast.makeText(SudokuActivity.this,R.string.Complete_toast,Toast.LENGTH_SHORT);
             timer.stop();
+            String str[][] = new String[3][2];
+            for(int i = 0; i < 3; i++){//for familiarity
+                int maxIndex = 0;//find max value's index
+                for (int j = 0; j < familiarity.length; j++) {
+                    maxIndex = familiarity[j] > familiarity[maxIndex] ? j : maxIndex;
+                }
+                if(familiarity[maxIndex] != 0){
+                    str[i][0] = lan1[maxIndex];
+                    str[i][1] = lan2[maxIndex];
+                }else{
+                    str[i][0] = "";//if there's no/ not enough unfamiliar words, then set unfamiliar words list to empty
+                    str[i][1] = "";
+                }
+                familiarity[maxIndex] = 0;
+            }
+            wordListLab.setNotFamiliarWord(str);
         }else{
             toast =Toast.makeText(SudokuActivity.this,R.string.Fail_toast,Toast.LENGTH_SHORT);
         }
@@ -297,6 +324,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         toast.show();
     }
 
+    //to change text for buttons when user switches language
     public void changeButtonTextforSwitchLanguage(){
         for (int j = 0; j < mPUZZLETOTALSIZE; j++){
             Button tobeChangedButton = findViewById(j);
@@ -318,6 +346,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
+    //to generate grid layout
     public void initializeGridLayout(GridLayout gridLayout){
         for (int i = 0; i < mPUZZLETOTALSIZE; i++) {
             final Button button = new Button(this);
@@ -366,6 +395,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                                 Toast toast = Toast.makeText(SudokuActivity.this,str,Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                                 toast.show();
+                                familiarity[mPuzzle[y][x].getNumber()-1] += 1;//for familiarity
                             }
                         }else{
                             erasedButtonId= buttonId;
