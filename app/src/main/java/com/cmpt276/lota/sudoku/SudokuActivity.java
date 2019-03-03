@@ -108,7 +108,6 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                 mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex+1], lan2[dialogChosenIndex+1],0);
                 Button tobeChangedButton = findViewById(erasedButtonId);
                 tobeChangedButton.setText("");
-
             }
         });
 
@@ -410,29 +409,6 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
 }
