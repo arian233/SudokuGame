@@ -34,6 +34,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
     private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
     private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
+    private int erasedButtonId = -1;//to erase cell
     private int initialFlag = -1;
 
     private WordListLab wordListLab = WordListLab.get(SudokuActivity.this);
@@ -90,6 +91,23 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 initialFlag = 1;
                 initialPuzzle();
+            }
+        });
+        //initialize erase button
+        Button eraseButton = findViewById(R.id.erase_button);
+        eraseButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+        eraseButton.setTextSize(2*mFONTSIZE);
+        eraseButton.setPadding(10,10,10,10);
+        eraseButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int x = erasedButtonId % mPUZZLESIZE;
+                int y = erasedButtonId / mPUZZLESIZE;
+                dialogChosenIndex= -1;
+                mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex+1], lan2[dialogChosenIndex+1],0);
+                Button tobeChangedButton = findViewById(erasedButtonId);
+                tobeChangedButton.setText("");
+
             }
         });
 
@@ -297,7 +315,6 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                     tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
                 }
             }
-
         }
     }
 
@@ -351,6 +368,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                                 toast.show();
                             }
                         }else{
+                            erasedButtonId= buttonId;
                             showRadioDialog(buttonId);
                             //highlight corresponding row and column
                             highlightButton(buttonId);
