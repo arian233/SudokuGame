@@ -12,5 +12,8 @@
     <string name="switch_language_button">switch language</string>
     <string name="check_result_button">check result</string>
     <string name="listening_mode_button">listening mode</string>
+    <string name="erase_button">erase</string>
+    <string name="words_lists_button">words lists</string>
+
 
 </resources>
