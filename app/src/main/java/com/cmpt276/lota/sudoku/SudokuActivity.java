@@ -46,7 +46,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sudoku);
+        setContentView(R.layout.activity_sudoku);//android:configChanges="orientation|screenSize|keyboardHidden"
         initialPuzzle();
         initial();
     }

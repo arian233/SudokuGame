@@ -10,6 +10,11 @@ public class ListsOfWords {
     private String mWordListsName;
     private UUID mId;
 
+    public ListsOfWords(List<Words> mWordLists, String str){
+        this.mWordLists = mWordLists;
+        mWordListsName = str;
+    }
+
     public ListsOfWords(String[] str1, String[] str2, String name) {
         mWordLists = new ArrayList<>();
         mId = UUID.randomUUID();

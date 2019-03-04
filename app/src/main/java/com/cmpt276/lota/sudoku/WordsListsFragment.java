@@ -21,7 +21,7 @@ public class WordsListsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_words_list, container, false);
-
+        setRetainInstance(true);
         mCrimeRecyclerView = (RecyclerView) view
                 .findViewById(R.id.words_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

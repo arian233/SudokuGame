@@ -36,7 +36,8 @@ public class InputWordsActivity extends AppCompatActivity {
     Button chooseFileBtn;
     private final int REQUEST_PERMISSION_CODE = 1001;
     private final int PICK_FILE_CODE = 1000;
-    List<Words> words = new ArrayList<>();
+    List<Words> words;
+    private WordListLab wordListLab = WordListLab.getWordListLab();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,8 @@ public class InputWordsActivity extends AppCompatActivity {
                         Log.e("Problem",e.toString());
                     }
                 }
+                ListsOfWords list = new ListsOfWords(words, "1");
+                wordListLab.addListsOfWords(list);
             }
             catch (IOException ex)
             {
