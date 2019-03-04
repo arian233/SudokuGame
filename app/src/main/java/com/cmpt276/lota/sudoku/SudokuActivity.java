@@ -111,9 +111,17 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                 int x = erasedButtonId % mPUZZLESIZE;
                 int y = erasedButtonId / mPUZZLESIZE;
                 dialogChosenIndex= -1;
-                mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex+1], lan2[dialogChosenIndex+1],0);
-                Button tobeChangedButton = findViewById(erasedButtonId);
-                tobeChangedButton.setText("");
+                Toast toast = Toast.makeText(SudokuActivity.this,R.string.Erase_toast,Toast.LENGTH_SHORT);
+                if ( x > -1 && y > -1){
+                    mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex+1], lan2[dialogChosenIndex+1],0);
+                    Button tobeChangedButton = findViewById(erasedButtonId);
+                    tobeChangedButton.setText("");
+                }
+                else{
+                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                }
+
             }
         });
 
