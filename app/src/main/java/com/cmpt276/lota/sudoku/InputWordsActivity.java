@@ -110,8 +110,9 @@ public class InputWordsActivity extends AppCompatActivity {
                         Log.e("Problem",e.toString());
                     }
                 }
-                ListsOfWords list = new ListsOfWords(words, "1");
+                ListsOfWords list = new ListsOfWords(words, file.getName());
                 wordListLab.addListsOfWords(list);
+                Toast.makeText(this, "Read File Successfully: " + file.getName(), Toast.LENGTH_SHORT).show();
             }
             catch (IOException ex)
             {
