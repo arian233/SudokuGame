@@ -33,7 +33,7 @@ public class WordsListsFragment extends Fragment {
 
     private void updateUI() {
         wordListLab = WordListLab.get(getActivity());
-        String[] lan3 = new String[] {"guitar123456789h", "sing","swim","dance", "draw","chess","speak", "join","club","story","write","show","kungfu","drum","violin","piano"};
+        String[] lan3 = new String[] {"guitar", "sing","swim","dance", "draw","chess","speak", "join","club","story","write","show","kungfu","drum","violin","piano"};
         String[] lan4 = new String[] {"吉他", "唱歌","游泳","跳舞", "画","国际象棋","说话", "加入","社团","故事","写字","展示","功夫","鼓","小提琴","钢琴"};
         wordListLab.addListsOfWords(new ListsOfWords(lan3,lan4, "chapter3"));
         List<ListsOfWords> listsOfWord = wordListLab.getListsOfWord();
