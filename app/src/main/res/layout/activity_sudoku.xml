@@ -109,6 +109,16 @@ tools:context=".SudokuActivity">
         app:layout_constraintStart_toEndOf="@+id/word_list_button"
         app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
 
+    <ImageButton
+        android:id="@+id/add_words_button"
+        android:layout_width="44dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintStart_toEndOf="@+id/refresh_button"
+        app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
+
 
 </android.support.constraint.ConstraintLayout>
 

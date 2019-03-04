@@ -14,6 +14,7 @@ import android.support.v7.widget.GridLayout;
 import android.view.Gravity;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.Locale;
 
@@ -155,6 +156,18 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                 initialFlag = 1;
             }
         });
+
+        //initialize AddWordsButton
+        final ImageButton addWorldsButton = findViewById(R.id.add_words_button);
+        addWorldsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+        addWorldsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SudokuActivity.this, InputWordsActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         //initialize listeningModeButton
         Button listeningModeButton = findViewById(R.id.listening_mode_button);
