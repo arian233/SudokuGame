@@ -5,6 +5,7 @@
     <string name="Complete_toast">Congratulations! You finished the puzzle.</string>
     <string name="Fail_toast">Your result is incomplete.</string>
     <string name="Fail_sound_toast">Error with sound.</string>
+    <string name="Erase_toast">Please select a cell first</string>
 
 
     <string name="dialog_radio_text">choose an answer</string>
