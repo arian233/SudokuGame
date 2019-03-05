@@ -394,6 +394,24 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
             }
 
             button.setId(i);
+            button.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    int buttonId = button.getId();
+                    int x = buttonId % mPUZZLESIZE;
+                    int y = buttonId / mPUZZLESIZE;
+                    Toast toast;
+                    String containedStr; //content of cell
+                    if(mPuzzle[y][x].getFlag() == -1)
+                        containedStr = mPuzzle[y][x].getLanguageOne();
+                    else
+                        containedStr = mPuzzle[y][x].getLanguageTwo();
+                    toast = Toast.makeText(SudokuActivity.this, containedStr, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                    return true;
+                }
+            });
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
