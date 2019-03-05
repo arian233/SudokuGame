@@ -478,6 +478,10 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         }
     }
 
-
+    @Override
+        public void onDestroy(){
+            super.onDestroy();
+            textToSpeech.shutdown();
+    }
 
 }
