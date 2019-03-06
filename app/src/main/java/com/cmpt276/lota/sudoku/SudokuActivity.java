@@ -101,7 +101,7 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         });
 
         //initialize erase button
-        Button eraseButton = findViewById(R.id.erase_button);
+        final Button eraseButton = findViewById(R.id.erase_button);
         eraseButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         eraseButton.setTextSize(2*mFONTSIZE);
         eraseButton.setPadding(10,10,10,10);
@@ -166,9 +166,9 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
         });
 
         //initialize AddWordsButton
-        final ImageButton addWorldsButton = findViewById(R.id.add_words_button);
-        addWorldsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-        addWorldsButton.setOnClickListener(new View.OnClickListener() {
+        final ImageButton addWordsButton = findViewById(R.id.add_words_button);
+        addWordsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+        addWordsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SudokuActivity.this, InputWordsActivity.class);
@@ -193,6 +193,12 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                     checkResultButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
                     switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
                     wordsListsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+                    refreshButton.setEnabled(false);
+                    refreshButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+                    addWordsButton.setEnabled(false);
+                    addWordsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+                    eraseButton.setEnabled(false);
+                    eraseButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
                     changeButtobTextsforListening();
                 }else {
                     checkResultButton.setEnabled(true);
@@ -201,6 +207,12 @@ public class SudokuActivity extends Activity implements TextToSpeech.OnInitListe
                     wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
                     checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
                     switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+                    refreshButton.setEnabled(true);
+                    refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+                    addWordsButton.setEnabled(true);
+                    addWordsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+                    eraseButton.setEnabled(true);
+                    eraseButton.setBackground(getResources().getDrawable(R.drawable.buttons));
                     changeButtonTextforSwitchLanguage();
                 }
             }
