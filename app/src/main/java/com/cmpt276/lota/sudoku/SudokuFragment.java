@@ -40,11 +40,18 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
     private int erasedButtonId = -1;//to erase cell
-    private int initialFlag = -1;
 
     private WordListLab wordListLab = WordListLab.getWordListLab();
     private int familiarity[] = new int[mPUZZLESIZE];
     private View layout;
+
+    private ImageButton refreshButton;
+    private Button eraseButton;
+    private Button checkResultButton;
+    private Button switchButton;
+    private Button wordsListsButton;
+    private ImageButton addWordsButton;
+    private Button listeningModeButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         setRetainInstance(true);
         generator = new PuzzleGenerator();
         mPuzzle = generator.generateGrid();
-
     }
 
     @Override
@@ -62,9 +68,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         initialPuzzle();
         initial();
         changeButtonTextforSwitchLanguage();
-        if(initialFlag != -1)
-            initialForRefresh();
-        changeButtonTextforSwitchLanguage();
+        if (listeningModeFlag == 1){
+            listeningModeControl();
+        }
         return layout;
     }
 
@@ -80,7 +86,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     //run the code when first run, and when user click refresh button
     public void initialForRefresh(){
 
-        //initialFlag = -1;
         switchLanguageFlag = 1;
         for (int i = 0; i < mPUZZLETOTALSIZE; i++) {
             Button tobeChangedButton = layout.findViewById(i);
@@ -98,7 +103,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
     }
 
-
     //separate below code b/c those codes only need to be ran once, don't need to be ran when user click refresh button
     public void initial(){
         //set timer
@@ -109,7 +113,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         textToSpeech = new TextToSpeech(getActivity(), this);
 
         //initialize refreshButton
-        final ImageButton refreshButton = layout.findViewById(R.id.refresh_button);
+        refreshButton = layout.findViewById(R.id.refresh_button);
         refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         //refreshButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_refresh));
         refreshButton.setOnClickListener(new View.OnClickListener() {
@@ -117,14 +121,13 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 generator = new PuzzleGenerator();
                 mPuzzle = generator.generateGrid();
-                initialFlag = 1;
                 initialPuzzle();
                 initialForRefresh();
             }
         });
 
         //initialize erase button
-        final Button eraseButton = layout.findViewById(R.id.erase_button);
+        eraseButton = layout.findViewById(R.id.erase_button);
         eraseButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         eraseButton.setTextSize(2*mFONTSIZE);
         eraseButton.setPadding(10,10,10,10);
@@ -148,7 +151,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         });
 
         //initialize checkResultButton
-        final Button checkResultButton = layout.findViewById(R.id.check_result_button);
+        checkResultButton = layout.findViewById(R.id.check_result_button);
         checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         checkResultButton.setTextSize(2*mFONTSIZE);
         checkResultButton.setPadding(10,10,10,10);
@@ -160,7 +163,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         });
 
         //initialize switch language Button
-        final Button switchButton = layout.findViewById(R.id.switch_button);
+        switchButton = layout.findViewById(R.id.switch_button);
         switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         switchButton.setTextSize(2*mFONTSIZE);
         switchButton.setPadding(10,10,10,10);
@@ -174,7 +177,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         });
 
         //initialize wordsListsButton
-        final Button wordsListsButton = layout.findViewById(R.id.word_list_button);
+        wordsListsButton = layout.findViewById(R.id.word_list_button);
         wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         wordsListsButton.setTextSize(2*mFONTSIZE);
         wordsListsButton.setPadding(10,10,10,10);
@@ -183,12 +186,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),WordsListsActivity.class );
                 startActivity(intent);
-                initialFlag = 1;
             }
         });
 
         //initialize AddWordsButton
-        final ImageButton addWordsButton = layout.findViewById(R.id.add_words_button);
+        addWordsButton = layout.findViewById(R.id.add_words_button);
         addWordsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         addWordsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +202,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
 
         //initialize listeningModeButton
-        Button listeningModeButton = layout.findViewById(R.id.listening_mode_button);
+        listeningModeButton = layout.findViewById(R.id.listening_mode_button);
         listeningModeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         listeningModeButton.setTextSize(2*mFONTSIZE);
         listeningModeButton.setPadding(10,10,10,10);
@@ -208,35 +210,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             @Override
             public void onClick(View v) {
                 listeningModeFlag *= -1;
-                if(listeningModeFlag == 1){
-                    checkResultButton.setEnabled(false);
-                    switchButton.setEnabled(false);
-                    wordsListsButton.setEnabled(false);
-                    checkResultButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-                    switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-                    wordsListsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-                    refreshButton.setEnabled(false);
-                    refreshButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-                    addWordsButton.setEnabled(false);
-                    addWordsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-                    eraseButton.setEnabled(false);
-                    eraseButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-                    changeButtobTextsforListening();
-                }else {
-                    checkResultButton.setEnabled(true);
-                    switchButton.setEnabled(true);
-                    wordsListsButton.setEnabled(true);
-                    wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-                    checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-                    switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-                    refreshButton.setEnabled(true);
-                    refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-                    addWordsButton.setEnabled(true);
-                    addWordsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-                    eraseButton.setEnabled(true);
-                    eraseButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-                    changeButtonTextforSwitchLanguage();
-                }
+                listeningModeControl();
             }
         });
 
@@ -245,9 +219,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         gridLayout.setColumnCount(mPUZZLESIZE);
         gridLayout.setRowCount(mPUZZLESIZE);
         initializeGridLayout(gridLayout);
-        //get screen size
-        //int width = getResources().getDisplayMetrics().widthPixels;
-        //width/=9;
+
     }
 
     //gibe a Dialog for user to input words
@@ -498,6 +470,39 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
+    //to control listening mode
+    public void listeningModeControl(){
+        if(listeningModeFlag == 1){
+            checkResultButton.setEnabled(false);
+            switchButton.setEnabled(false);
+            wordsListsButton.setEnabled(false);
+            checkResultButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+            switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+            wordsListsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+            refreshButton.setEnabled(false);
+            refreshButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+            addWordsButton.setEnabled(false);
+            addWordsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+            eraseButton.setEnabled(false);
+            eraseButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+            changeButtobTextsforListening();
+        }else {
+            checkResultButton.setEnabled(true);
+            switchButton.setEnabled(true);
+            wordsListsButton.setEnabled(true);
+            wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+            checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+            switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+            refreshButton.setEnabled(true);
+            refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+            addWordsButton.setEnabled(true);
+            addWordsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+            eraseButton.setEnabled(true);
+            eraseButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+            changeButtonTextforSwitchLanguage();
+        }
+    }
+
     /**
      * initialize TextToSpeech
      * @param status: required
@@ -513,8 +518,8 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     }
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
+    public void onDetach(){
+        super.onDetach();
         textToSpeech.shutdown();
     }
 }
