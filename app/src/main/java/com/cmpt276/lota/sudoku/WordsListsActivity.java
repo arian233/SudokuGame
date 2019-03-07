@@ -7,18 +7,6 @@ import android.support.v4.app.Fragment;
 
 public class WordsListsActivity extends SingleFragmentActivity {
 
-
-
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        Intent i = getIntent();
-//        Bundle b= i.getBundleExtra("B");
-//
-//        WordListLab wordListLab= (WordListLab) b.getSerializable("S");
-//    }
-
-
     @Override
     protected Fragment createFragment() {
         return new WordsListsFragment();

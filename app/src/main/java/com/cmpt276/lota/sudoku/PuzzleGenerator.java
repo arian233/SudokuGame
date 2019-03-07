@@ -10,7 +10,7 @@ import java.util.UUID;
 public class PuzzleGenerator {
     private static final int lanSize = 10;
     private static final int puzzleSize = 9;
-    private static final int emptyGridNum = 0;
+    private static final int emptyGridNum = 5;
     private static final int regionNum = 3;
     private static String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
     private static String lan2[] = new String[lanSize];
@@ -22,8 +22,8 @@ public class PuzzleGenerator {
      * Constructor: to have a 2d array of preset two languages
      */
     public PuzzleGenerator(){
-        lan1[0] = "dummy";
-        lan2[0] = "dummy";
+        lan1[0] = "";
+        lan2[0] = "";
 
         int i = 1;
         for(int j=0 ; j < 3; j++){
