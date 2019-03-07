@@ -10,7 +10,7 @@ import java.util.UUID;
 public class PuzzleGenerator {
     private static final int lanSize = 10;
     private static final int puzzleSize = 9;
-    private static final int emptyGridNum = 20;
+    private static final int emptyGridNum = 0;
     private static final int regionNum = 3;
     private static String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
     private static String lan2[] = new String[lanSize];
@@ -21,13 +21,13 @@ public class PuzzleGenerator {
     /**
      * Constructor: to have a 2d array of preset two languages
      */
-    PuzzleGenerator(){
+    public PuzzleGenerator(){
         lan1[0] = "dummy";
         lan2[0] = "dummy";
-        UUID id = wordListLab.getId();
+
         int i = 1;
         for(int j=0 ; j < 3; j++){
-            if( wordListLab.getNotFamiliarWord() != null && wordListLab.getNotFamiliarWord()[j][0] != "" ){
+            if( wordListLab.getHasSetFamiliar() != -1 && wordListLab.getNotFamiliarWord()[j][0] != "" ){
                 lan1[i] = wordListLab.getNotFamiliarWord()[j][0];
                 lan2[i] = wordListLab.getNotFamiliarWord()[j][1];
                 i++;
@@ -37,8 +37,8 @@ public class PuzzleGenerator {
         HashSet<Integer> integerHashSet = new HashSet<Integer>();
         Random random=new Random();
         int size;
-        if(id != null){
-            size = wordListLab.getListsOfWords(id).getWordLists().size();//to chosen wordslist size
+        if(wordListLab.getHasSetId() != -1){
+            size = wordListLab.getListsOfWords( wordListLab.getId() ).getWordLists().size();//to chosen wordslist size
         }else{
             size = wordListLab.getListsOfWord().get(0).getWordLists().size();// get 1st wordlist size
         }
@@ -48,8 +48,8 @@ public class PuzzleGenerator {
             if (!integerHashSet.contains(randomInt)) {
                 integerHashSet.add(randomInt);
 
-                if(id != null){
-                    ListsOfWords list = wordListLab.getListsOfWords(id);//to get words from chosen wordslist
+                if(wordListLab.getHasSetId() != -1){
+                    ListsOfWords list = wordListLab.getListsOfWords( wordListLab.getId() );//to get words from chosen wordslist
                     lan1[i] = list.getWordLists().get(randomInt).getLanguageOne();
                     lan2[i] = list.getWordLists().get(randomInt).getLanguageTwo();
                 }else{

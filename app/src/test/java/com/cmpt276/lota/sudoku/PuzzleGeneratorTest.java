@@ -13,6 +13,7 @@ public class PuzzleGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
+
         testPuzzleGenerator = new PuzzleGenerator();
         testCheckResult = new CheckResult();
     }

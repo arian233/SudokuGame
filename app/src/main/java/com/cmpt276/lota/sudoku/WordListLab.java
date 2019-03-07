@@ -11,8 +11,11 @@ import java.util.UUID;
 public class WordListLab implements Serializable {
     private static WordListLab sWordListLab;//class itself
     private List<ListsOfWords> mListsOfWord;//the big list of wordlists
-    private UUID id = null;
-    private String notFamiliarWord[][] = null;// to save 3 not familiar words
+    private UUID id = UUID.randomUUID();
+    private String notFamiliarWord[][];// to save 3 not familiar words
+
+    private int hasSetId = -1;//-1 is not set
+    private int hasSetFamiliar = -1;//-1 is not set familiar
 
     //get class itself
     public static WordListLab get(Context context) {
@@ -24,6 +27,9 @@ public class WordListLab implements Serializable {
 
     //get class itself
     public static WordListLab getWordListLab() {
+        if (sWordListLab == null) {
+            sWordListLab = new WordListLab();
+        }
         return sWordListLab;
     }
 
@@ -39,6 +45,21 @@ public class WordListLab implements Serializable {
         mListsOfWord.add(listsOfWords);
         //mListsOfWord.sort
     }
+
+    //for junit test
+    private WordListLab() {
+        String[] lan1 = new String[] {"one", "two","three","four", "five","six","seven", "eight","nine","ten","eleven",};
+        String[] lan2 = new String[] {"一", "二","三","四", "五","六","七", "八","九","十","十一"};
+        String[] lan3 = new String[] {"guitar", "sing","swim","dance", "draw","chess","speak", "join","club","story","write","show","kungfu","drum","violin","piano"};
+        String[] lan4 = new String[] {"吉他", "唱歌","游泳","跳舞", "画","国际象棋","说话", "加入","社团","故事","写字","展示","功夫","鼓","小提琴","钢琴"};
+        mListsOfWord = new ArrayList<>();
+        ListsOfWords listsOfWords = new ListsOfWords(lan1, lan2, "chapter1"); //here generate lists of the name of each preset wordslist
+        mListsOfWord.add(listsOfWords);
+        listsOfWords = new ListsOfWords(lan3, lan4, "chapter2");
+        mListsOfWord.add(listsOfWords);
+        //mListsOfWord.sort
+    }
+
 
     //return the big list of wordlists
     public List<ListsOfWords> getListsOfWord() {
@@ -63,6 +84,7 @@ public class WordListLab implements Serializable {
     //set the id for a specific word list which is to be used for generate puzzle(user chosen)
     public void setId(UUID id){
         this.id = id;
+        hasSetId = 1;
     }
 
     public UUID getId() {
@@ -76,6 +98,14 @@ public class WordListLab implements Serializable {
 
     public void setNotFamiliarWord(String[][] notFamiliarWord) {
         this.notFamiliarWord = notFamiliarWord;
+        hasSetFamiliar = 1;
     }
 
+    public int getHasSetId() {
+        return hasSetId;
+    }
+
+    public int getHasSetFamiliar() {
+        return hasSetFamiliar;
+    }
 }
