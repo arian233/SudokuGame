@@ -18,6 +18,12 @@ As a teacher, I want to help students to improve their Problem-solving skills wi
 
 7. The user could click the words to get the short pop out of the translations of the corresponding words. **[Complete]**
 
+8. The user can use the erase button to erase the cells(cells need to be filled )to change their answer. **[Complete]**
+
+
+ 
+
+
 &nbsp;
 
 
