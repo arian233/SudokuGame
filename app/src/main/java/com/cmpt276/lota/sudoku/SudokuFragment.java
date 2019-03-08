@@ -344,6 +344,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 familiarity[maxIndex] = 0;
             }
             wordListLab.setNotFamiliarWord(str);
+            Intent intent = new Intent(getActivity(), GifActivity.class);
+            startActivity(intent);
+
         }else{
             toast =Toast.makeText(getActivity(),R.string.Fail_toast,Toast.LENGTH_SHORT);
         }
