@@ -1,37 +1,34 @@
 #### **Sudoku Vocabulary Application** 
 This is a 9*9 Sudoku application that helps the users to learn a second language.
 
-For now, there's only one preset puzzle, and the puzzle generator will be implemented in the later iteration.
+When the users launch the application, it will automatically generate a number puzzle for the user to play.
 
-This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". The test environment is MACOS 10.14.2, 10.13 and Windows 10.
+This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". The test environment is MACOS 10.14.2, 10.13 and Windows 10.////need to be confirmed
 
-This app is only runnable in portrait screen mode for now, may support landscape mode in the later iteration.
+This app right now is runnable for portrait screen mode and landscape mode.[when the user rotates the screen the app will save the state.]
 
 **User Instruction:**
-- Click on an empty cell and then select the answer that you want from the buttons below; alternatively click on the buttons at the bottom of the screen then select the desired cell.
+- Click on an empty cell, the highlighted reticle will indicates the cell that the user select, also the app will pop out another select screen for the user to select the answers. 
+
 - While playing the sudoku, the user can switch between Chinese and English by tapping on "Switch language" button.
+
 - The application has the ability to check for repetitions instantly.
+
 - This application features a timer on the top of the screen.
+
 - While playing the sudoku, the user can click the preset gird to get a short pop up message as translation hint of that word.
 
-**As the planned by the group, we created two versions of the app however we decided to use the more stable version for marking,
-the other one is still incomplete due to the time constraints.**
+- While playing the sudoku, the user can use the erase button to erase the cells(cells need to be filled )to change their answer.
+
+- While playing the sudoku, the user can click the listening mode button to switch the app to a listening mode. When the user clicks a preset cell, the pronunciation of the word will be played.
+
+- The user can click the "+" sign button to import the CSV files that contain the two language pairs to the current puzzle.
+
+- The user can click the refresh button to refresh the current puzzle.
+  - Rule of refreshing
+    Based on how many times the user clicks the cell for the hint, 3 highest clicked words (unfamiliar words) will appear more often than those familiar words in the refresh puzzle.
+
+- After the user finishes the puzzle, he/she can click the checkResult button to check if he/she gets the correct answer.
 
 
-**The one for marking is in the master branch, and the other version is located at the "Master_1" branch.**
-
-The answer for this preset puzzle is:
-```
-  { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-  { 4, 5, 6, 7, 8, 9, 1, 2, 3 }
-  { 7, 8, 9, 1, 2, 3, 4, 5, 6 }
-  { 2, 1, 4, 3, 6, 5, 8, 9, 7 }
-  { 3, 6, 5, 8, 9, 7, 2, 1, 4 }
-  { 8, 9, 7, 2, 1, 4, 3, 6, 5 }
-  { 5, 3, 1, 6, 4, 2, 9, 7, 8 }
-  { 6, 4, 2, 9, 7, 8, 5, 3, 1 }
-  { 9, 7, 8, 5, 3, 1, 6, 4, 2 }
-```
 **This application was created by group IOTA as the first team iteration in CMPT276**
-
-
