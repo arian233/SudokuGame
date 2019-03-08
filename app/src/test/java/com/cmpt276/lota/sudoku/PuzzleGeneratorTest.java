@@ -13,6 +13,7 @@ public class PuzzleGeneratorTest {
     private  Language testConflict[][];
     private  int testConflictPuzzle[][];
 
+
     @Before
     public void setUp() throws Exception {
 
@@ -30,17 +31,21 @@ public class PuzzleGeneratorTest {
         // we firstly using the generateGrid to generate a puzzle and then let the CheckResult to test
         testPuzzle = testPuzzleGenerator.generateGrid();
 
-//        for (int i = 0; i < 9; i++)
-//        {
-//            for (int j = 0; j < 9 ; j++)
-//            {
-//
-//                System.out.print(" " + testPuzzle[i][j].getNumber() + " ");
-//            }
-//            System.out.println("\n");
-//        }
+
+
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9 ; j++)
+            {
+
+                assertEquals(true,testCheckResult.checkValid(testPuzzle,j,i));
+                //System.out.print(" " + testPuzzle[i][j].getNumber() + " ");
+            }
+            System.out.println("\n");
+        }
         //after the generator generates a puzzle, then we just use the checkResult function to check
-        assertEquals(true, testCheckResult.checkResult(testPuzzle));
+        //assertEquals(true, testCheckResult.checkResult(testPuzzle));
 
         //since this puzzle generator return correct result so it should pass the test
 
@@ -58,8 +63,11 @@ public class PuzzleGeneratorTest {
             for (int j = 0; j <9 ; j++)
             {
                 testConflictPuzzle[i][j] = testConflict[i][j].getNumber();
+                //System.out.print(" " + testConflictPuzzle[i][j] + " ");
             }
+            System.out.println("\n");
         }
+
 
 
         assertEquals(false,testPuzzleGenerator.getConflict(testConflictPuzzle));
