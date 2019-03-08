@@ -13,6 +13,7 @@ public class ListsOfWords {
     public ListsOfWords(List<Words> mWordLists, String str){
         this.mWordLists = mWordLists;
         mWordListsName = str;
+        mId = UUID.randomUUID();
     }
 
     public ListsOfWords(String[] str1, String[] str2, String name) {
