@@ -48,7 +48,7 @@ public class WordListLab implements Serializable {
     }
 
     //for junit test
-    private WordListLab() {
+    public WordListLab() {
         String[] lan1 = new String[] {"one", "two","three","four", "five","six","seven", "eight","nine","ten","eleven",};
         String[] lan2 = new String[] {"一", "二","三","四", "五","六","七", "八","九","十","十一"};
         String[] lan3 = new String[] {"guitar", "sing","swim","dance", "draw","chess","speak", "join","club","story","write","show","kungfu","drum","violin","piano"};
@@ -93,7 +93,8 @@ public class WordListLab implements Serializable {
     }
 
 
-    public String[][] getNotFamiliarWord() {
+    public String[][] getNotFamiliarWord()
+    {
         return notFamiliarWord;
     }
 
