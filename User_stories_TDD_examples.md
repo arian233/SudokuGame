@@ -87,4 +87,14 @@ As a student, I want the Sudoku app to keep track of the vocabulary words that I
 
 &nbsp;
 
+**User Stories 7:**
+
+As a vocabulary learner, I want to use my phone or tablet(different devices) for Sudoku vocabulary practice, so that I want the words' font size be automatically changed to the size that fits for different devices.
+
+**TDD Examples:**
+
+1. When the users use different devices to playing the Sudoku application, the words changing size depends on the real size of the screen in inches so that the size of the words could automatically be changed to the size that suitable to the current screen.**[Complete]**
+
+
+
 
