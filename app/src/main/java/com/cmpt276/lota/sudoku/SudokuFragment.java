@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -350,7 +351,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             wordListLab.setNotFamiliarWord(str);
             Intent intent = new Intent(getActivity(), GifActivity.class);
             startActivity(intent);
-
         }else{
             toast =Toast.makeText(getActivity(),R.string.Fail_toast,Toast.LENGTH_SHORT);
         }
@@ -391,16 +391,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             params.height = 0;
             params.rowSpec = GridLayout.spec(y, 1f);
             params.columnSpec = GridLayout.spec(x, 1f);
-//            if(textView.getText().length()>18){
-//                textView.setTextSize(TypedValue.COMPLEX_UNIT_PT,11);
-//            }else
-//            if(textView.getText().length()>10){
-//                textView.setTextSize(TypedValue.COMPLEX_UNIT_PT,11);
-//            }else {
-//                textView.setTextSize(TypedValue.COMPLEX_UNIT_PT,11);
-//            }
-            TextViewCompat.setAutoSizeTextTypeWithDefaults(textView, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-            //textView.setTextSize(8);
+
+            //TextViewCompat.setAutoSizeTextTypeWithDefaults(textView, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+            textView.setTextSize(calFontSize());
             textView.setTextColor(Color.parseColor("#282626"));
             // set button style
             if (mPuzzle[y][x].getFlag() != -1 ) {
@@ -513,6 +506,31 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
+    public int calFontSize(){
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        float xdpi = displaymetrics.xdpi;
+        float ydpi = displaymetrics.ydpi;
+        int height = displaymetrics.heightPixels;
+        int width = displaymetrics.widthPixels;
+        float width2 = (width / xdpi)*(width / xdpi);
+        float height2 = (height / ydpi)*(width / xdpi);
+        float size =  (float) Math.sqrt(width2+height2);
+
+        if (size <= 6) {// the real screen size in inches
+            return mFONTSIZE;
+        }else if (size <= 7) {
+            return mFONTSIZE+1;
+        }else if (width <= 8){
+            return mFONTSIZE+2;
+        }else if (width <= 9) {
+            return mFONTSIZE + 5;
+        }else {
+            return mFONTSIZE+7;
+        }
+    }
+
     /**
      * initialize TextToSpeech
      * @param status: required
@@ -532,4 +550,5 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         super.onDetach();
         textToSpeech.shutdown();
     }
+
 }
