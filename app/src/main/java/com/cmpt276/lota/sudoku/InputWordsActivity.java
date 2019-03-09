@@ -1,5 +1,5 @@
 package com.cmpt276.lota.sudoku;
-/**
+/*
  * Powered by MaterialFilePicker built by nbsp-team
  * @License GNU General Public License version 2
  * @Link https://github.com/nbsp-team/MaterialFilePicker
@@ -8,7 +8,6 @@ package com.cmpt276.lota.sudoku;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -27,12 +26,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -93,9 +89,10 @@ public class InputWordsActivity extends AppCompatActivity {
         //Toast.makeText(this,""+words.get(5).getLanguageOne()+words.get(5).getLanguageTwo(), Toast.LENGTH_LONG).show();
     }
 
-    /*
-    csv file data
-    */
+    /**
+     * read csv file data
+     * @param path path of file
+     */
     void readFileData(String path) throws FileNotFoundException, UnsupportedEncodingException {
         String[] data;
         File file = new File(path);
@@ -126,7 +123,7 @@ public class InputWordsActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String name = enterFileName.getText().toString();
                         if (name.equals("")){
-                            Toast.makeText(InputWordsActivity.this, "Please enter the world list name!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InputWordsActivity.this, "Please enter the world list name.", Toast.LENGTH_SHORT).show();
                         }else {
                             ListsOfWords list = new ListsOfWords(words, name);
                             wordListLab.addListsOfWords(list);
