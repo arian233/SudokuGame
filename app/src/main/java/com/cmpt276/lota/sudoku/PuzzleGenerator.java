@@ -113,6 +113,11 @@ public class PuzzleGenerator {
         return puzzle;
     }
 
+
+    /**
+     * To randomly remove the cells (set the cell to 0)
+     * @param puzzle: an 2d array of int
+     */
     private void removeElments(int[][] puzzle)
     {
         int removeNumber = 0;
@@ -129,6 +134,10 @@ public class PuzzleGenerator {
         conflict = getConflict(puzzle);
     }
 
+    /**
+     * To clear the Grid(set all the cells of the gird to -1)
+     * @param puzzle: an 2d array of int
+     */
     private void clearGrid(int[][] puzzle){
         available.clear();                  //Clears the arrayList
 
@@ -146,6 +155,13 @@ public class PuzzleGenerator {
         }
     }
 
+
+    /**
+     * To check if the current puzzle is a complete and valid puzzle
+     * if there is conflict return true otherwise return false
+     * @param puzzle: an 2d array of int
+     * @return boolean
+     */
     public boolean getConflict(int[][] puzzle){
         for (int currentPos = 0; currentPos < puzzleSize*puzzleSize; currentPos++) {
             int xPos = currentPos % puzzleSize;
@@ -162,6 +178,16 @@ public class PuzzleGenerator {
         return false;
     }
 
+
+    /**
+     * To check if the current position cell crates conflict
+     * if there is conflict return true otherwise return false
+     * @param puzzle: an 2d array of int
+     * @param currentPos: the number to define the position of the cell
+     * @param number: the current cell number that needs to be checked
+     * @return boolean
+     */
+
     private boolean checkConflict(int[][] puzzle, int currentPos, final int number){
         int xPos = currentPos % puzzleSize;
         int yPos = currentPos / puzzleSize;
@@ -175,11 +201,12 @@ public class PuzzleGenerator {
     }
 
     /**
-     * Return true if there is a conflict
-     * @param puzzle
-     * @param xPos
-     * @param yPos
-     * @param number
+     * Return true if there is a conflict in the horizontal direction
+     * if there is conflict return true otherwise return false
+     * @param puzzle:an 2d array of int
+     * @param xPos: the x position of the cell that needs to be checked
+     * @param yPos: the y position of the cell that needs to be checked
+     * @param number: the number needs to  be checked
      * @return
      */
     private boolean checkHorizontalConflict(final int[][] puzzle, final int xPos, final int yPos, final int number){
@@ -191,6 +218,17 @@ public class PuzzleGenerator {
         return false;
     }
 
+
+
+    /**
+     * Return true if there is a conflict in the Vertical direction
+     * if there is conflict return true otherwise return false
+     * @param Sudoku:an 2d array of int
+     * @param xPos: the x position of the cell that needs to be checked
+     * @param yPos: the y position of the cell that needs to be checked
+     * @param number: the number needs to  be checked
+     * @return
+     */
     private boolean checkVerticalConflict(final int[][] Sudoku, final int xPos, final int yPos, final int number){
         for (int y = yPos - 1; y >= 0; y--){
             if (number == Sudoku[xPos][y]){
@@ -199,6 +237,16 @@ public class PuzzleGenerator {
         }
         return false;
     }
+
+    /**
+     * Return true if there is a conflict in a small 3*3 region
+     * @param Sudoku:an 2d array of int
+     * if there is conflict return true otherwise return false
+     * @param xPos: the x position of the cell that needs to be checked
+     * @param yPos: the y position of the cell that needs to be checked
+     * @param number: the number needs to  be checked
+     * @return
+     */
 
     private boolean checkRegionConflict(final int[][] Sudoku, final int xPos, final int yPos, final int number){
         int xRegion = xPos / regionNum;
@@ -239,3 +287,7 @@ public class PuzzleGenerator {
         return str;
     }
 }
+
+
+
+

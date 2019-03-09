@@ -7,15 +7,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
-
+import 	android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -67,14 +69,17 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         layout = inflater.inflate(R.layout.activity_sudoku, null);//android:configChanges="orientation|screenSize|keyboardHidden"
         initialPuzzle();
         initial();
-        changeButtonTextforSwitchLanguage();
         if (listeningModeFlag == 1){
             listeningModeControl();
+        }else{
+            changeButtonTextforSwitchLanguage();
         }
         return layout;
     }
 
-    //run the code when first run, and when user click refresh button
+    /**
+     * run the code when first run, and when user click refresh button
+     */
     public void initialPuzzle(){
         //initializations
         lan1 = generator.getLanOne();
@@ -83,12 +88,14 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         mCheckResult = new CheckResult();
     }
 
-    //run the code when first run, and when user click refresh button
+    /**
+     * run the code when first run, and when user click refresh button
+     */
     public void initialForRefresh(){
 
         switchLanguageFlag = 1;
         for (int i = 0; i < mPUZZLETOTALSIZE; i++) {
-            Button tobeChangedButton = layout.findViewById(i);
+            TextView tobeChangedButton = layout.findViewById(i);
             int x = i % mPUZZLESIZE;
             int y = i / mPUZZLESIZE;
 
@@ -103,7 +110,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
     }
 
-    //separate below code b/c those codes only need to be ran once, don't need to be ran when user click refresh button
+    /**
+     * separate below code b/c those codes only need to be ran once, don't need to be ran when user click refresh button
+     */
     public void initial(){
         //set timer
         timer = layout.findViewById(R.id.timer);
@@ -140,7 +149,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 Toast toast = Toast.makeText(getActivity(),R.string.Erase_toast,Toast.LENGTH_SHORT);
                 if ( x > -1 && y > -1){
                     mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex+1], lan2[dialogChosenIndex+1],0);
-                    Button tobeChangedButton = layout.findViewById(erasedButtonId);
+                    TextView tobeChangedButton = layout.findViewById(erasedButtonId);
                     tobeChangedButton.setText("");
                 }
                 else{
@@ -220,9 +229,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         gridLayout.setRowCount(mPUZZLESIZE);
         initializeGridLayout(gridLayout);
 
+
     }
 
-    //gibe a Dialog for user to input words
+    /**
+    * gibe a Dialog for user to input words
+    */
     private void showRadioDialog(int id){
         final int buttonId = id;
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -239,7 +251,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         alertDialog.show();
     }
 
-    //handle the situation if user inputs a repeat word
+    /**
+     * handle the situation if user inputs a repeat word
+     */
     public void changePuzzle(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
@@ -254,7 +268,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             toast.show();
             return;
         }
-        Button tobeChangedButton = layout.findViewById(id);
+        TextView tobeChangedButton = layout.findViewById(id);
         if(switchLanguageFlag == 1){
             tobeChangedButton.setText(lan2[dialogChosenIndex]);
         }else{
@@ -262,7 +276,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //when user switches language, the texts in the dialog changes too
+    /**
+     * when user switches language, the texts in the dialog changes too
+     */
     public void switchLanguageInDialog(){
         if(switchLanguageFlag == 1){
             lanDialog = lan2;
@@ -271,25 +287,29 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //highlight row and column
+    /**
+     * highlight row and column
+     */
     public void highlightButton(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
         for(int i = 1; i <= mPUZZLESIZE;i++){
-            Button tobeChangedButton = layout.findViewById((i-1)*9+x);
+            TextView tobeChangedButton = layout.findViewById((i-1)*9+x);
             tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.highlightbutton));
             tobeChangedButton = layout.findViewById(i-1+9*y);
             tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.highlightbutton));
         }
     }
 
-    //change highlihted grid back to normal color
+    /**
+     * change highlihted grid back to normal color
+     */
     public void changeHighlightBack(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
         for(int i = 1; i<=mPUZZLESIZE; i++){
             int id2 = (i-1)*9+x;
-            Button tobeChangedButton = layout.findViewById(id2);
+            TextView tobeChangedButton = layout.findViewById(id2);
             int x2 = id2 % mPUZZLESIZE;
             int y2 = id2 / mPUZZLESIZE;
             if (mPuzzle[y2][x2].getFlag() != -1) {
@@ -310,10 +330,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //change texts to numbers in listening mode
+    /**
+     * change texts to numbers in listening mode
+     */
     public void changeButtobTextsforListening(){
         for(int i=0; i<mPUZZLETOTALSIZE; i++){
-            Button tobeChangedButton = layout.findViewById(i);
+            TextView tobeChangedButton = layout.findViewById(i);
             int x = i % mPUZZLESIZE;
             int y = i / mPUZZLESIZE;
             if(mPuzzle[y][x].getFlag() != 0){
@@ -322,7 +344,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //to check final answer and save 3 most unfamiliar words
+    /**
+     * to check final answer and save 3 most unfamiliar words
+     */
     public void checkAnswer(){
         Toast toast;
         if(mCheckResult.checkResult(mPuzzle)){
@@ -346,7 +370,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             wordListLab.setNotFamiliarWord(str);
             Intent intent = new Intent(getActivity(), GifActivity.class);
             startActivity(intent);
-
         }else{
             toast =Toast.makeText(getActivity(),R.string.Fail_toast,Toast.LENGTH_SHORT);
         }
@@ -354,10 +377,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         toast.show();
     }
 
-    //to change text for buttons when user switches language
+    /**
+     * to change text for buttons when user switches language
+     */
     public void changeButtonTextforSwitchLanguage(){
         for (int j = 0; j < mPUZZLETOTALSIZE; j++){
-            Button tobeChangedButton = layout.findViewById(j);
+            TextView tobeChangedButton = layout.findViewById(j);
             int x = j % mPUZZLESIZE;
             int y = j / mPUZZLESIZE;
             if(switchLanguageFlag == 1){
@@ -376,10 +401,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //to generate grid layout
+    /**
+     * to generate grid layout
+     */
     public void initializeGridLayout(GridLayout gridLayout){
         for (int i = 0; i < mPUZZLETOTALSIZE; i++) {
-            final Button button = new Button(getActivity());
+            final TextView textView = new TextView(getActivity());
             int x = i % mPUZZLESIZE;
             int y = i / mPUZZLESIZE;
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -387,26 +414,22 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             params.height = 0;
             params.rowSpec = GridLayout.spec(y, 1f);
             params.columnSpec = GridLayout.spec(x, 1f);
-            button.setTextSize(mFONTSIZE);
-            button.setTextColor(Color.parseColor("#282626"));
 
+            //TextViewCompat.setAutoSizeTextTypeWithDefaults(textView, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+            textView.setTextSize(calFontSize());
+            textView.setTextColor(Color.parseColor("#282626"));
             // set button style
             if (mPuzzle[y][x].getFlag() != -1 ) {
-                button.setBackground(getResources().getDrawable(R.drawable.emptybutton));
-                button.setText( mPuzzle[y][x].getLanguageOne() );
+                textView.setBackground(getResources().getDrawable(R.drawable.emptybutton));
             }else{
-                button.setBackground(getResources().getDrawable(R.drawable.presetbutton));
-                button.setText( mPuzzle[y][x].getLanguageOne() );
-
-                //float size = presetbutton.getTextSize();
-                //Log.d("jialic", "presetbutton width:"+width+"  text size"+ size);
+                textView.setBackground(getResources().getDrawable(R.drawable.presetbutton));
             }
 
-            button.setId(i);
-            button.setOnClickListener(new View.OnClickListener() {
+            textView.setId(i);
+            textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int buttonId = button.getId();
+                    int buttonId = textView.getId();
                     int x = buttonId % mPUZZLESIZE;
                     int y = buttonId / mPUZZLESIZE;
                     //change highlighted buttons back to origin color
@@ -439,19 +462,19 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                         if(mPuzzle[y][x].getFlag() != 0){
                             if (textToSpeech != null && !textToSpeech.isSpeaking()) {
                                 //set to default
-                                textToSpeech.setPitch(1.0f);
+                                //textToSpeech.setPitch(0.9f);
                                 //set to default
-                                textToSpeech.setSpeechRate(1.0f);
+                                //textToSpeech.setSpeechRate(0.9f);
                                 textToSpeech.speak(mPuzzle[y][x].getLanguageTwo(), TextToSpeech.QUEUE_FLUSH, null);
                             }
                         }
                     }
                 }
             });
-            button.setOnLongClickListener(new View.OnLongClickListener() {
+            textView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    int buttonId = button.getId();
+                    int buttonId = textView.getId();
                     int x = buttonId % mPUZZLESIZE;
                     int y = buttonId / mPUZZLESIZE;
                     Toast toast;
@@ -467,13 +490,15 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 }
             });
 
-            button.setGravity(Gravity.CENTER);
+            textView.setGravity(Gravity.CENTER);
             params.setMargins(2, 2, 2, 2);
-            gridLayout.addView(button, params);
+            gridLayout.addView(textView, params);
         }
     }
 
-    //to control listening mode
+    /**
+     * to control listening mode
+     */
     public void listeningModeControl(){
         if(listeningModeFlag == 1){
             checkResultButton.setEnabled(false);
@@ -507,13 +532,41 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     }
 
     /**
+     * calculate font size
+     */
+    public int calFontSize(){
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        float xdpi = displaymetrics.xdpi;
+        float ydpi = displaymetrics.ydpi;
+        int height = displaymetrics.heightPixels;
+        int width = displaymetrics.widthPixels;
+        float width2 = (width / xdpi)*(width / xdpi);
+        float height2 = (height / ydpi)*(width / xdpi);
+        float size =  (float) Math.sqrt(width2+height2);
+
+        if (size <= 6) {// the real screen size in inches
+            return mFONTSIZE;
+        }else if (size <= 7) {
+            return mFONTSIZE+1;
+        }else if (width <= 8){
+            return mFONTSIZE+2;
+        }else if (width <= 9) {
+            return mFONTSIZE + 5;
+        }else {
+            return mFONTSIZE+7;
+        }
+    }
+
+    /**
      * initialize TextToSpeech
      * @param status: required
      */
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-            int result = textToSpeech.setLanguage(Locale.CHINA);
+            int result = textToSpeech.setLanguage(Locale.CHINESE);
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(getActivity(), R.string.Fail_sound_toast, Toast.LENGTH_SHORT).show();
             }
@@ -522,7 +575,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
     @Override
     public void onDetach(){
+        if(textToSpeech !=null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
         super.onDetach();
-        textToSpeech.shutdown();
     }
+
 }

@@ -40,20 +40,23 @@ public class WordListLabTest {
             arr[0][i] = "testString";
         }
 
+
     }
 
     @Test
-    public void get()
+    public void getWordListLab()
     {
-        //assertEquals(test,test.getWordListLab());
-    }
+       assertEquals(testWordListLab1.getWordListLab(),testWordListLab1.getWordListLab());
 
+    }
 
     @Test
     public void addListsOfWords() {
         testWordListLab1.addListsOfWords(testListOfWords1);
         testWordListLab2.addListsOfWords(testListOfWords1);
-        assertEquals(testWordListLab1,testWordListLab2);
+        //since we added the word defined by ourself at the end
+        //so we can directly match those words that we just added
+        assertEquals(testWordListLab1.getListsOfWord().get(2),testWordListLab2.getListsOfWord().get(2));
     }
 
     @Test
@@ -102,4 +105,6 @@ public class WordListLabTest {
         //so the getHasSetFamiliar should return -1;
         assertEquals(-1,testWordListLab1.getHasSetFamiliar());
     }
+
+
 }

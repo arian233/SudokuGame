@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
 public class WordListLab implements Serializable {
     private static WordListLab sWordListLab;//class itself
     private List<ListsOfWords> mListsOfWord;//the big list of wordlists
@@ -18,7 +17,10 @@ public class WordListLab implements Serializable {
     private int hasSetId = -1;//-1 is not set
     private int hasSetFamiliar = -1;//-1 is not set familiar
 
-    //get class itself
+    /**
+     * get a new WordListLab singleton object
+     * @param context context
+     */
     public static WordListLab get(Context context) {
         if (sWordListLab == null) {
             sWordListLab = new WordListLab(context);
@@ -26,7 +28,9 @@ public class WordListLab implements Serializable {
         return sWordListLab;
     }
 
-    //get class itself
+    /**
+     * get class itself
+     */
     public static WordListLab getWordListLab() {
         if (sWordListLab == null) {
             sWordListLab = new WordListLab();
@@ -34,6 +38,10 @@ public class WordListLab implements Serializable {
         return sWordListLab;
     }
 
+    /**
+     * constructor
+     * @param context context
+     */
     private WordListLab(Context context) {
         String[] lan1 = new String[] {"one", "two","three","four", "five","six","seven", "eight","nine","ten","eleven",};
         String[] lan2 = new String[] {"一", "二","三","四", "五","六","七", "八","九","十","十一"};
@@ -47,7 +55,9 @@ public class WordListLab implements Serializable {
         //mListsOfWord.sort
     }
 
-    //for junit test
+    /**
+     * constructor for junit test
+     */
     public WordListLab() {
         String[] lan1 = new String[] {"one", "two","three","four", "five","six","seven", "eight","nine","ten","eleven",};
         String[] lan2 = new String[] {"一", "二","三","四", "五","六","七", "八","九","十","十一"};
@@ -61,13 +71,17 @@ public class WordListLab implements Serializable {
         //mListsOfWord.sort
     }
 
-
-    //return the big list of wordlists
+    /**
+     * return the big list of wordlists
+     */
     public List<ListsOfWords> getListsOfWord() {
         return mListsOfWord;
     }
 
-    //return a specific one word list from the big lists
+    /**
+     * return a specific one word list from the big lists
+     * @param id id of user chosen wordlist
+     */
     public ListsOfWords getListsOfWords(UUID id) {
         for (ListsOfWords listsOfWord : mListsOfWord) {
             if (listsOfWord.getId().equals(id)) {
@@ -77,36 +91,56 @@ public class WordListLab implements Serializable {
         return null;
     }
 
-    //add one new list to the big list of wordLists
+    /**
+     * add one new list to the big list of wordLists
+     * @param listsOfWords add new ListsOfWords into class
+     */
     public void addListsOfWords(ListsOfWords listsOfWords) {
         mListsOfWord.add(listsOfWords);
     }
 
-    //set the id for a specific word list which is to be used for generate puzzle(user chosen)
+    /**
+     * set the id for a userchosen word list which is to be used for generate puzzle
+     * @param id id of user chosen wordlist
+     */
     public void setId(UUID id){
         this.id = id;
         hasSetId = 1;
     }
 
+    /**
+     * get the id for a userchosen word list which is to be used for generate puzzle
+     */
     public UUID getId() {
         return id;
     }
 
-
+    /**
+     * get the string of three most unfamiliar words
+     */
     public String[][] getNotFamiliarWord()
     {
         return notFamiliarWord;
     }
 
+    /**
+     * set the string of three most unfamiliar words
+     */
     public void setNotFamiliarWord(String[][] notFamiliarWord) {
         this.notFamiliarWord = notFamiliarWord;
         hasSetFamiliar = 1;
     }
 
+    /**
+     * set the flag that userr has chosen a word list to be shown
+     */
     public int getHasSetId() {
         return hasSetId;
     }
 
+    /**
+     * set the flag that userr has set three most unfamiliar words
+     */
     public int getHasSetFamiliar() {
         return hasSetFamiliar;
     }

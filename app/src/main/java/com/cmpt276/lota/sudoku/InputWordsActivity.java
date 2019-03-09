@@ -1,4 +1,9 @@
 package com.cmpt276.lota.sudoku;
+/**
+ * Powered by MaterialFilePicker built by nbsp-team
+ * @License GNU General Public License version 2
+ * @Link https://github.com/nbsp-team/MaterialFilePicker
+ */
 
 import android.Manifest;
 import android.content.Intent;
@@ -11,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +40,8 @@ import java.util.regex.Pattern;
 public class InputWordsActivity extends AppCompatActivity {
     TextView chosenFileName;
     Button chooseFileBtn;
+    Button OKBtn;
+    EditText enterFileName;
     private final int REQUEST_PERMISSION_CODE = 1001;
     private final int PICK_FILE_CODE = 1000;
     List<Words> words;
@@ -50,7 +58,9 @@ public class InputWordsActivity extends AppCompatActivity {
         }
 
         chosenFileName = (TextView) findViewById(R.id.chosen_file_name);
+        enterFileName = (EditText) findViewById(R.id.edit_file_name);
         chooseFileBtn = (Button) findViewById(R.id.choose_file);
+        OKBtn = (Button) findViewById(R.id.input_word_list);
         chooseFileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +120,20 @@ public class InputWordsActivity extends AppCompatActivity {
                         Log.e("Problem",e.toString());
                     }
                 }
-                ListsOfWords list = new ListsOfWords(words, file.getName());
-                wordListLab.addListsOfWords(list);
                 Toast.makeText(this, "Read File Successfully: " + file.getName(), Toast.LENGTH_SHORT).show();
+                OKBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String name = enterFileName.getText().toString();
+                        if (name.equals("")){
+                            Toast.makeText(InputWordsActivity.this, "Please enter the world list name!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            ListsOfWords list = new ListsOfWords(words, name);
+                            wordListLab.addListsOfWords(list);
+                            finish();
+                        }
+                    }
+                });
             }
             catch (IOException ex)
             {
