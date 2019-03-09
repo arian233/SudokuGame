@@ -35,7 +35,6 @@ As a student, I want to practice my understanding of spoken words in the languag
 
 1. In the Sudoku application, the user could click the listening mode button to get into the listening mode. In the listening mode, the user could click the cell that corresponding the word that he/she wants to practice, the application will play the pronunciation of the word. **[Complete]**
 
-2. Each time the user clicks the preset cells under the comprehension mode, the pronunciation of the word will be played. **[Complete]**
 
 &nbsp;
 
