@@ -18,35 +18,36 @@ public class Words {
     }
 
     /**
-     * constructor
+     * getId
      */
     public UUID getId() {
         return mId;
     }
 
     /**
-     * constructor
+     * getLanguageOne
      */
     public String getLanguageOne() {
         return languageOne;
     }
 
     /**
-     * constructor
+     * setLanguageOne
+     * @param languageOne 1st language
      */
     public void setLanguageOne(String languageOne) {
         this.languageOne = languageOne;
     }
 
     /**
-     * constructor
+     * getLanguageTwo
      */
     public String getLanguageTwo() {
         return languageTwo;
     }
 
     /**
-     * constructor
+     * setLanguageTwo
      * @param languageTwo second language
      */
     public void setLanguageTwo(String languageTwo) {

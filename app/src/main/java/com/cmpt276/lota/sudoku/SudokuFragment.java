@@ -462,9 +462,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                         if(mPuzzle[y][x].getFlag() != 0){
                             if (textToSpeech != null && !textToSpeech.isSpeaking()) {
                                 //set to default
-                                textToSpeech.setPitch(0.9f);
+                                //textToSpeech.setPitch(0.9f);
                                 //set to default
-                                textToSpeech.setSpeechRate(0.9f);
+                                //textToSpeech.setSpeechRate(0.9f);
                                 textToSpeech.speak(mPuzzle[y][x].getLanguageTwo(), TextToSpeech.QUEUE_FLUSH, null);
                             }
                         }
@@ -566,7 +566,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-            int result = textToSpeech.setLanguage(Locale.CHINA);
+            int result = textToSpeech.setLanguage(Locale.CHINESE);
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(getActivity(), R.string.Fail_sound_toast, Toast.LENGTH_SHORT).show();
             }
@@ -575,8 +575,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
     @Override
     public void onDetach(){
+        if(textToSpeech !=null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
         super.onDetach();
-        textToSpeech.shutdown();
     }
 
 }
