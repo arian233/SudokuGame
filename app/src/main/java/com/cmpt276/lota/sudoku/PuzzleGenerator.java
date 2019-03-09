@@ -118,7 +118,6 @@ public class PuzzleGenerator {
      * To randomly remove the cells (set the cell to 0)
      * @param puzzle: an 2d array of int
      */
-
     private void removeElments(int[][] puzzle)
     {
         int removeNumber = 0;

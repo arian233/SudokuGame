@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +77,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         return layout;
     }
 
-    //run the code when first run, and when user click refresh button
+    /**
+     * run the code when first run, and when user click refresh button
+     */
     public void initialPuzzle(){
         //initializations
         lan1 = generator.getLanOne();
@@ -87,7 +88,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         mCheckResult = new CheckResult();
     }
 
-    //run the code when first run, and when user click refresh button
+    /**
+     * run the code when first run, and when user click refresh button
+     */
     public void initialForRefresh(){
 
         switchLanguageFlag = 1;
@@ -107,7 +110,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
     }
 
-    //separate below code b/c those codes only need to be ran once, don't need to be ran when user click refresh button
+    /**
+     * separate below code b/c those codes only need to be ran once, don't need to be ran when user click refresh button
+     */
     public void initial(){
         //set timer
         timer = layout.findViewById(R.id.timer);
@@ -227,7 +232,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
     }
 
-    //gibe a Dialog for user to input words
+    /**
+    * gibe a Dialog for user to input words
+    */
     private void showRadioDialog(int id){
         final int buttonId = id;
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -244,7 +251,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         alertDialog.show();
     }
 
-    //handle the situation if user inputs a repeat word
+    /**
+     * handle the situation if user inputs a repeat word
+     */
     public void changePuzzle(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
@@ -267,7 +276,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //when user switches language, the texts in the dialog changes too
+    /**
+     * when user switches language, the texts in the dialog changes too
+     */
     public void switchLanguageInDialog(){
         if(switchLanguageFlag == 1){
             lanDialog = lan2;
@@ -276,7 +287,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //highlight row and column
+    /**
+     * highlight row and column
+     */
     public void highlightButton(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
@@ -288,7 +301,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //change highlihted grid back to normal color
+    /**
+     * change highlihted grid back to normal color
+     */
     public void changeHighlightBack(int id){
         int x = id % mPUZZLESIZE;
         int y = id / mPUZZLESIZE;
@@ -315,7 +330,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //change texts to numbers in listening mode
+    /**
+     * change texts to numbers in listening mode
+     */
     public void changeButtobTextsforListening(){
         for(int i=0; i<mPUZZLETOTALSIZE; i++){
             TextView tobeChangedButton = layout.findViewById(i);
@@ -327,7 +344,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //to check final answer and save 3 most unfamiliar words
+    /**
+     * to check final answer and save 3 most unfamiliar words
+     */
     public void checkAnswer(){
         Toast toast;
         if(mCheckResult.checkResult(mPuzzle)){
@@ -358,7 +377,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         toast.show();
     }
 
-    //to change text for buttons when user switches language
+    /**
+     * to change text for buttons when user switches language
+     */
     public void changeButtonTextforSwitchLanguage(){
         for (int j = 0; j < mPUZZLETOTALSIZE; j++){
             TextView tobeChangedButton = layout.findViewById(j);
@@ -380,7 +401,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //to generate grid layout
+    /**
+     * to generate grid layout
+     */
     public void initializeGridLayout(GridLayout gridLayout){
         for (int i = 0; i < mPUZZLETOTALSIZE; i++) {
             final TextView textView = new TextView(getActivity());
@@ -439,9 +462,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                         if(mPuzzle[y][x].getFlag() != 0){
                             if (textToSpeech != null && !textToSpeech.isSpeaking()) {
                                 //set to default
-                                textToSpeech.setPitch(1.0f);
+                                textToSpeech.setPitch(0.9f);
                                 //set to default
-                                textToSpeech.setSpeechRate(1.0f);
+                                textToSpeech.setSpeechRate(0.9f);
                                 textToSpeech.speak(mPuzzle[y][x].getLanguageTwo(), TextToSpeech.QUEUE_FLUSH, null);
                             }
                         }
@@ -473,7 +496,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
-    //to control listening mode
+    /**
+     * to control listening mode
+     */
     public void listeningModeControl(){
         if(listeningModeFlag == 1){
             checkResultButton.setEnabled(false);
@@ -506,6 +531,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         }
     }
 
+    /**
+     * calculate font size
+     */
     public int calFontSize(){
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
