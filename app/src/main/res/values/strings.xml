@@ -16,8 +16,8 @@
     <string name="erase_button">erase</string>
     <string name="words_lists_button">words lists</string>
     <string name="choose_file">CHOOSE FILE</string>
-    <string name="ok">OK</string>
-    <string name="please_input_word_list_name">Please input word list name</string>
+    <string name="ok">Import</string>
+    <string name="please_input_word_list_name">word list name</string>
 
 
 </resources>

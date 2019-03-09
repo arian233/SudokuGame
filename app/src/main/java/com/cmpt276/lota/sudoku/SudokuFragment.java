@@ -228,8 +228,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         gridLayout.setColumnCount(mPUZZLESIZE);
         gridLayout.setRowCount(mPUZZLESIZE);
         initializeGridLayout(gridLayout);
-
-
     }
 
     /**

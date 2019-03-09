@@ -16,6 +16,7 @@ public class WordsListsFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private WordsAdapter mAdapter;
     private static WordListLab wordListLab;
+    private final int FONTSIZE = 20;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class WordsListsFragment extends Fragment {
         public void bind(ListsOfWords listsOfWords) {
             mListsOfWord = listsOfWords;
             mTitleTextView.setText(mListsOfWord.getWordListsName());
+            mTitleTextView.setTextSize(FONTSIZE);
         }
 
         @Override

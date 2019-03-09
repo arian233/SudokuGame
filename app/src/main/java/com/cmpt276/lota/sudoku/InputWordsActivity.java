@@ -34,13 +34,14 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class InputWordsActivity extends AppCompatActivity {
-    TextView chosenFileName;
-    Button chooseFileBtn;
-    Button OKBtn;
-    EditText enterFileName;
+    private TextView chosenFileName;
+    private Button chooseFileBtn;
+    private Button importFileBtn;
+    private EditText enterFileName;
     private final int REQUEST_PERMISSION_CODE = 1001;
     private final int PICK_FILE_CODE = 1000;
-    List<Words> words;
+    private List<Words> words;
+    private final int mFONTSIZE = 8;
     private WordListLab wordListLab = WordListLab.getWordListLab();
 
     @Override
@@ -56,7 +57,13 @@ public class InputWordsActivity extends AppCompatActivity {
         chosenFileName = (TextView) findViewById(R.id.chosen_file_name);
         enterFileName = (EditText) findViewById(R.id.edit_file_name);
         chooseFileBtn = (Button) findViewById(R.id.choose_file);
-        OKBtn = (Button) findViewById(R.id.input_word_list);
+        chooseFileBtn.setBackground(getResources().getDrawable(R.drawable.buttons));
+        chooseFileBtn.setTextSize(2*mFONTSIZE);
+        chooseFileBtn.setPadding(10,10,10,10);
+        importFileBtn = (Button) findViewById(R.id.input_word_list);
+        importFileBtn.setBackground(getResources().getDrawable(R.drawable.buttons));
+        importFileBtn.setTextSize(2*mFONTSIZE);
+        importFileBtn.setPadding(10,10,10,10);
         chooseFileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +125,7 @@ public class InputWordsActivity extends AppCompatActivity {
                     }
                 }
                 Toast.makeText(this, "Read File Successfully: " + file.getName(), Toast.LENGTH_SHORT).show();
-                OKBtn.setOnClickListener(new View.OnClickListener() {
+                importFileBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String name = enterFileName.getText().toString();
