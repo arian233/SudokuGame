@@ -128,6 +128,22 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String str[][] = new String[3][2];
+                for(int i = 0; i < 3; i++){//for familiarity
+                    int maxIndex = 0;//find max value's index
+                    for (int j = 0; j < familiarity.length; j++) {
+                        maxIndex = familiarity[j] > familiarity[maxIndex] ? j : maxIndex;
+                    }
+                    if(familiarity[maxIndex] != 0){
+                        str[i][0] = lan1[maxIndex];
+                        str[i][1] = lan2[maxIndex];
+                    }else{
+                        str[i][0] = "";//if there's no/ not enough unfamiliar words, then set unfamiliar words list to empty
+                        str[i][1] = "";
+                    }
+                    familiarity[maxIndex] = 0;
+                }
+                wordListLab.setNotFamiliarWord(str);
                 generator = new PuzzleGenerator();
                 mPuzzle = generator.generateGrid();
                 initialPuzzle();
@@ -350,22 +366,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         if(mCheckResult.checkResult(mPuzzle)){
             toast =Toast.makeText(getActivity(),R.string.Complete_toast,Toast.LENGTH_SHORT);
             timer.stop();
-            String str[][] = new String[3][2];
-            for(int i = 0; i < 3; i++){//for familiarity
-                int maxIndex = 0;//find max value's index
-                for (int j = 0; j < familiarity.length; j++) {
-                    maxIndex = familiarity[j] > familiarity[maxIndex] ? j : maxIndex;
-                }
-                if(familiarity[maxIndex] != 0){
-                    str[i][0] = lan1[maxIndex];
-                    str[i][1] = lan2[maxIndex];
-                }else{
-                    str[i][0] = "";//if there's no/ not enough unfamiliar words, then set unfamiliar words list to empty
-                    str[i][1] = "";
-                }
-                familiarity[maxIndex] = 0;
-            }
-            wordListLab.setNotFamiliarWord(str);
             Intent intent = new Intent(getActivity(), GifActivity.class);
             startActivity(intent);
         }else{
