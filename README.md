@@ -3,8 +3,7 @@ This is a 9*9 Sudoku application that helps the users to learn a second language
 
 When the users launch the application, it will automatically generate a number puzzle for the user to play.
 
-This app has been tested on emulator phone "Nexus 5X API 24" and tablet "Nexus 10 API 24". The test environment is MACOS 10.14.2, 10.13 and Windows 10.////need to be confirmed
-
+This app has been tested on emulator phone "Nexus 5X API 21" and tablet "10.1 WXGA(Tablet) API 21". The test environment is MACOS 10.14.2, 10.13 and Windows 10.
 This app right now is runnable for portrait screen mode and landscape mode.[when the user rotates the screen the app will save the state.]
 
 **User Instruction:**
@@ -23,6 +22,7 @@ This app right now is runnable for portrait screen mode and landscape mode.[when
 - While playing the sudoku, the user can click the listening mode button to switch the app to a listening mode. When the user clicks a preset cell, the pronunciation of the word will be played.
 
 - The user can click the "+" sign button to import the CSV files that contain the two language pairs to the current puzzle.
+  - When the user wants to import the CSV file, he/she can name the file by the user itself, after choosing the file, click ok to import the file successfully.
 
 - The user can click the refresh button to refresh the current puzzle.
   - Rule of refreshing
