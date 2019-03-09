@@ -70,6 +70,8 @@ As a student working with a textbook, I want to load pairs of words to practice 
 
 1. Students can extract those words from each chapter to a CSV file. Then each time that students want to practice those words, they can directly click the wordlists button to import those words to the current Suduko puzzle.**[Complete]**
 
+2. When the student wants to import the CSV file, he/she can name the file by the user itself, after choosing the file, click ok to import the file successfully.**[Complete]**
+
 3. Each time that students click the refresh button, it generates a new puzzle for the user to solve.**[Complete]**
 
 
