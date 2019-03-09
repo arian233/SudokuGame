@@ -6,16 +6,26 @@ import java.util.UUID;
 
 public class ListsOfWords {
     private List<Words> mWordLists;
-
     private String mWordListsName;
     private UUID mId;
 
+    /**
+     * constructor
+     * @param mWordLists a list of word
+     * @param str name of this list
+     */
     public ListsOfWords(List<Words> mWordLists, String str){
         this.mWordLists = mWordLists;
         mWordListsName = str;
         mId = UUID.randomUUID();
     }
 
+    /**
+     *constructor
+     * @param str1 string of 1st language
+     * @param str2 string of 2nd language
+     * @param name name of this list
+     */
     public ListsOfWords(String[] str1, String[] str2, String name) {
         mWordLists = new ArrayList<>();
         mId = UUID.randomUUID();
@@ -26,17 +36,27 @@ public class ListsOfWords {
         mWordListsName = name;
     }
 
+    /**
+     * get id
+     * @return id
+     */
     public UUID getId() {
         return mId;
     }
 
+    /**
+     * getWordLists
+     * @return WordLists
+     */
     public List<Words> getWordLists() {
         return mWordLists;
     }
 
+    /**
+     * getWordListsName
+     * @return name of WordLists
+     */
     public String getWordListsName() {
         return mWordListsName;
     }
-
-
 }

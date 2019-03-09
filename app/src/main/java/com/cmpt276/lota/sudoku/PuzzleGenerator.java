@@ -1,11 +1,8 @@
 package com.cmpt276.lota.sudoku;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-import java.util.UUID;
 
 public class PuzzleGenerator {
     private static final int lanSize = 10;
@@ -18,6 +15,7 @@ public class PuzzleGenerator {
     private Random rand;
     public static boolean conflict = true; //True if there is a conflict
     private WordListLab wordListLab = WordListLab.getWordListLab();
+
     /**
      * Constructor: to have a 2d array of preset two languages
      */
@@ -81,7 +79,6 @@ public class PuzzleGenerator {
                     int yPos = currentPos / puzzleSize;
                     tmp[xPos][yPos] = number;
                     available.get(currentPos).remove(i);
-
                     currentPos++;
                 }
                 else{
@@ -108,11 +105,8 @@ public class PuzzleGenerator {
                     puzzle[j][i]=new Language(tmp[j][i], lan1[tmp[j][i]], lan2[tmp[j][i]],0);//0 means dummy
             }
         }
-
-
         return puzzle;
     }
-
 
     /**
      * To randomly remove the cells (set the cell to 0)
@@ -155,7 +149,6 @@ public class PuzzleGenerator {
         }
     }
 
-
     /**
      * To check if the current puzzle is a complete and valid puzzle
      * if there is conflict return true otherwise return false
@@ -178,7 +171,6 @@ public class PuzzleGenerator {
         return false;
     }
 
-
     /**
      * To check if the current position cell crates conflict
      * if there is conflict return true otherwise return false
@@ -187,7 +179,6 @@ public class PuzzleGenerator {
      * @param number: the current cell number that needs to be checked
      * @return boolean
      */
-
     private boolean checkConflict(int[][] puzzle, int currentPos, final int number){
         int xPos = currentPos % puzzleSize;
         int yPos = currentPos / puzzleSize;
@@ -218,8 +209,6 @@ public class PuzzleGenerator {
         return false;
     }
 
-
-
     /**
      * Return true if there is a conflict in the Vertical direction
      * if there is conflict return true otherwise return false
@@ -240,14 +229,13 @@ public class PuzzleGenerator {
 
     /**
      * Return true if there is a conflict in a small 3*3 region
+     * * if there is conflict return true otherwise return false
      * @param Sudoku:an 2d array of int
-     * if there is conflict return true otherwise return false
      * @param xPos: the x position of the cell that needs to be checked
      * @param yPos: the y position of the cell that needs to be checked
      * @param number: the number needs to  be checked
      * @return
      */
-
     private boolean checkRegionConflict(final int[][] Sudoku, final int xPos, final int yPos, final int number){
         int xRegion = xPos / regionNum;
         int yRegion = yPos / regionNum;
@@ -261,7 +249,6 @@ public class PuzzleGenerator {
         }
         return false;
     }
-
 
     /**
      * to return LanguageOne array

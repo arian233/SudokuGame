@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 public class SudokuActivity extends AppCompatActivity {
+
     private WordListLab wordListLab = WordListLab.get(SudokuActivity.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +28,4 @@ public class SudokuActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
 }

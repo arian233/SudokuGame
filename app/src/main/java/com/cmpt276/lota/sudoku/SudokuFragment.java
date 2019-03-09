@@ -462,10 +462,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                         if(mPuzzle[y][x].getFlag() != 0){
                             if (textToSpeech != null && !textToSpeech.isSpeaking()) {
                                 //set to default
-                                //textToSpeech.setPitch(0.9f);
+                                textToSpeech.setPitch(0.9f);
                                 //set to default
-                                //textToSpeech.setSpeechRate(0.9f);
-                                textToSpeech.speak(mPuzzle[y][x].getLanguageTwo(), TextToSpeech.QUEUE_FLUSH, null);
+                                textToSpeech.setSpeechRate(0.9f);
+                                String utteranceId=this.hashCode() + "";
+                                textToSpeech.speak(mPuzzle[y][x].getLanguageTwo(), TextToSpeech.QUEUE_FLUSH, null,utteranceId);
                             }
                         }
                     }
@@ -535,6 +536,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
      * calculate font size
      */
     public int calFontSize(){
+        int fontSize = mFONTSIZE;
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 
@@ -542,20 +544,22 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         float ydpi = displaymetrics.ydpi;
         int height = displaymetrics.heightPixels;
         int width = displaymetrics.widthPixels;
+        if(width > height)
+            fontSize += 2;
         float width2 = (width / xdpi)*(width / xdpi);
         float height2 = (height / ydpi)*(width / xdpi);
         float size =  (float) Math.sqrt(width2+height2);
 
         if (size <= 6) {// the real screen size in inches
-            return mFONTSIZE;
+            return fontSize;
         }else if (size <= 7) {
-            return mFONTSIZE+1;
+            return fontSize+1;
         }else if (width <= 8){
-            return mFONTSIZE+2;
+            return fontSize+2;
         }else if (width <= 9) {
-            return mFONTSIZE + 5;
+            return fontSize + 5;
         }else {
-            return mFONTSIZE+7;
+            return fontSize+7;
         }
     }
 

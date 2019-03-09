@@ -20,10 +20,8 @@ public class WordsListsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_words_list, container, false);
-        setRetainInstance(true);
         mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.words_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         updateUI();
         return view;
     }
@@ -43,7 +41,7 @@ public class WordsListsFragment extends Fragment {
         private TextView mTitleTextView;
 
         /**
-         * updateUI
+         * constructor
          */
         public WordsHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_wordslist, parent, false));
@@ -51,10 +49,12 @@ public class WordsListsFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.words_title);
         }
 
+        /**
+         * to get word list
+         */
         public void bind(ListsOfWords listsOfWords) {
             mListsOfWord = listsOfWords;
             mTitleTextView.setText(mListsOfWord.getWordListsName());
-
         }
 
         @Override
@@ -70,6 +70,9 @@ public class WordsListsFragment extends Fragment {
 
         private List<ListsOfWords> mListsOfWord;
 
+        /**
+         * constructor
+         */
         public WordsAdapter(List<ListsOfWords> listsOfWord) {
             mListsOfWord = listsOfWord;
         }
