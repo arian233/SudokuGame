@@ -26,7 +26,7 @@ This app right now is runnable for portrait screen mode and landscape mode.[when
   - all the imported file will displayed in the wordlist(another fragment).
 
 - The user can click the refresh(another imageButton) button to generate a new puzzle.
-  - Rule of refreshing
+  - Rule of refreshing: 
     Based on how many times the user clicks the preset cell for the hint, 3 highest clicked words (unfamiliar words) will appear in the new puzzle.
   - If user doesn't click any preset grid, then the application thinks the user is familiar with all words, so the next time user generate new puzzle, there are not any unfamiliar word.
     
