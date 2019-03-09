@@ -3,7 +3,8 @@ This is a 9*9 Sudoku application that helps the users to learn a second language
 
 When the users launch the application, it will automatically generate a number puzzle for the user to play.
 
-This app has been tested on emulator phone "Nexus 5X API 21" and tablet "10.1 WXGA(Tablet) API 21". The test environment is MACOS 10.14.2, 10.13 and Windows 10.
+This app has been tested on emulator phone "Nexus 5X API 21" and tablet "10.1 WXGA(Tablet) API 24"(As the requirements of this iteration the API supposed to be 21. 
+The reason why we use API 24 is to test the sound feature in listening mode , but every features of application works in API 21 except the sound feature in listening mode.). The test environment is MACOS 10.14.2, 10.13 and Windows 10.
 This app right now is runnable for portrait screen mode and landscape mode.[when the user rotates the screen the app will save the state.]
 
 **User Instruction:**
