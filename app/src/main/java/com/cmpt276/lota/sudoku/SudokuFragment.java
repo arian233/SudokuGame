@@ -20,7 +20,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Random;
 
 public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListener {
 
@@ -89,11 +91,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     }
 
     /**
-     * run the code when first run, and when user click refresh button
+     * run the code when user click refresh button
      */
     public void initialForRefresh(){
-
         switchLanguageFlag = 1;
+
         for (int i = 0; i < mPUZZLETOTALSIZE; i++) {
             TextView tobeChangedButton = layout.findViewById(i);
             int x = i % mPUZZLESIZE;
@@ -107,7 +109,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
             }
         }
-
+        if(listeningModeFlag != -1){
+            changeButtobTextsforListening();
+        }
     }
 
     /**
@@ -124,7 +128,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         //initialize refreshButton
         refreshButton = layout.findViewById(R.id.refresh_button);
         refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-        //refreshButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_refresh));
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -348,12 +351,26 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
      * change texts to numbers in listening mode
      */
     public void changeButtobTextsforListening(){
+        int randomListeningIndex[] = new int[mPUZZLESIZE];//to prevent cheating in listening mode
+        HashSet<Integer> integerHashSet = new HashSet<Integer>();
+        Random random=new Random();
+
+        for(int i = 0; i<mPUZZLESIZE ; ){
+            int randomInt = random.nextInt( mPUZZLESIZE );
+            if (!integerHashSet.contains(randomInt)) {
+                integerHashSet.add(randomInt);
+                randomListeningIndex[i] = randomInt;
+                i++;
+            }else{
+                continue;
+            }
+        }
         for(int i=0; i<mPUZZLETOTALSIZE; i++){
             TextView tobeChangedButton = layout.findViewById(i);
             int x = i % mPUZZLESIZE;
             int y = i / mPUZZLESIZE;
             if(mPuzzle[y][x].getFlag() != 0){
-                tobeChangedButton.setText(String.valueOf(mPuzzle[y][x].getNumber()));
+                tobeChangedButton.setText(String.valueOf(randomListeningIndex[mPuzzle[y][x].getNumber()-1] + 1));
             }
         }
     }
@@ -466,6 +483,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                                 String utteranceId=this.hashCode() + "";
                                 textToSpeech.speak(mPuzzle[y][x].getLanguageTwo(), TextToSpeech.QUEUE_FLUSH, null,utteranceId);
                             }
+                        }else{
+                            erasedButtonId= buttonId;
+                            showRadioDialog(buttonId);
+                            //highlight corresponding row and column
+                            highlightButton(buttonId);
+                            highlightedButton = buttonId;
                         }
                     }
                 }
@@ -500,32 +523,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
      */
     public void listeningModeControl(){
         if(listeningModeFlag == 1){
-            checkResultButton.setEnabled(false);
             switchButton.setEnabled(false);
-            wordsListsButton.setEnabled(false);
-            checkResultButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
             switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-            wordsListsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-            refreshButton.setEnabled(false);
-            refreshButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-            addWordsButton.setEnabled(false);
-            addWordsButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-            eraseButton.setEnabled(false);
-            eraseButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
             changeButtobTextsforListening();
         }else {
-            checkResultButton.setEnabled(true);
             switchButton.setEnabled(true);
-            wordsListsButton.setEnabled(true);
-            wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-            checkResultButton.setBackground(getResources().getDrawable(R.drawable.buttons));
             switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-            refreshButton.setEnabled(true);
-            refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-            addWordsButton.setEnabled(true);
-            addWordsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-            eraseButton.setEnabled(true);
-            eraseButton.setBackground(getResources().getDrawable(R.drawable.buttons));
             changeButtonTextforSwitchLanguage();
         }
     }
