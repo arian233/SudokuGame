@@ -7,7 +7,7 @@ import java.util.Random;
 public class PuzzleGenerator {
     private static final int lanSize = 10;
     private static final int puzzleSize = 9;
-    private static final int emptyGridNum = 10;
+    private static final int emptyGridNum = 1;
     private static final int regionNum = 3;
     private static String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
     private static String lan2[] = new String[lanSize];
