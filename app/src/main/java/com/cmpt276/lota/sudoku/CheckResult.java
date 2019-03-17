@@ -1,12 +1,26 @@
 package com.cmpt276.lota.sudoku;
 
 public class CheckResult {
-    private final int puzzleSize=9;
+    private WordListLab wordListLab = WordListLab.getWordListLab();
+    private final int puzzleSize = wordListLab.getPuzzleSize();
+    private int regionNumX = 3;
+    private int regionNumY = 3;
 
     /**
      * default constructor
      */
-    public CheckResult(){}
+    public CheckResult(){
+        if(puzzleSize == 4){
+            regionNumX = 2;
+            regionNumY = 2;
+        }else if(puzzleSize == 6){
+            regionNumX = 2;
+            regionNumY = 3;
+        }else if(puzzleSize == 12) {
+            regionNumX = 3;
+            regionNumY = 4;
+        }
+    }
 
     /**
      * to check repetition.
@@ -37,13 +51,13 @@ public class CheckResult {
             }
         }
         //check 9 grid
-        int x = puzzleXIndex/3;
-        int y = puzzleYIndex/3;
+        int x = puzzleXIndex/regionNumX;
+        int y = puzzleYIndex/regionNumY;
 
-        x*=3;
-        y*=3;
-        for(int j=0; j<3; j++){
-            for(int i=0; i<3; i++){
+        x *= regionNumX;
+        y *= regionNumY;
+        for(int j=0; j<regionNumY; j++){
+            for(int i=0; i<regionNumX; i++){
                 if(puzzle[y+j][x+i].getNumber()!=0){
                     if (check[puzzle[y+j][x+i].getNumber()] == 3 )
                         return false;

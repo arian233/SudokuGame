@@ -5,16 +5,17 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class PuzzleGenerator {
-    private static final int lanSize = 10;
-    private static final int puzzleSize = 9;
-    private static final int emptyGridNum = 1;
-    private static final int regionNum = 3;
-    private static String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
-    private static String lan2[] = new String[lanSize];
+    private WordListLab wordListLab = WordListLab.getWordListLab();
+    private int puzzleSize = wordListLab.getPuzzleSize();
+    private int lanSize = puzzleSize + 1;
+    private final int emptyGridNum = 1;
+    private int regionNumX = 3;
+    private int regionNumY = 3;
+    private String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
+    private String lan2[] = new String[lanSize];
     private ArrayList<ArrayList<Integer>> available = new ArrayList<ArrayList<Integer>>();
     private Random rand;
-    public static boolean conflict = true; //True if there is a conflict
-    private WordListLab wordListLab = WordListLab.getWordListLab();
+    public boolean conflict = true; //True if there is a conflict
 
     /**
      * Constructor: to have a 2d array of preset two languages
@@ -24,12 +25,23 @@ public class PuzzleGenerator {
         lan2[0] = "";
 
         int i = 1;
-        for(int j=0 ; j < 3; j++){
+        for(int j=0 ; j < 3 ; j++){
             if( wordListLab.getHasSetFamiliar() != -1 && wordListLab.getNotFamiliarWord()[j][0] != "" ){
                 lan1[i] = wordListLab.getNotFamiliarWord()[j][0];
                 lan2[i] = wordListLab.getNotFamiliarWord()[j][1];
                 i++;
             }
+        }
+
+        if(puzzleSize == 4){
+            regionNumY = 2;
+            regionNumX = 2;
+        }else if(puzzleSize == 6){
+            regionNumY = 2;
+            regionNumX = 3;
+        }else if(puzzleSize == 12) {
+            regionNumY = 3;
+            regionNumX = 4;
         }
 
         HashSet<Integer> integerHashSet = new HashSet<Integer>();
@@ -57,7 +69,6 @@ public class PuzzleGenerator {
                 i++;
             }
         }
-
     }
 
     /**
@@ -68,7 +79,7 @@ public class PuzzleGenerator {
         int currentPos = 0;
         clearGrid(tmp);
         rand = new Random();
-        while (currentPos < puzzleSize*puzzleSize){
+        while (currentPos < puzzleSize * puzzleSize){
             if (available.get(currentPos).size() != 0){ //if arraylist is not empty
                 int i = rand.nextInt(available.get(currentPos).size()); // get random number
                 int number = available.get(currentPos).get(i);
@@ -237,11 +248,11 @@ public class PuzzleGenerator {
      * @return
      */
     private boolean checkRegionConflict(final int[][] Sudoku, final int xPos, final int yPos, final int number){
-        int xRegion = xPos / regionNum;
-        int yRegion = yPos / regionNum;
+        int xRegion = xPos / regionNumX;
+        int yRegion = yPos / regionNumY;
 
-        for (int x = xRegion * regionNum; x < xRegion * regionNum + regionNum; x++){
-            for (int y = yRegion * regionNum; y < yRegion * regionNum + regionNum; y++){
+        for (int x = xRegion * regionNumX; x < xRegion * regionNumX + regionNumX; x++){
+            for (int y = yRegion * regionNumY; y < yRegion * regionNumY + regionNumY; y++){
                 if ((x != xPos || y != yPos) && number == Sudoku[x][y]){
                     return true;
                 }
@@ -254,7 +265,7 @@ public class PuzzleGenerator {
      * to return LanguageOne array
      * @return an array of Language one
      */
-    public static String[] getLanOne(){
+    public String[] getLanOne(){
         String str[]=new String[puzzleSize];
         for(int i=0; i<puzzleSize;i++){
             str[i]=lan1[i+1];
@@ -266,7 +277,7 @@ public class PuzzleGenerator {
      * to return LanguageTwo array
      * @return an array of Language two
      */
-    public static String[] getLanTwo(){
+    public String[] getLanTwo(){
         String str[]=new String[puzzleSize];
         for(int i=0; i<puzzleSize;i++){
             str[i]=lan2[i+1];

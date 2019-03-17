@@ -16,6 +16,7 @@ public class WordListLab implements Serializable {
 
     private int hasSetId = -1;//-1 is not set
     private int hasSetFamiliar = -1;//-1 is not set familiar
+    private int puzzleSize = 9;
 
     /**
      * get a new WordListLab singleton object
@@ -43,8 +44,8 @@ public class WordListLab implements Serializable {
      * @param context context
      */
     private WordListLab(Context context) {
-        String[] lan1 = new String[] {"one", "two","three","four", "five","six","seven", "eight","nine","ten","eleven",};
-        String[] lan2 = new String[] {"一", "二","三","四", "五","六","七", "八","九","十","十一"};
+        String[] lan1 = new String[] {"one", "two","three","four", "five","six","seven", "eight","nine","ten","eleven","twelve","thirteen"};
+        String[] lan2 = new String[] {"一", "二","三","四", "五","六","七", "八","九","十","十一","十二","十三"};
         String[] lan3 = new String[] {"guitar", "sing","swim","dance", "draw","chess","speak", "join","club","story","write","show","kungfu","drum","violin","piano"};
         String[] lan4 = new String[] {"吉他", "唱歌","游泳","跳舞", "画","国际象棋","说话", "加入","社团","故事","写字","展示","功夫","鼓","小提琴","钢琴"};
         mListsOfWord = new ArrayList<>();
@@ -143,5 +144,19 @@ public class WordListLab implements Serializable {
      */
     public int getHasSetFamiliar() {
         return hasSetFamiliar;
+    }
+
+    /**
+     * get the PuzzleSize
+     */
+    public int getPuzzleSize() {
+        return puzzleSize;
+    }
+
+    /**
+     * set the PuzzleSize
+     */
+    public void setPuzzleSize(int puzzleSize) {
+        this.puzzleSize = puzzleSize;
     }
 }
