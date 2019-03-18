@@ -29,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -106,7 +107,7 @@ public class InputWordsActivity extends AppCompatActivity {
         if (file.exists())
         {
             words = new ArrayList<>();
-            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "GBK");
+            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
             BufferedReader reader = new BufferedReader(isr);
             try
             {
