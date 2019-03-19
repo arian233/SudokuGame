@@ -46,7 +46,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
     private int erasedButtonId; //to erase cell
-    private int changeListeningLanguageFlag = -1;//-1 is second language(e.g. chinese), 1 is first language
+    private int changeListeningLanguageFlag = 1;//-1 is second language(e.g. chinese), 1 is first language
     private int hasChangedSizeFlag = -1;
 
     private int familiarity[] = new int[mPUZZLESIZE];
@@ -115,7 +115,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         if(listeningModeFlag == 1){
             switchLanguageFlag = -1;
         }
-        changeListeningLanguageFlag = -1;//reset to second language
+        changeListeningLanguageFlag = 1;//reset to second language
         textToSpeech.stop();
         textToSpeech.shutdown();
         initialListeningTTS();
@@ -266,6 +266,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 switchLanguageFlag *= -1;
                 switchLanguageInDialog();
                 changeButtonTextforSwitchLanguage();
+                changeButtonTextforSwitchLanguage();
+                changeListeningLanguageFlag *= -1;
+                textToSpeech.stop();
+                textToSpeech.shutdown();
+                initialListeningTTS();
             }
         });
 
