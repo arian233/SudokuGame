@@ -10,8 +10,7 @@ public class CheckResultTest {
     private  CheckResult testCheckResult;
     private  Language testWrongPuzzle[][];
     private  Language testCorrectPuzzle[][];
-
-
+    private Language[][] teatPuzzleForRegion;
 
     @Before
     public void setUp() throws Exception // have question in here
@@ -61,6 +60,19 @@ public class CheckResultTest {
                 { 9, 7, 8, 5, 3, 1, 6, 4, 2 },
         };//an simple correct testing case
 
+        teatPuzzleForRegion = new Language[9][9];
+        int puzzleForRegionTest[][] = {
+            { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+            { 4, 1, 6, 7, 8, 9, 1, 2, 3 },
+            { 7, 8, 9, 1, 2, 3, 4, 5, 6 },
+            { 2, 1, 4, 3, 6, 5, 8, 9, 7 },
+            { 3, 6, 5, 8, 9, 7, 2, 1, 4 },
+            { 8, 9, 7, 2, 1, 4, 3, 6, 5 },
+            { 5, 3, 1, 6, 4, 2, 9, 7, 8 },
+            { 6, 4, 2, 9, 7, 8, 5, 3, 1 },
+            { 9, 7, 8, 5, 3, 1, 6, 4, 2 },
+        };
+
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9 ; j++)
@@ -72,6 +84,15 @@ public class CheckResultTest {
                 //in checkResult is not checking for the String Language One and Two.
             }
         }
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9 ; j++)
+            {
+                teatPuzzleForRegion[i][j] = new Language(puzzleForRegionTest[i][j],"dummy","dummy",0);
+            }
+        }
+
 
         //Current Correct Puzzle
 //        {
@@ -182,5 +203,10 @@ public class CheckResultTest {
             }
         }
 
+    }
+
+    @Test
+    public void testCheckRegion() {
+        assertEquals(false, testCheckResult.checkRegion(teatPuzzleForRegion,1,1));
     }
 }

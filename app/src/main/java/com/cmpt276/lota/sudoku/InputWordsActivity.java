@@ -43,7 +43,7 @@ public class InputWordsActivity extends AppCompatActivity {
     private final int PICK_FILE_CODE = 1000;
     private List<Words> words;
     private final int mFONTSIZE = 8;
-    private WordListLab wordListLab = WordListLab.getWordListLab();
+    private WordListLab wordListLab = WordListLab.get(InputWordsActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

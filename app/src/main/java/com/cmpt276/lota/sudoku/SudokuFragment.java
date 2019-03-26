@@ -25,11 +25,11 @@ import java.util.Random;
 
 public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListener {
 
-    private WordListLab wordListLab = WordListLab.getWordListLab();
+    private WordListLab wordListLab = WordListLab.get(getActivity());
 
     private int mPUZZLESIZE = wordListLab.getPuzzleSize();
     private int mPUZZLETOTALSIZE = mPUZZLESIZE * mPUZZLESIZE;
-    private final int mFONTSIZE = 8;
+    private final int mFONTSIZE = 9;
     private PuzzleGenerator generator;
     private CheckResult mCheckResult;
     private Chronometer timer;
@@ -178,7 +178,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             }
         });
 
-        //initialize refreshButton
+        //initialize refreshButton and save 3 most unfamiliar words
         refreshButton = layout.findViewById(R.id.refresh_button);
         refreshButton.setBackground(getResources().getDrawable(R.drawable.buttons));
         refreshButton.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +199,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                     }
                     familiarity[maxIndex] = 0;
                 }
-                wordListLab.setNotFamiliarWord(str);
+                wordListLab.setUnfamiliarWord(str);
                 generator = new PuzzleGenerator();
                 mPuzzle = generator.generateGrid();
                 if(hasChangedSizeFlag == 1){
@@ -215,7 +215,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                     initialPuzzle();
                     initialForRefresh();
                 }
-
             }
         });
 
@@ -471,7 +470,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     }
 
     /**
-     * to check final answer and save 3 most unfamiliar words
+     * to check final answer
      */
     public void checkAnswer(){
         Toast toast;
@@ -663,11 +662,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         float size =  (float) Math.sqrt(width2+height2);
 
         int fontSizeAdjustForSmallGrid = 0;
-        if(mPUZZLESIZE <= 4)
+        if(mPUZZLESIZE == 4)
             fontSizeAdjustForSmallGrid = 4;
-        else if(mPUZZLESIZE <= 6){
+        else if(mPUZZLESIZE == 6){
             fontSizeAdjustForSmallGrid = 2;
-        }else if(mPUZZLESIZE <= 12){
+        }else if(mPUZZLESIZE == 12){
             fontSizeAdjustForSmallGrid = -2;
         }
 
@@ -712,6 +711,9 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 }else{
                     size = 9;
                 }
+
+                if(size!=9)
+                    highlightedButton = -1;
                 wordListLab.setPuzzleSize(size);
             }
         }).create();

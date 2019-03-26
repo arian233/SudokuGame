@@ -1,17 +1,21 @@
 package com.cmpt276.lota.sudoku;
 
-import org.junit.Before;
-import org.junit.Test;
+import android.content.Context;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PuzzleGeneratorTest {
 
+    private Context testContex;
+    WordListLab wordListLab = WordListLab.get(testContex);
     private PuzzleGenerator testPuzzleGenerator;  //declare  a class member to test
     private CheckResult testCheckResult;
     private Language testPuzzle[][];
     private int testConflictPuzzle[][];
-
 
     @Before
     public void setUp() throws Exception {
@@ -33,36 +37,86 @@ public class PuzzleGeneratorTest {
         };
     }
 
-        @Test
-        public void generateGrid ()
-        {
-            // since we already test the correctness of the class checkResult
-            // so we can directly use the checkResult class to get test the correctness of our Generator
-            // we firstly using the generateGrid to generate a puzzle and then let the CheckResult to test
-            testPuzzle = testPuzzleGenerator.generateGrid();
+    @After
+    public void clean() throws Exception {
+        wordListLab.setPuzzleSize(9);
+        testPuzzleGenerator = new PuzzleGenerator();
+        testCheckResult = new CheckResult();
+    }
 
+    @Test
+    public void generateGrid ()
+    {
+        // since we already test the correctness of the class checkResult
+        // so we can directly use the checkResult class to get test the correctness of our Generator
+        // we firstly using the generateGrid to generate a puzzle and then let the CheckResult to test
+        testPuzzle = testPuzzleGenerator.generateGrid();
 
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
 
-                    assertEquals(true, testCheckResult.checkValid(testPuzzle, j, i));
-                    //System.out.print(" " + testPuzzle[i][j].getNumber() + " ");
-                }
-                System.out.println("\n");
+                assertEquals(true, testCheckResult.checkValid(testPuzzle, j, i));
+                //System.out.print(" " + testPuzzle[i][j].getNumber() + " ");
             }
-            //after the generator generates a puzzle, then we just use the checkResult function to check
-            //assertEquals(true, testCheckResult.checkResult(testPuzzle));
-
-            //since this puzzle generator return correct result so it should pass the test
-
+            System.out.println("\n");
         }
 
-        @Test
-        public void getConflict ()
-        {
-            // getConflict's input is an int array
-            // so we can create a complete int array to check if the check conflict work
-            // Examples that I create in the setup function
+        //after the generator generates a puzzle, then we just use the checkResult function to check
+        //assertEquals(true, testCheckResult.checkResult(testPuzzle));
+
+        //since this puzzle generator return correct result so it should pass the test
+    }
+
+    @Test
+    public void testUnfamiliar(){
+        String str[][] = {{"a","b"},{"c","d"},{"e","f"}};
+        wordListLab.setUnfamiliarWord(str);
+        testPuzzleGenerator = new PuzzleGenerator();//has to init here, since changed wordlistslab
+        testCheckResult = new CheckResult();//same as above
+        testPuzzle = testPuzzleGenerator.generateGrid();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                assertEquals(true, testCheckResult.checkValid(testPuzzle, j, i));
+            }
+        }
+    }
+
+    @Test
+    public void testSizes(){
+        int sizeSet[] = {4,6,9,12};
+        for(int k = 0; k < 4; k++){
+            wordListLab.setPuzzleSize(sizeSet[k]);
+            testPuzzleGenerator = new PuzzleGenerator();
+            testCheckResult = new CheckResult();
+            testPuzzle = testPuzzleGenerator.generateGrid();
+            for (int i = 0; i < sizeSet[k]; i++) {
+                for (int j = 0; j < sizeSet[k]; j++) {
+                    assertEquals(true, testCheckResult.checkValid(testPuzzle, j, i));
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testChangeWordlists(){
+        //to test the case that user has changed wordlist
+        wordListLab.setId(wordListLab.getListsOfWord().get(1).getId());
+        testPuzzleGenerator = new PuzzleGenerator();//has to init here, since changed wordlistslab
+        testCheckResult = new CheckResult();//same as above
+        testPuzzle = testPuzzleGenerator.generateGrid();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                assertEquals(true, testCheckResult.checkValid(testPuzzle, j, i));
+            }
+        }
+    }
+
+    @Test
+    public void getConflict ()
+    {
+        // getConflict's input is an int array
+        // so we can create a complete int array to check if the check conflict work
+        // Examples that I create in the setup function
 //        { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 //        { 4, 5, 6, 7, 8, 9, 1, 2, 3 }
 //        { 7, 8, 9, 1, 2, 3, 4, 5, 6 }
@@ -82,28 +136,30 @@ public class PuzzleGeneratorTest {
 //                }
 //                System.out.println("\n");
 
+        assertEquals(false, testPuzzleGenerator.getConflict(testConflictPuzzle));
+        //since the puzzle that we provided is correct, so there is no conflict so it
+        //return false which expected
+
+        //right now we randomly change a cell then this puzzle will become a invalid puzzle
+        int temp = testConflictPuzzle[2][2];
+
+        //will get a conflict if there's a -1
+        testConflictPuzzle[2][2] = -1;
+        assertEquals(true, testPuzzleGenerator.getConflict(testConflictPuzzle));
 
 
-            assertEquals(false, testPuzzleGenerator.getConflict(testConflictPuzzle));
-            //since the puzzle that we provided is correct, so there is no conflict so it
-            //return false which expected
+        testConflictPuzzle[2][2] = testConflictPuzzle[2][3];
+        //gonna crate a conflict
 
+        assertEquals(true, testPuzzleGenerator.getConflict(testConflictPuzzle));
+        //expected return true which represents a conflict
 
-            //right now we randomly change a cell then this puzzle will become a invalid puzzle
-            int temp = testConflictPuzzle[2][2];
-            testConflictPuzzle[2][2] = testConflictPuzzle[2][3];
-            //gonna crate a conflict
+        //change it back
+        testConflictPuzzle[2][2] = temp;
+        assertEquals(false, testPuzzleGenerator.getConflict(testConflictPuzzle));
+        //should not return any problem
 
-            assertEquals(true, testPuzzleGenerator.getConflict(testConflictPuzzle));
-            //expected return true which represents a conflict
-
-            //change it back
-            testConflictPuzzle[2][2] = temp;
-            assertEquals(false, testPuzzleGenerator.getConflict(testConflictPuzzle));
-            //should not return any problem
-
-
-        }
+    }
 //
 //    @Test
 //    public void getLanOne()

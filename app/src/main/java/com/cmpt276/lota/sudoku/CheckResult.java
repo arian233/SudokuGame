@@ -1,7 +1,10 @@
 package com.cmpt276.lota.sudoku;
 
+import android.content.Context;
+
 public class CheckResult {
-    private WordListLab wordListLab = WordListLab.getWordListLab();
+    private Context testContex;
+    private WordListLab wordListLab = WordListLab.get(testContex);
     private final int puzzleSize = wordListLab.getPuzzleSize();
     private int regionNumX = 3;
     private int regionNumY = 3;
@@ -27,12 +30,21 @@ public class CheckResult {
      * @param puzzle: an 2d array of Language objects
      * @param puzzleYIndex: the y index of 2d array
      * @param puzzleXIndex: the x index of 2d array
-     * @return boolean
+     * @return true is no conflict
      */
     public boolean checkValid(Language puzzle[][], int puzzleYIndex, int puzzleXIndex) {
-        int check[]=new int[puzzleSize+1];
+        return checkRow(puzzle,puzzleYIndex,puzzleXIndex) && checkColumn(puzzle,puzzleYIndex,puzzleXIndex) && checkRegion(puzzle,puzzleYIndex,puzzleXIndex);
+    }
 
-        //check row
+    /**
+     * to check row repetition.
+     * @param puzzle: an 2d array of Language objects
+     * @param puzzleYIndex: the y index of 2d array
+     * @param puzzleXIndex: the x index of 2d array
+     * @return true is no conflict
+     */
+    public boolean checkRow(Language puzzle[][], int puzzleYIndex, int puzzleXIndex) {
+        int check[] = new int[puzzleSize+1];
         for(int i=0; i<puzzleSize ; i++){
             if(puzzle[puzzleYIndex][i].getNumber()!=0){
                 if (check[puzzle[puzzleYIndex][i].getNumber()] == 1 )
@@ -41,7 +53,18 @@ public class CheckResult {
                     check[puzzle[puzzleYIndex][i].getNumber()] = 1;
             }
         }
-        //check column
+        return true;
+    }
+
+    /**
+     * to check column repetition.
+     * @param puzzle: an 2d array of Language objects
+     * @param puzzleYIndex: the y index of 2d array
+     * @param puzzleXIndex: the x index of 2d array
+     * @return true is no conflict
+     */
+    public boolean checkColumn(Language puzzle[][], int puzzleYIndex, int puzzleXIndex) {
+        int check[] = new int[puzzleSize+1];
         for(int i=0; i<puzzleSize ; i++){
             if(puzzle[i][puzzleXIndex].getNumber()!=0){
                 if (check[puzzle[i][puzzleXIndex].getNumber()] == 2 )
@@ -50,6 +73,18 @@ public class CheckResult {
                     check[puzzle[i][puzzleXIndex].getNumber()] = 2;
             }
         }
+        return true;
+    }
+
+    /**
+     * to check region repetition.
+     * @param puzzle: an 2d array of Language objects
+     * @param puzzleYIndex: the y index of 2d array
+     * @param puzzleXIndex: the x index of 2d array
+     * @return true is no conflict
+     */
+    public boolean checkRegion(Language puzzle[][], int puzzleYIndex, int puzzleXIndex) {
+        int check[] = new int[puzzleSize+1];
         //check 9 grid
         int x = puzzleXIndex/regionNumX;
         int y = puzzleYIndex/regionNumY;

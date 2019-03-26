@@ -1,14 +1,18 @@
 package com.cmpt276.lota.sudoku;
 
+import android.content.Context;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
 public class PuzzleGenerator {
-    private WordListLab wordListLab = WordListLab.getWordListLab();
+    private Context testContex;
+    private WordListLab wordListLab = WordListLab.get(testContex);
     private int puzzleSize = wordListLab.getPuzzleSize();
     private int lanSize = puzzleSize + 1;
-    private final int emptyGridNum = 1;
+    private final int emptyGridNum = 2;
     private int regionNumX = 3;
     private int regionNumY = 3;
     private String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.
@@ -26,9 +30,9 @@ public class PuzzleGenerator {
 
         int i = 1;
         for(int j=0 ; j < 3 ; j++){
-            if( wordListLab.getHasSetFamiliar() != -1 && wordListLab.getNotFamiliarWord()[j][0] != "" ){
-                lan1[i] = wordListLab.getNotFamiliarWord()[j][0];
-                lan2[i] = wordListLab.getNotFamiliarWord()[j][1];
+            if( wordListLab.getHasSetFamiliar() != -1 && wordListLab.getUnfamiliarWord()[j][0] != "" ){
+                lan1[i] = wordListLab.getUnfamiliarWord()[j][0];
+                lan2[i] = wordListLab.getUnfamiliarWord()[j][1];
                 i++;
             }
         }
@@ -266,11 +270,7 @@ public class PuzzleGenerator {
      * @return an array of Language one
      */
     public String[] getLanOne(){
-        String str[]=new String[puzzleSize];
-        for(int i=0; i<puzzleSize;i++){
-            str[i]=lan1[i+1];
-        }
-        return str;
+        return Arrays.copyOfRange(lan1, 1, puzzleSize + 1);
     }
 
     /**
@@ -278,14 +278,6 @@ public class PuzzleGenerator {
      * @return an array of Language two
      */
     public String[] getLanTwo(){
-        String str[]=new String[puzzleSize];
-        for(int i=0; i<puzzleSize;i++){
-            str[i]=lan2[i+1];
-        }
-        return str;
+        return Arrays.copyOfRange(lan2, 1, puzzleSize + 1);
     }
 }
-
-
-
-
