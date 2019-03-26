@@ -160,16 +160,18 @@ public class PuzzleGeneratorTest {
         //should not return any problem
 
     }
-//
-//    @Test
-//    public void getLanOne()
-//    {
+
+    @Test
+    public void getLanOne()
+    {
+        assertEquals(9,testPuzzleGenerator.getLanOne().length);
+        assertEquals(9,testPuzzleGenerator.getLanTwo().length);
 //        String test1String[];
 //        String test2String[];
-        //since each time the Lan one gonna return different output and it does not provided a getter
-        //we can not test it
-        //Use two string to compare teach time if it is the same
-
+//        since each time the Lan one gonna return different output and it does not provided a getter
+//        we can not test it
+//        Use two string to compare teach time if it is the same
+//
 //        test1String = testPuzzleGenerator.getLanOne();
 //        test2String = testPuzzleGenerator.getLanOne();
 //        for (int j = 0; j < 9 ; j++)
@@ -187,14 +189,14 @@ public class PuzzleGeneratorTest {
 //            System.out.print(" " + test2String[j] + " ");
 //
 //        }
+//
+//        two output is the same
+//
+//        test in this way
+//        assertEquals(test1String,testPuzzleGenerator.getLanOne());
+//        assertEquals(true,test1String.equals(testPuzzleGenerator.getLanOne()));
 
-        //two output is the same
-
-        //test in this way
-        //assertEquals(test1String,testPuzzleGenerator.getLanOne());
-        //assertEquals(true,test1String.equals(testPuzzleGenerator.getLanOne()));
-
-//    }
+    }
 
 
     }
