@@ -420,7 +420,50 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             });
 
             textView.setGravity(Gravity.CENTER);
-            params.setMargins(2, 2, 2, 2);
+
+            int divisor1;
+            int quotient1;
+            int divisor2;
+            int quotient2;
+            int quotient3;
+            int adjustForTwelve = 0;
+
+            if(mPUZZLESIZE == 9){
+                divisor1 = 3;
+                quotient1 = 2;
+                divisor2 = 9;
+                quotient2 = 2;
+                quotient3 = 5;
+            }else if(mPUZZLESIZE == 4){
+                divisor1 = 2;
+                quotient1 = 1;
+                divisor2 = 4;
+                quotient2 = 1;
+                quotient3 = 5;
+            }else if(mPUZZLESIZE == 6){
+                divisor1 = 2;
+                quotient1 = 1;
+                divisor2 = 6;
+                quotient2 = 2;
+                quotient3 = 5;
+            }else{
+                //size==12
+                divisor1 = 3;
+                quotient1 = 2;
+                divisor2 = 12;
+                quotient2 = 3;
+                quotient3 = 7;
+                adjustForTwelve = 5;
+            }
+
+            if( i % divisor1 == quotient1 ){
+                params.setMargins(2, 2, 15 - adjustForTwelve, 2);
+            }else if(i / divisor2 == quotient2 || i / divisor2 == quotient3) {
+                params.setMargins(2, 2, 2, 15 - adjustForTwelve);
+            }else{
+                params.setMargins(2, 2, 2, 2);
+            }
+
             gridLayout.addView(textView, params);
         }
     }
