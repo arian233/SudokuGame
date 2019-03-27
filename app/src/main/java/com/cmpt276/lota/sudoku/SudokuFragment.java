@@ -307,7 +307,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             @Override
             public void onClick(View v) {
                 listeningModeFlag *= -1;
-                switchLanguageFlag *= -1;
+                //switchLanguageFlag *= -1;
                 listeningModeControl();
                 switchLanguageInDialog();
             }
