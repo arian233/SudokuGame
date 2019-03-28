@@ -4,7 +4,6 @@ import android.content.Context;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -50,7 +49,9 @@ public class PuzzleGeneratorTest {
         // since we already test the correctness of the class checkResult
         // so we can directly use the checkResult class to get test the correctness of our Generator
         // we firstly using the generateGrid to generate a puzzle and then let the CheckResult to test
-        testPuzzle = testPuzzleGenerator.generateGrid();
+        for(int i=0; i<99; i++){// since the puzzle is randomly generated, in order to get 100% coverage, we need 99 times to get boundary case
+            testPuzzle = testPuzzleGenerator.generateGrid();
+        }
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

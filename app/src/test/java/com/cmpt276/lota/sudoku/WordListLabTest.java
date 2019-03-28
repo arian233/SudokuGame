@@ -78,21 +78,21 @@ public class WordListLabTest {
     }
 
 
-    @Test
-    public void getHasSetId()
-    {
-        //since in the initialization the default value is -1
-        //so the getHasSetID should return -1;
-        assertEquals(-1, testWordListLab.getHasSetId());
-    }
+//    @Test
+//    public void getHasSetId()
+//    {
+//        //since in the initialization the default value is -1
+//        //so the getHasSetID should return -1;
+//        assertEquals(-1, testWordListLab.getHasSetId());
+//    }
 
-    @Test
-    public void getHasSetFamiliar()
-    {
-        //since in the initialization the default value is -1
-        //so the getHasSetFamiliar should return -1;
-        assertEquals(-1, testWordListLab.getHasSetFamiliar());
-    }
+//    @Test
+//    public void getHasSetFamiliar()
+//    {
+//        //since in the initialization the default value is -1
+//        //so the getHasSetFamiliar should return -1;
+//        assertEquals(-1, testWordListLab.getHasSetFamiliar());
+//    }
 
     @Test
     public void setPuzzleSize()

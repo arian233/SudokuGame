@@ -105,8 +105,10 @@ public class PuzzleGenerator {
                 }
                 currentPos--;
             }
-            if(currentPos<0)
+            if(currentPos<0){
                 currentPos = 0;
+                clearGrid(tmp);
+            }
         }
 
         removeElments(tmp);
