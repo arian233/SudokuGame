@@ -18,13 +18,13 @@ As a teacher, I want to help students to improve their Problem-solving skills wi
    - Given: that listening comprehension mode is enabled
      - Or normal text mode is enabled
 
-   - When: the student clicks on one of the empty cells
+   - When: the student clicks on one of the **empty cells**
    - Then: the program highlights the row and column of that empty cell by showing a crosshair in colour
 
 3.  **[Complete]**
 
    - Given: that normal text mode is enabled
-   - When: the student clicks on one of the prefilled cells
+   - When: the student clicks on one of the **prefilled cells**
 
    - Then: the program pops up a tranlastion of the word which the student clicked
 
@@ -40,15 +40,15 @@ As a teacher, I want to help students to improve their Problem-solving skills wi
 5.  **[To be implemented]**
 
    - Given: on the welcome page ( will implement in the final iteration)
-   - When: the student choose the difficulty of the puzzle
-     - and click start button to initials the game ( will implement in the final iteration)
+   - When: the student choose the difficulty of the puzzle by **difficulty button**  ( will implement in the final iteration)
+     - and click **start button** to initials the game ( will implement in the final iteration)
 
    - Then: the program generates a puzzles with different number of empty cells accordingly
 
 6. **[Complete]**
 
    - Given: that normal text mode is enabled
-   - When: the student clicks on switch language button
+   - When: the student clicks on **switch language button**
 
    - Then: the program will switch the languages it displays in the prefilled cell
 
@@ -56,7 +56,7 @@ As a teacher, I want to help students to improve their Problem-solving skills wi
 
    - Given: that listening comprehension mode is enabled
      - Or normal text mode is enabled
-   - When: the student look at the clock counter at the middle top of the screen
+   - When: the student look at the **clock counter** at the middle top of the screen
    - Then: studentcan know how much time has past
 
 8. **[Complete]**
@@ -69,7 +69,7 @@ As a teacher, I want to help students to improve their Problem-solving skills wi
 9. **[Complete]**
 
    - Given: that normal text mode is enabled
-   - When: the student press an empty cell
+   - When: the student press an **empty cell**
    - Then:  a word list will be shown
      - Student can choose one of the words to enter into the empty grid
      - if the chosen answer is not repeated, then it'll be shown in the cell
