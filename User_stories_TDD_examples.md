@@ -119,7 +119,7 @@ As a user, I want to have a dark theme, so that it does not hurt my eyes in eith
 
 **TDD Example:**
 
-1. When the user wants to change the background, the user can click the theme button to change the grid theme between dark mode or light mode **[To be implemented]**
+1.  **[To be implemented]**
 
    - Given: on the welcome page ( will implement in the final iteration)
    - When: the student choose the light or dark **theme**
