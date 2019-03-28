@@ -50,10 +50,11 @@ public class WordListLabTest {
     }
 
     @Test
+    //since we added the word defined by ourself at the end
+    //so we can directly match those words that we just added
     public void addListsOfWords() {
         testWordListLab.addListsOfWords(testListOfWords1);
-        //since we added the word defined by ourself at the end
-        //so we can directly match those words that we just added
+
         assertEquals(testListOfWords1,testWordListLab.getListsOfWord().get(testWordListLab.getListsOfWord().size() - 1));
     }
 
