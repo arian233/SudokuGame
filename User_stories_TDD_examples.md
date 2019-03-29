@@ -83,7 +83,7 @@ As a student, I want to listen to the words I'm learning, so that I can practice
 **TDD Examples:**
 
 1. **[Complete]** ("then" is implemented in iter3 )
-   - Given: that listening comprehension mode is enabled
+   - Given: that normal text mode is enabled
    - When: the student clicks **listening mode button**
    - Then: the student sees a standard Sudoku grid with some prefilled cells showing digits in the range 1..9/1…4/1…6/1…12 accordingly and all other cells empty
 2. **[Complete]** ( implemented in iter3 )
