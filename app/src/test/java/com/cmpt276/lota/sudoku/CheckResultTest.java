@@ -10,7 +10,7 @@ public class CheckResultTest {
     private  CheckResult testCheckResult;
     private  Language testWrongPuzzle[][];
     private  Language testCorrectPuzzle[][];
-    private Language[][] teatPuzzleForRegion;
+    private Language[][] testPuzzleForRegion;
 
 
     //In the setup function we construct some test objects
@@ -54,7 +54,6 @@ public class CheckResultTest {
         testWrongPuzzle = new Language[9][9];
         testCheckResult = new CheckResult();
 
-
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 testWrongPuzzle[i][j] = new Language(j + 1, "dummy", "dummy", 0);
@@ -74,7 +73,7 @@ public class CheckResultTest {
                     {9, 7, 8, 5, 3, 1, 6, 4, 2},
             };
 
-            teatPuzzleForRegion = new Language[9][9];
+            testPuzzleForRegion = new Language[9][9];
             int puzzleForRegionTest[][] = {
                     {1, 2, 3, 4, 5, 6, 7, 8, 9},
                     {4, 1, 6, 7, 8, 9, 1, 2, 3},
@@ -87,7 +86,7 @@ public class CheckResultTest {
                     {9, 7, 8, 5, 3, 1, 6, 4, 2},
             };
 
-            for (int b = 0; b < 9; i++) {
+            for (int b = 0; b < 9; b++) {
                 for (int j = 0; j < 9; j++) {
                     testCorrectPuzzle[b][j] = new Language(correctPuzzleCopy[b][j], "dummy", "dummy", 0);
 
@@ -96,7 +95,7 @@ public class CheckResultTest {
 
             for (int a = 0; a < 9; a++) {
                 for (int j = 0; j < 9; j++) {
-                    teatPuzzleForRegion[a][j] = new Language(puzzleForRegionTest[a][j], "dummy", "dummy", 0);
+                    testPuzzleForRegion[a][j] = new Language(puzzleForRegionTest[a][j], "dummy", "dummy", 0);
                 }
             }
 
@@ -181,6 +180,6 @@ public class CheckResultTest {
 
     @Test
     public void testCheckRegion() {
-        assertEquals(false, testCheckResult.checkRegion(teatPuzzleForRegion,1,1));
+        assertEquals(false, testCheckResult.checkRegion(testPuzzleForRegion,1,1));
     }
 }
