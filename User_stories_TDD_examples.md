@@ -220,6 +220,12 @@ As a vocabulary learner, I want to use my phone or tablet(different devices) for
 
    - Then:  the app will change the puzzle size accordingly
 
+3. **[Complete]** 
+
+   - Given: normal text mode is enabled
+   - When: the student **long click** the prefilled grid
+   - Then: the app will pop up the word, in case in some situation that the font size is small
+
 ------
 
 **User Stories 8:**
