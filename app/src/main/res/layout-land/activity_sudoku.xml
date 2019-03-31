@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SudokuActivity">
+    tools:context=".controller.SudokuActivity">
 
     <Chronometer
         android:id="@+id/timer"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.019"
         app:orientation="horizontal"
         app:useDefaultMargins="false"
-        tools:context="com.cmpt276.lota.sudoku.SudokuActivity">
+        tools:context="com.cmpt276.lota.sudoku.controller.SudokuActivity">
 
     </android.support.v7.widget.GridLayout>
 

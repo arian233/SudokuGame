@@ -2,12 +2,16 @@ package com.cmpt276.lota.sudoku;
 
 import android.content.Context;
 
+import com.cmpt276.lota.sudoku.model.CheckResult;
+import com.cmpt276.lota.sudoku.model.Language;
+import com.cmpt276.lota.sudoku.model.PuzzleGenerator;
+import com.cmpt276.lota.sudoku.model.WordListLab;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import android.content.Context;
-
 
 public class PuzzleGeneratorTest {
 
@@ -200,6 +204,4 @@ public class PuzzleGeneratorTest {
 //        assertEquals(true,test1String.equals(testPuzzleGenerator.getLanOne()));
 
     }
-
-
-    }
+}

@@ -1,5 +1,7 @@
 package com.cmpt276.lota.sudoku;
 
+import com.cmpt276.lota.sudoku.model.Words;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +11,6 @@ import static org.junit.Assert.*;
 
 public class WordsTest {
     private Words testWord;
-
 
     @Before
     public void setUp() throws Exception {

@@ -2,6 +2,10 @@ package com.cmpt276.lota.sudoku;
 
 import android.content.Context;
 
+import com.cmpt276.lota.sudoku.model.ListsOfWords;
+import com.cmpt276.lota.sudoku.model.WordListLab;
+import com.cmpt276.lota.sudoku.model.Words;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,9 +28,7 @@ public class WordListLabTest {
     private Context testContex;
     private WordListLab testWordListLab = WordListLab.get(testContex);
 
-
     String[][] arr = new String[1][3];
-
 
     @Before
     public void setUp() throws Exception

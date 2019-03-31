@@ -1,5 +1,7 @@
 package com.cmpt276.lota.sudoku;
 
+import com.cmpt276.lota.sudoku.model.Language;
+
 import org.junit.Before;
 import org.junit.Test;
 
