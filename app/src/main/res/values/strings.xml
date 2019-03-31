@@ -19,5 +19,6 @@
     <string name="ok">Import</string>
     <string name="please_input_word_list_name">word list name</string>
     <string name="dialog_radio_change_grid_size">choose a size</string>
+    <string name="start_button">Start</string>
 
 </resources>
