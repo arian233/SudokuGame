@@ -6,14 +6,18 @@ public class CheckResult {
     private Context testContex;
     private WordListLab wordListLab = WordListLab.get(testContex);
     private final int puzzleSize = wordListLab.getPuzzleSize();
-    private int regionNumX = 3;
-    private int regionNumY = 3;
+    private int regionNumX;
+    private int regionNumY;
 
     /**
      * default constructor
      */
     public CheckResult(){
-        if(puzzleSize == 4){
+
+        if(puzzleSize == 9){
+            regionNumX = 3;
+            regionNumY = 3;
+        }else if(puzzleSize == 4){
             regionNumX = 2;
             regionNumY = 2;
         }else if(puzzleSize == 6){

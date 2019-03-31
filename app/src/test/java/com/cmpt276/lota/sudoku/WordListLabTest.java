@@ -28,7 +28,7 @@ public class WordListLabTest {
     private Context testContex;
     private WordListLab testWordListLab = WordListLab.get(testContex);
 
-    String[][] arr = new String[1][3];
+    private String[][] arr = new String[1][3];
 
     @Before
     public void setUp() throws Exception
@@ -88,7 +88,7 @@ public class WordListLabTest {
 //        //so the getHasSetID should return -1;
 //        assertEquals(-1, testWordListLab.getHasSetId());
 //    }
-
+//
 //    @Test
 //    public void getHasSetFamiliar()
 //    {
@@ -111,6 +111,10 @@ public class WordListLabTest {
         assertEquals(testListOfWords1, testWordListLab.getListsOfWords(testListOfWords1.getId()));
         UUID testID = UUID.randomUUID();
         assertEquals(null, testWordListLab.getListsOfWords(testID));
+
+        assertNotEquals(null, testWordListLab.getListsOfWord());
+        assertEquals("chapter1", testWordListLab.getListsOfWord().get(0).getWordListsName());
+        assertEquals("chapter2", testWordListLab.getListsOfWord().get(1).getWordListsName());
     }
 
 }
