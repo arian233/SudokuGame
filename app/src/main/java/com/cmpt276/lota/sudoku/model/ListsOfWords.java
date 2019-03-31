@@ -7,7 +7,7 @@ import java.util.UUID;
 public class ListsOfWords {
     private List<Words> mWordLists;
     private String mWordListsName;
-    private UUID mId;
+    private UUID mId = UUID.randomUUID();
 
     /**
      * constructor
@@ -17,7 +17,6 @@ public class ListsOfWords {
     public ListsOfWords(List<Words> mWordLists, String str){
         this.mWordLists = mWordLists;
         mWordListsName = str;
-        mId = UUID.randomUUID();
     }
 
     /**

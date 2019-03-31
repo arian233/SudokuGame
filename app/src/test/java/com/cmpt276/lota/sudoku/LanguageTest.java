@@ -21,18 +21,21 @@ public class LanguageTest {
     public void getNumber()
     {
         assertEquals(0,testLanguage.getNumber());
+        assertNotEquals(null,testLanguage.getNumber());
     }
 
     @Test
     public void getLanguageOne()
     {
         assertEquals("dummy1",testLanguage.getLanguageOne());
+        assertNotEquals(null,testLanguage.getLanguageOne());
     }
 
     @Test
     public void getLanguageTwo()
     {
         assertEquals("dummy2",testLanguage.getLanguageTwo());
+        assertNotEquals(null,testLanguage.getLanguageTwo());
     }
 
     @Test
@@ -40,6 +43,7 @@ public class LanguageTest {
     {
         assertEquals(0,testLanguage.getFlag());
         assertNotEquals(1,testLanguage.getFlag());
+        assertNotEquals(null,testLanguage.getFlag());
     }
 
     @Test
@@ -48,6 +52,7 @@ public class LanguageTest {
         testLanguage.setNumber(1);//set another number for testing purpose
         assertEquals(1,testLanguage.getNumber());
         testLanguage.setNumber(0);//set it back
+        assertNotEquals(null,testLanguage.getNumber());
     }
 
     @Test
@@ -56,5 +61,7 @@ public class LanguageTest {
         testLanguage.setFlag(1); //set another flag number
         assertEquals(1,testLanguage.getFlag());
         testLanguage.setFlag(0);
+        assertNotEquals(null,testLanguage.getFlag());
+
     }
 }

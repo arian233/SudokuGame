@@ -86,6 +86,8 @@ public class PuzzleGeneratorTest {
                 assertEquals(true, testCheckResult.checkValid(testPuzzle, j, i));
             }
         }
+        assertEquals("a", testPuzzleGenerator.getLanOne()[0]);
+        assertEquals("d", testPuzzleGenerator.getLanTwo()[1]);
     }
 
     @Test

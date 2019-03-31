@@ -14,6 +14,8 @@ public class CheckResultTest {
     private Language testWrongPuzzle[][];
     private Language testCorrectPuzzle[][];
     private Language[][] teatPuzzleForRegion;
+    private Language[][] teatPuzzleForRow;
+    private Language[][] teatPuzzleForColumn;
 
     @Before
     public void setUp() throws Exception // have question in here
@@ -47,7 +49,6 @@ public class CheckResultTest {
 //        1,2,3,4,5,6,7,8,9
 //    }
 
-
         //construct a correct puzzle for testing purpose
         testCorrectPuzzle = new Language[9][9];
         int[][] correctPuzzleCopy;
@@ -76,6 +77,32 @@ public class CheckResultTest {
             { 9, 7, 8, 5, 3, 1, 6, 4, 2 },
         };
 
+        teatPuzzleForRow = new Language[9][9];
+        int puzzleForRowTest[][] = {
+                { 1, 1, 3, 4, 5, 6, 7, 8, 9 },
+                { 4, 5, 6, 7, 8, 9, 1, 2, 3 },
+                { 7, 8, 9, 1, 2, 3, 4, 5, 6 },
+                { 2, 1, 4, 3, 6, 5, 8, 9, 7 },
+                { 3, 6, 5, 8, 9, 7, 2, 1, 4 },
+                { 8, 9, 7, 2, 1, 4, 3, 6, 5 },
+                { 5, 3, 1, 6, 4, 2, 9, 7, 8 },
+                { 6, 4, 2, 9, 7, 8, 5, 3, 1 },
+                { 9, 7, 8, 5, 3, 1, 6, 4, 2 },
+        };
+
+        teatPuzzleForColumn = new Language[9][9];
+        int puzzleForcolTest[][] = {
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                { 1, 5, 6, 7, 8, 9, 1, 2, 3 },
+                { 7, 8, 9, 1, 2, 3, 4, 5, 6 },
+                { 2, 1, 4, 3, 6, 5, 8, 9, 7 },
+                { 3, 6, 5, 8, 9, 7, 2, 1, 4 },
+                { 8, 9, 7, 2, 1, 4, 3, 6, 5 },
+                { 5, 3, 1, 6, 4, 2, 9, 7, 8 },
+                { 6, 4, 2, 9, 7, 8, 5, 3, 1 },
+                { 9, 7, 8, 5, 3, 1, 6, 4, 2 },
+        };
+
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9 ; j++)
@@ -93,6 +120,22 @@ public class CheckResultTest {
             for (int j = 0; j < 9 ; j++)
             {
                 teatPuzzleForRegion[i][j] = new Language(puzzleForRegionTest[i][j],"dummy","dummy",0);
+            }
+        }
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9 ; j++)
+            {
+                teatPuzzleForRow[i][j] = new Language(puzzleForRowTest[i][j],"dummy","dummy",0);
+            }
+        }
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9 ; j++)
+            {
+                teatPuzzleForColumn[i][j] = new Language(puzzleForcolTest[i][j],"dummy","dummy",0);
             }
         }
 
@@ -170,7 +213,11 @@ public class CheckResultTest {
         //change it back to 9 for later testing.
         testCorrectPuzzle[1][5].setNumber(9);
 
-        //testing finish
+        //case6- row conflict
+        assertEquals(false, testCheckResult.checkRow(teatPuzzleForRow,0,1));
+
+        //case7- column conflict
+        assertEquals(false, testCheckResult.checkColumn(teatPuzzleForColumn,1,0));
     }
 
     @Test

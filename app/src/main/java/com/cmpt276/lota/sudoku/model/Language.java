@@ -4,7 +4,7 @@ public class Language {
     private int number;
     private String languageOne;
     private String languageTwo;
-    private int flag=0;//0 is first langauge(preset), 1 is user entered
+    private int flag = 0;//0 is first langauge(preset), 1 is user entered
 
     /**
      * constructor

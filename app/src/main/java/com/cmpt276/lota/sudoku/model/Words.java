@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Words {
 
-    private UUID mId;
+    private UUID mId = UUID.randomUUID();
     private String languageOne;
     private String languageTwo;
 
@@ -12,7 +12,6 @@ public class Words {
      * constructor
      */
     public Words(String languageOne, String languageTwo) {
-        mId = UUID.randomUUID();
         this.languageOne = languageOne;
         this.languageTwo = languageTwo;
     }
