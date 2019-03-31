@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#00E7FF</color>
-    <color name="colorPrimaryDark">#00B2C4</color>
+    <color name="colorPrimaryDark">#08C0D5</color>
     <color name="colorAccent">#F3528A</color>
     <color name="mBackgroundPaint_Color">#D9D4CF</color>
     <color name="presetGridPaint_Color">#ABD0CE</color>
@@ -9,4 +9,5 @@
     <color name="gridLinePaint_Color">#7C7877</color>
     <color name="gridTextPaint_Color">#534847</color>
     <color name="typeInButtonPaint_Color">#fffcf0</color>
+    <color name="white">#FFFFFF</color>
 </resources>
