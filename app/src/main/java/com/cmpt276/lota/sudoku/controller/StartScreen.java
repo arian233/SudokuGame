@@ -20,6 +20,7 @@ public class StartScreen extends AppCompatActivity {
         setContentView(R.layout.activity_start_screen);
         start = (Button)findViewById(R.id.start_button);
         start.setBackground(getResources().getDrawable(R.drawable.buttons));
+        start.setPadding(10,10,10,10);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

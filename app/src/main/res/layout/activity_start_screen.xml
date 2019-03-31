@@ -31,7 +31,6 @@
         android:layout_marginTop="8dp"
         android:text="@string/start_button"
         android:textColor="?android:attr/colorForegroundInverse"
-
         android:layout_marginBottom="156dp"
         android:elevation="14dp"
         android:textSize="18sp"
