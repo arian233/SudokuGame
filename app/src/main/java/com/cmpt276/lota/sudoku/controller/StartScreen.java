@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.cmpt276.lota.sudoku.R;
 
-
+// This creates the start screen
 public class StartScreen extends AppCompatActivity {
     private Button start;
     @Override
