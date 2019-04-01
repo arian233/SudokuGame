@@ -62,7 +62,7 @@ As a student, I want to listen to the words I'm learning, so that I can practice
    - Given: that listening comprehension mode is enabled
    - When: the student clicks **earphone button**
    - Then: the program switch the languages it speaks
-3. **[Complete] **( implemented in iter3 )
+3. **[Complete]**( implemented in iter3 )
    - Given: that listening comprehension mode is enabled
    - When: the student clicks **empty cells**
    - Then: the program will pops up a list answer for the student to enter into the cell
