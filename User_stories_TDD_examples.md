@@ -219,7 +219,7 @@ As a user, I want to change the puzzle difficulty, so that I won't be pushed awa
 
 ------
 
-**User Stories 9:**
+**User Stories 10:**
 
 As a user, I want to have a picture mode for each words, so that I can memorize the word by seeing a picture.
 
