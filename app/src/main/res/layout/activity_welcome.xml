@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.WelcomeActivity">
+
+    <ImageView
+        android:id="@+id/imgPlaylistItemBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:maxHeight="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/uibg1" />
+
+    <Button
+        android:id="@+id/setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:background="@drawable/button_boarder"
+        android:drawableStart="@drawable/ic_setting"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/settings_button"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintEnd_toEndOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/initial_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_boarder"
+        android:drawableStart="@drawable/ic_startgame"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/initial_button"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_words_button" />
+
+    <Button
+        android:id="@+id/word_list_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:drawableStart="@drawable/ic_wordlist"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:background="@drawable/button_boarder"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/words_lists_button"
+        android:textColor="?android:attr/colorForegroundInverse"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_button" />
+
+    <Button
+        android:id="@+id/add_words_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_boarder"
+        android:drawableStart="@drawable/ic_add"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/import_button"
+        android:textColor="?android:attr/colorForegroundInverse"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/word_list_button" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start1"
+        android:textColor="?android:attr/colorForegroundInverse"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintEnd_toEndOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintStart_toStartOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintTop_toTopOf="@+id/imgPlaylistItemBg"
+        app:layout_constraintVertical_bias="0.13" />
+
+</android.support.constraint.ConstraintLayout>

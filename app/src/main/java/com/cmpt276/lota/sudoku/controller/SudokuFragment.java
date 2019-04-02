@@ -45,15 +45,15 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private static String lan1[];//Language one
     private static String lan2[];//Language two
     private static String lanDialog[];//Language to be shown in dialog
-    private String changeGridSize[] = {"4*4","6*6","9*9","12*12"};
+   // private String changeGridSize[] = {"4*4","6*6","9*9","12*12"};
 
     private static int dialogChosenIndex = -1;//-1 is nothing to be chosen
-    private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
-    private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
+    private int switchLanguageFlag = wordListLab.getSwitchLanguageFlag();//1 is 1st lan, -1 is second lan
+    private int listeningModeFlag = wordListLab.getListeningModeFlag();//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
-    private int erasedButtonId; //to erase cell
-    private int changeListeningLanguageFlag = -1;//-1 is second language(e.g. chinese), 1 is first language
-    private int hasChangedSizeFlag = -1;
+    private int erasedButtonId = -1; //to erase cell
+   // private int changeListeningLanguageFlag = -1;//-1 is second language(e.g. chinese), 1 is first language
+    //private int hasChangedSizeFlag = -1;
 
     private int familiarity[] = new int[mPUZZLESIZE];
     private View layout;
@@ -61,12 +61,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private ImageButton refreshButton;
     private Button eraseButton;
     private Button checkResultButton;
-    private Button switchButton;
-    private Button wordsListsButton;
-    private ImageButton addWordsButton;
-    private Button listeningModeButton;
-    private ImageButton changeListeningLanguageButton;
-    private ImageButton changeGridSizeButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,12 +110,8 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
      * run the code when user click refresh button
      */
     public void initialForRefresh(){
-        switchLanguageFlag = 1;
 
-        if(listeningModeFlag == 1){
-            switchLanguageFlag = -1;
-        }
-        changeListeningLanguageFlag = -1;//reset to second language
+        //changeListeningLanguageFlag = -1;//reset to second language
         textToSpeech.stop();
         textToSpeech.shutdown();
         initialListeningTTS();
@@ -137,11 +127,13 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 tobeChangedButton.setText("");
             } else {
                 tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
-                tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
+                //tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
             }
         }
         if(listeningModeFlag != -1){
             changeButtobTextsforListening();
+        }else{
+            changeButtonTextforSwitchLanguage();
         }
     }
 
@@ -157,32 +149,32 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
         initialListeningTTS();
 
-        //initialize button to change grid size
-        changeGridSizeButton = layout.findViewById(R.id.change_grid_size_button);
-        changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-        changeGridSizeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRadioDialogForChangeGridSize();
-            }
-        });
-
-        //initialize change listening language button
-        changeListeningLanguageButton = layout.findViewById(R.id.change_listening_language_button);
-        changeListeningLanguageButton.setEnabled(false);
-        changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-        changeListeningLanguageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeListeningLanguageFlag *= -1;
-                textToSpeech.stop();
-                textToSpeech.shutdown();
-                initialListeningTTS();
-                switchLanguageFlag *= -1;
-                switchLanguageInDialog();
-                changeButtobTextsforListening();
-            }
-        });
+//        //initialize button to change grid size
+//        changeGridSizeButton = layout.findViewById(R.id.change_grid_size_button);
+//        changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+//        changeGridSizeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showRadioDialogForChangeGridSize();
+//            }
+//        });
+//
+//        //initialize change listening language button
+//        changeListeningLanguageButton = layout.findViewById(R.id.change_listening_language_button);
+//        changeListeningLanguageButton.setEnabled(false);
+//        changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+//        changeListeningLanguageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                changeListeningLanguageFlag *= -1;
+//                textToSpeech.stop();
+//                textToSpeech.shutdown();
+//                initialListeningTTS();
+//                switchLanguageFlag *= -1;
+//                switchLanguageInDialog();
+//                changeButtobTextsforListening();
+//            }
+//        });
 
         //initialize refreshButton and save 3 most unfamiliar words
         refreshButton = layout.findViewById(R.id.refresh_button);
@@ -208,19 +200,20 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 wordListLab.setUnfamiliarWord(str);
                 generator = new PuzzleGenerator();
                 mPuzzle = generator.generateGrid();
-                if(hasChangedSizeFlag == 1){
-                    mPUZZLESIZE = wordListLab.getPuzzleSize();
-                    mPUZZLETOTALSIZE = mPUZZLESIZE * mPUZZLESIZE;
-                    mCheckResult = new CheckResult();
-                    familiarity = new int[mPUZZLESIZE];
-                    hasChangedSizeFlag = -1;
-                    initialPuzzle();
-                    initial();
-                    changeButtonTextforSwitchLanguage();
-                }else{
-                    initialPuzzle();
-                    initialForRefresh();
-                }
+//                if(hasChangedSizeFlag == 1){
+//                    mPUZZLESIZE = wordListLab.getPuzzleSize();
+//                    mPUZZLETOTALSIZE = mPUZZLESIZE * mPUZZLESIZE;
+//                    mCheckResult = new CheckResult();
+//                    familiarity = new int[mPUZZLESIZE];
+//                    hasChangedSizeFlag = -1;
+//                    initialPuzzle();
+//                    initial();
+//                    changeButtonTextforSwitchLanguage();
+//                }else{
+//
+//                }
+                initialPuzzle();
+                initialForRefresh();
             }
         });
 
@@ -234,17 +227,17 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             public void onClick(View v){
                 int x = erasedButtonId % mPUZZLESIZE;
                 int y = erasedButtonId / mPUZZLESIZE;
-                dialogChosenIndex= -1;
-                Toast toast = Toast.makeText(getActivity(),R.string.Erase_toast,Toast.LENGTH_SHORT);
-                if ( x > -1 && y > -1){
+                dialogChosenIndex = -1;
+                if ( erasedButtonId != -1){
                     mPuzzle[y][x] = new Language(dialogChosenIndex +1, lan1[dialogChosenIndex+1], lan2[dialogChosenIndex+1],0);
                     TextView tobeChangedButton = layout.findViewById(erasedButtonId);
                     tobeChangedButton.setText("");
-                }
-                else{
+                }else{
+                    Toast toast = Toast.makeText(getActivity(),R.string.Erase_toast,Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();
                 }
+                erasedButtonId = -1;
             }
         });
 
@@ -260,59 +253,37 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             }
         });
 
-        //initialize switch language Button
-        switchButton = layout.findViewById(R.id.switch_button);
-        switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-        switchButton.setTextSize(2*mFONTSIZE);
-        switchButton.setPadding(10,10,10,10);
-        switchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchLanguageFlag *= -1;
-                switchLanguageInDialog();
-                changeButtonTextforSwitchLanguage();
-            }
-        });
-
-        //initialize wordsListsButton
-        wordsListsButton = layout.findViewById(R.id.word_list_button);
-        wordsListsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-        wordsListsButton.setTextSize(2*mFONTSIZE);
-        wordsListsButton.setPadding(10,10,10,10);
-        wordsListsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),WordsListsActivity.class );
-                startActivity(intent);
-            }
-        });
-
-        //initialize AddWordsButton
-        addWordsButton = layout.findViewById(R.id.add_words_button);
-        addWordsButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-        addWordsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), InputWordsActivity.class);
-                startActivity(intent);
-            }
-        });
+//        //initialize switch language Button
+//        switchButton = layout.findViewById(R.id.switch_button);
+//        switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+//        switchButton.setTextSize(2*mFONTSIZE);
+//        switchButton.setPadding(10,10,10,10);
+//        switchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                switchLanguageFlag *= -1;
+//                switchLanguageInDialog();
+//                changeButtonTextforSwitchLanguage();
+//            }
+//        });
 
 
-        //initialize listeningModeButton
-        listeningModeButton = layout.findViewById(R.id.listening_mode_button);
-        listeningModeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-        listeningModeButton.setTextSize(2*mFONTSIZE);
-        listeningModeButton.setPadding(10,10,10,10);
-        listeningModeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listeningModeFlag *= -1;
-                switchLanguageFlag *= -1;
-                listeningModeControl();
-                switchLanguageInDialog();
-            }
-        });
+
+
+//        //initialize listeningModeButton
+//        listeningModeButton = layout.findViewById(R.id.listening_mode_button);
+//        listeningModeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+//        listeningModeButton.setTextSize(2*mFONTSIZE);
+//        listeningModeButton.setPadding(10,10,10,10);
+//        listeningModeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listeningModeFlag *= -1;
+//                switchLanguageFlag *= -1;
+//                listeningModeControl();
+//                switchLanguageInDialog();
+//            }
+//        });
 
         //initialize gridLayout 9 rows and 9 columns
         GridLayout gridLayout = layout.findViewById(R.id.grid_layout);
@@ -386,7 +357,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                                 textToSpeech.setPitch(0.9f);
                                 //set to default
                                 textToSpeech.setSpeechRate(0.9f);
-                                if(changeListeningLanguageFlag == -1)
+                                if(switchLanguageFlag == -1)
                                     textToSpeech.speak(mPuzzle[y][x].getLanguageTwo(), TextToSpeech.QUEUE_FLUSH, null);
                                 else
                                     textToSpeech.speak(mPuzzle[y][x].getLanguageOne(), TextToSpeech.QUEUE_FLUSH, null);
@@ -617,7 +588,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             int result;
-            if(changeListeningLanguageFlag == -1){
+            if(switchLanguageFlag == -1){
                 result = textToSpeech.setLanguage(Locale.CHINESE);
             }else{
                 result = textToSpeech.setLanguage(Locale.US);
@@ -668,21 +639,21 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
      */
     public void listeningModeControl(){
         if(listeningModeFlag == 1){
-            switchButton.setEnabled(false);
-            changeGridSizeButton.setEnabled(false);
-            changeListeningLanguageButton.setEnabled(true);
-            switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-            changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-            changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+//            switchButton.setEnabled(false);
+//            changeGridSizeButton.setEnabled(false);
+//            changeListeningLanguageButton.setEnabled(true);
+//            switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+//            changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+//            changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.buttons));
 
             changeButtobTextsforListening();
         }else {
-            switchButton.setEnabled(true);
-            changeGridSizeButton.setEnabled(true);
-            changeListeningLanguageButton.setEnabled(false);
-            switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-            changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-            changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
+//            switchButton.setEnabled(true);
+//            changeGridSizeButton.setEnabled(true);
+//            changeListeningLanguageButton.setEnabled(false);
+//            switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+//            changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
+//            changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
 
             changeButtonTextforSwitchLanguage();
         }
@@ -735,33 +706,33 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         textToSpeech = new TextToSpeech(getActivity(), this);
     }
 
-    /**
-     * gibe a Dialog for user to input words
-     */
-    private void showRadioDialogForChangeGridSize(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle(getString(R.string.dialog_radio_change_grid_size));
-        alertDialog.setIcon(R.mipmap.ic_launcher_round);
-        alertDialog.setItems(changeGridSize, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int size;
-                hasChangedSizeFlag = 1;
-                if(which == 0){
-                    size = 4;
-                }else if(which == 1){
-                    size = 6;
-                }else if(which == 3){
-                    size = 12;
-                }else{
-                    size = 9;
-                }
-
-                if(size!=9)
-                    highlightedButton = -1;
-                wordListLab.setPuzzleSize(size);
-            }
-        }).create();
-        alertDialog.show();
-    }
+//    /**
+//     * gibe a Dialog for user to input words
+//     */
+//    private void showRadioDialogForChangeGridSize(){
+//        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+//        alertDialog.setTitle(getString(R.string.dialog_radio_change_grid_size));
+//        alertDialog.setIcon(R.mipmap.ic_launcher_round);
+//        alertDialog.setItems(changeGridSize, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                int size;
+//                hasChangedSizeFlag = 1;
+//                if(which == 0){
+//                    size = 4;
+//                }else if(which == 1){
+//                    size = 6;
+//                }else if(which == 3){
+//                    size = 12;
+//                }else{
+//                    size = 9;
+//                }
+//
+//                if(size!=9)
+//                    highlightedButton = -1;
+//                wordListLab.setPuzzleSize(size);
+//            }
+//        }).create();
+//        alertDialog.show();
+//    }
 }

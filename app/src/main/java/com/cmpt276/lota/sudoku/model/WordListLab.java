@@ -16,6 +16,8 @@ public class WordListLab implements Serializable {
     private int hasSetId = -1;//-1 is not set
     private int hasSetFamiliar = -1;//-1 is not set familiar
     private int puzzleSize = 9;
+    private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
+    private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
 
     /**
      * get a new WordListLab singleton object
@@ -139,4 +141,21 @@ public class WordListLab implements Serializable {
     public void setNull() {
         mWordListLab = null;
     }
+
+    public int getSwitchLanguageFlag() {
+        return switchLanguageFlag;
+    }
+
+    public void setSwitchLanguageFlag(int switchLanguageFlag) {
+        this.switchLanguageFlag = switchLanguageFlag;
+    }
+
+    public int getListeningModeFlag() {
+        return listeningModeFlag;
+    }
+
+    public void setListeningModeFlag(int listeningModeFlag) {
+        this.listeningModeFlag = listeningModeFlag;
+    }
 }
+
