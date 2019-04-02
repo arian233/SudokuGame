@@ -5,20 +5,39 @@
     <string name="Complete_toast">Congratulations! You finished the puzzle.</string>
     <string name="Fail_toast">Your result is incomplete.</string>
     <string name="Fail_sound_toast">Error with sound.</string>
-    <string name="Erase_toast">Please select a cell first</string>
-
-
+    <string name="Erase_toast">Please select a filled cell first</string>
     <string name="dialog_radio_text">choose an answer</string>
-
     <string name="switch_language_button">switch language</string>
     <string name="check_result_button">check result</string>
     <string name="listening_mode_button">listening mode</string>
     <string name="erase_button">erase</string>
-    <string name="words_lists_button">words lists</string>
+
     <string name="choose_file">CHOOSE FILE</string>
     <string name="ok">Import</string>
     <string name="please_input_word_list_name">word list name</string>
     <string name="dialog_radio_change_grid_size">choose a size</string>
-    <string name="start_button">Start</string>
+    <string name="settings_button">Settings</string>
+    <string name="initial_button">Start game</string>
+    <string name="import_button">Import file</string>
+    <string name="words_lists_button">Words lists</string>
+
+    <string name="language_option">Choose a language pair:</string>
+    <string name="language_option2">English to Chinese</string>
+    <string name="language_option1">Chinese to English</string>
+
+    <string name="mode_option">Choose a mode:</string>
+    <string name="mode_option2">Listening mode</string>
+    <string name="mode_option1">Text mode</string>
+
+    <string name="size_option">Choose a puzzle size:</string>
+    <string name="size_option2">6x6</string>
+    <string name="size_option1">4x4</string>
+    <string name="size_option3">9x9</string>
+    <string name="size_option4">12x12</string>
+
+    <string name="difficulty_option">Choose a difficulty:</string>
+
+    <string name="confirm_button">Confirm</string>
+    <string name="cancel_button">Cancel</string>
 
 </resources>

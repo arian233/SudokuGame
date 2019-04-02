@@ -8,14 +8,23 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".controller.SudokuActivity">
 
+    <ImageView
+        android:id="@+id/imgPlaylistItemBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:maxHeight="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/gamebg1" />
+
     <Chronometer
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:textColor="@color/gridTextPaint_Color"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,99 +55,37 @@ tools:context=".controller.SudokuActivity">
     </android.support.v7.widget.GridLayout>
 
     <Button
-        android:id="@+id/switch_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/switch_language_button"
-        android:textColor="?android:attr/colorForegroundInverse"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid_layout" />
-
-    <Button
         android:id="@+id/check_result_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/check_result_button"
         android:textColor="?android:attr/colorForegroundInverse"
-        app:layout_constraintStart_toEndOf="@+id/switch_button"
+        app:layout_constraintStart_toEndOf="@+id/erase_button"
         app:layout_constraintTop_toBottomOf="@+id/grid_layout" />
-
-    <Button
-        android:id="@+id/listening_mode_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/listening_mode_button"
-        android:textColor="?android:attr/colorForegroundInverse"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_button" />
-
-    <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/change_listening_language_button"
-        android:layout_width="44dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_listen"
-        app:layout_constraintStart_toEndOf="@+id/listening_mode_button"
-        app:layout_constraintTop_toBottomOf="@+id/switch_button" />
 
     <Button
         android:id="@+id/erase_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/erase_button"
         android:textColor="?android:attr/colorForegroundInverse"
-        app:layout_constraintStart_toEndOf="@+id/change_listening_language_button"
-        app:layout_constraintTop_toBottomOf="@+id/check_result_button" />
-
-    <Button
-        android:id="@+id/word_list_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/words_lists_button"
-        android:textColor="?android:attr/colorForegroundInverse"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
+        app:layout_constraintStart_toEndOf="@+id/refresh_button"
+        app:layout_constraintTop_toBottomOf="@+id/grid_layout" />
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/refresh_button"
         android:layout_width="44dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/ic_refresh"
-        app:layout_constraintStart_toEndOf="@+id/word_list_button"
-        app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grid_layout" />
 
-    <ImageButton
-        android:id="@+id/add_words_button"
-        android:layout_width="44dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintStart_toEndOf="@+id/refresh_button"
-        app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
-
-    <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/change_grid_size_button"
-        android:layout_width="44dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_gridsize"
-        app:layout_constraintStart_toEndOf="@+id/add_words_button"
-        app:layout_constraintTop_toBottomOf="@+id/listening_mode_button" />
 
 
 </android.support.constraint.ConstraintLayout>
