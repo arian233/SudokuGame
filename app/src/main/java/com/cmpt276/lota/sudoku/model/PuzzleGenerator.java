@@ -12,7 +12,7 @@ public class PuzzleGenerator {
     private WordListLab wordListLab = WordListLab.get(testContex);
     private int puzzleSize = wordListLab.getPuzzleSize();
     private int lanSize = puzzleSize + 1;
-    private final int emptyGridNum = 1;
+    private final int emptyGridNum = wordListLab.getNumberOfEmptyCell();
     private int regionNumX = 3;
     private int regionNumY = 3;
     private String lan1[] = new String[lanSize];// to record two languages, may needs to change it, if the later iteration requires more than two languages.

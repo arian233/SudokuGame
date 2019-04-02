@@ -8,8 +8,8 @@ tools:context=".controller.WelcomeActivity">
 
     <ImageView
         android:id="@+id/dialog_imageview"
-        android:layout_width="268dp"
-        android:layout_height="513dp"
+        android:layout_width="277dp"
+        android:layout_height="615dp"
         android:background="#DA5F6A"
         android:gravity="center"
         android:scaleType="fitCenter"
@@ -190,9 +190,41 @@ tools:context=".controller.WelcomeActivity">
                     android:textColor="#FFFFFF" />
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/difficulty_seekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_horizontal"
+                android:text="@string/difficulty_seekbar"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lan_radio_group"
+                app:layout_constraintVertical_bias="0.01999998" />
+
+            <SeekBar
+                android:id="@+id/seekBar2"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:max="5"
+                android:progress="3"
+                android:progressTint="@color/white"
+                android:thumbTint="@color/white" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="97dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <Button
@@ -203,11 +235,15 @@ tools:context=".controller.WelcomeActivity">
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@color/transparent"
+                    android:background="@drawable/button_boarder"
                     android:gravity="center_vertical|center_horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
                     android:text="@string/cancel_button"
                     android:textColor="#ffffffff"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/confirm_btn_dialog"
@@ -217,11 +253,15 @@ tools:context=".controller.WelcomeActivity">
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@color/transparent"
+                    android:background="@drawable/button_boarder"
                     android:gravity="center_vertical|center_horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
                     android:text="@string/confirm_button"
                     android:textColor="#ffffffff"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -18,6 +18,7 @@ public class WordListLab implements Serializable {
     private int puzzleSize = 9;
     private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
     private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
+    private int NumberOfEmptyCell = 3;
 
     /**
      * get a new WordListLab singleton object
@@ -156,6 +157,14 @@ public class WordListLab implements Serializable {
 
     public void setListeningModeFlag(int listeningModeFlag) {
         this.listeningModeFlag = listeningModeFlag;
+    }
+
+    public int getNumberOfEmptyCell() {
+        return NumberOfEmptyCell;
+    }
+
+    public void setNumberOfEmptyCell(int numberOfEmptyCell) {
+        NumberOfEmptyCell = numberOfEmptyCell;
     }
 }
 

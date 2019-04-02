@@ -11,6 +11,8 @@ import android.view.ViewAnimationUtils;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.cmpt276.lota.sudoku.R;
 import com.cmpt276.lota.sudoku.model.WordListLab;
@@ -22,6 +24,7 @@ public class WelcomeActivity extends Activity {
     private Dialog dialog;
     private Button wordsListsButton;
     private Button addWordsButton;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,6 @@ public class WelcomeActivity extends Activity {
 
         //initialize wordsListsButton
         wordsListsButton = this.findViewById(R.id.word_list_button);
-        wordsListsButton.setPadding(10,10,10,10);
         wordsListsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +89,7 @@ public class WelcomeActivity extends Activity {
     private void showRadioDialog(){
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         dialog.setContentView(R.layout.setting_dialog);
         dialog.show();
 
@@ -141,6 +143,48 @@ public class WelcomeActivity extends Activity {
                 dialog.dismiss();
             }
         });
+
+        textView = dialog.findViewById(R.id.difficulty_seekbar);
+        SeekBar seekBar = dialog.findViewById(R.id.seekBar2);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String str = "";
+                if(progress == 0){
+                    str="very easy";
+                    wordListLab.setNumberOfEmptyCell(0);
+                }else if(progress == 1){
+                    str="easy";
+                    wordListLab.setNumberOfEmptyCell(1);
+                }else if(progress == 2){
+                    str="mediam";
+                    wordListLab.setNumberOfEmptyCell(4);
+                }else if(progress == 3){
+                    str="hard";
+                    wordListLab.setNumberOfEmptyCell(6);
+                }else if(progress == 4){
+                    str="very hard";
+                    wordListLab.setNumberOfEmptyCell(8);
+                }else if(progress == 5){
+                    str="master";
+                    wordListLab.setNumberOfEmptyCell(10);
+                }
+
+                textView.setText("Choose a difficulty: "+ str);
+            }
+        });
+
+
     }
 
 }
