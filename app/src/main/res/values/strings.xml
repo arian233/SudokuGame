@@ -11,7 +11,7 @@
     <string name="check_result_button">check result</string>
     <string name="listening_mode_button">listening mode</string>
     <string name="erase_button">erase</string>
-    <string name="words_lists_button">words lists</string>
+
     <string name="choose_file">CHOOSE FILE</string>
     <string name="ok">Import</string>
     <string name="please_input_word_list_name">word list name</string>
@@ -19,6 +19,7 @@
     <string name="settings_button">Settings</string>
     <string name="initial_button">Start game</string>
     <string name="import_button">Import file</string>
+    <string name="words_lists_button">Words lists</string>
 
     <string name="language_option">Choose a language pair:</string>
     <string name="language_option2">English to Chinese</string>
