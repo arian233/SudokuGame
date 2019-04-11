@@ -11,8 +11,7 @@ tools:context=".controller.SudokuActivity">
     <ImageView
         android:id="@+id/imgPlaylistItemBg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent"/>
+        android:layout_height="match_parent" />
 
     <Chronometer
         android:id="@+id/timer"
@@ -47,7 +46,6 @@ tools:context=".controller.SudokuActivity">
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/uibg1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/grid_layout"
             app:layout_constraintStart_toEndOf="@+id/check_result_button"
