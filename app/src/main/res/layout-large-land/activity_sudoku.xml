@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".controller.SudokuActivity">
 
+    <ImageView
+        android:id="@+id/imgPlaylistItemBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent" />
+
     <Chronometer
         android:id="@+id/timer"
         android:layout_width="wrap_content"

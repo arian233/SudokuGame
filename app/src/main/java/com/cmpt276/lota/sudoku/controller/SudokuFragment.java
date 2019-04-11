@@ -65,6 +65,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private int listeningModeFlag = wordListLab.getListeningModeFlag();//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
     private int erasedButtonId = -1; //to erase cell
+    private int themeFlag = wordListLab.getThemeFlag();//-1 is light
 
     private int familiarity[] = new int[mPUZZLESIZE];
     private View layout;
@@ -72,11 +73,17 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private ImageButton refreshButton;
     private Button eraseButton;
     private Button checkResultButton;
-    private ImageView imageView;
+    private ImageView imageViewForWords;
+    private ImageView imageViewBackgroud;
 
     private String link;
     String data = "";
     String singleParsed = "";
+
+    private String darkEmpty = "#CCAE78";
+    private String darkPrefilled = "#5BCCB6";
+    private String darkHighlight= "#C9C35B";
+    private String darkBG= "#232328";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,10 +149,13 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
             if (mPuzzle[y][x].getFlag() != -1) {
                 tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.emptybutton));
+                if(themeFlag == 1)
+                    tobeChangedButton.setBackgroundColor(Color.parseColor(darkEmpty));
                 tobeChangedButton.setText("");
             } else {
                 tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
-                //tobeChangedButton.setText(mPuzzle[y][x].getLanguageOne());
+                if(themeFlag == 1)
+                    tobeChangedButton.setBackgroundColor(Color.parseColor(darkPrefilled));
             }
         }
         if(listeningModeFlag != -1){
@@ -164,10 +174,16 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         timer = layout.findViewById(R.id.timer);
         timer.setFormat("time passed: %s");
         timer.start();
+        if(themeFlag == 1)
+            timer.setTextColor(Color.parseColor("#C0A372"));
 
         initialListeningTTS();
 
-        imageView = layout.findViewById(R.id.imgForWords);
+        imageViewForWords = layout.findViewById(R.id.imgForWords);
+
+        imageViewBackgroud = layout.findViewById(R.id.imgPlaylistItemBg);
+        if(themeFlag == 1)
+            imageViewBackgroud.setBackgroundColor(Color.parseColor(darkBG));
 
         //initialize refreshButton and save 3 most unfamiliar words
         refreshButton = layout.findViewById(R.id.refresh_button);
@@ -259,11 +275,17 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             //TextViewCompat.setAutoSizeTextTypeWithDefaults(textView, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
             textView.setTextSize(calFontSize());
             textView.setTextColor(Color.parseColor("#282626"));
+            if(themeFlag == 1)
+                textView.setTextColor(Color.parseColor("#C7385B"));
             // set button style
             if (mPuzzle[y][x].getFlag() != -1 ) {
                 textView.setBackground(getResources().getDrawable(R.drawable.emptybutton));
+                if(themeFlag == 1)
+                    textView.setBackgroundColor(Color.parseColor(darkEmpty));
             }else{
                 textView.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+                if(themeFlag == 1)
+                    textView.setBackgroundColor(Color.parseColor(darkPrefilled));
             }
 
             textView.setId(i);
@@ -496,8 +518,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         for(int i = 1; i <= mPUZZLESIZE;i++){
             TextView tobeChangedButton = layout.findViewById((i-1)*mPUZZLESIZE+x);
             tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.highlightbutton));
+            if(themeFlag == 1)
+                tobeChangedButton.setBackgroundColor(Color.parseColor(darkHighlight));
             tobeChangedButton = layout.findViewById(i-1+mPUZZLESIZE*y);
             tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.highlightbutton));
+            if(themeFlag == 1)
+                tobeChangedButton.setBackgroundColor(Color.parseColor(darkHighlight));
         }
     }
 
@@ -514,8 +540,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             int y2 = id2 / mPUZZLESIZE;
             if (mPuzzle[y2][x2].getFlag() != -1) {
                 tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.emptybutton));
+                if(themeFlag == 1)
+                    tobeChangedButton.setBackgroundColor(Color.parseColor(darkEmpty));
             }else{
                 tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+                if(themeFlag == 1)
+                    tobeChangedButton.setBackgroundColor(Color.parseColor(darkPrefilled));
             }
 
             id2 = i-1+mPUZZLESIZE*y;
@@ -524,8 +554,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             tobeChangedButton = layout.findViewById(id2);
             if (mPuzzle[y2][x2].getFlag() != -1) {
                 tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.emptybutton));
+                if(themeFlag == 1)
+                    tobeChangedButton.setBackgroundColor(Color.parseColor(darkEmpty));
             }else{
                 tobeChangedButton.setBackground(getResources().getDrawable(R.drawable.presetbutton));
+                if(themeFlag == 1)
+                    tobeChangedButton.setBackgroundColor(Color.parseColor(darkPrefilled));
             }
         }
     }
@@ -676,6 +710,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         Log.d("hahahhahahahahahahahaha", "url= " + word);
         Log.d("hahahhahahahahahahahaha", "index= " + link.substring(10,link.length()-3));
 
-        Picasso.get().load( link.substring(10,link.length()-3) ).into(imageView);
+        Picasso.get().load( link.substring(10,link.length()-3) ).into(imageViewForWords);
     }
 }

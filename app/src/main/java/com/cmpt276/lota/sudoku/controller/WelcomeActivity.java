@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.cmpt276.lota.sudoku.R;
 import com.cmpt276.lota.sudoku.model.WordListLab;
 
-
 public class WelcomeActivity extends Activity {
     private WordListLab wordListLab = WordListLab.get(WelcomeActivity.this);
     private Button start;
@@ -92,6 +91,8 @@ public class WelcomeActivity extends Activity {
                 RadioButton radioSize6 = dialog.findViewById(R.id.radioSizeMode6);
                 RadioButton radioSize12 = dialog.findViewById(R.id.radioSizeMode12);
                 RadioButton radioSizeDefault = dialog.findViewById(R.id.radioSizeMode9);
+                RadioButton radioTheme = dialog.findViewById(R.id.lightTheme);
+                RadioButton radioTheme2 = dialog.findViewById(R.id.darkTheme);
 
                 //set the settings
                 if(radioLan.isChecked()){
@@ -114,6 +115,12 @@ public class WelcomeActivity extends Activity {
                     wordListLab.setPuzzleSize(12);
                 }else if(radioSizeDefault.isChecked()){
                     wordListLab.setPuzzleSize(9);
+                }
+
+                if(radioTheme.isChecked()){
+                    wordListLab.setThemeFlag(-1);
+                }else if(radioTheme2.isChecked()){
+                    wordListLab.setThemeFlag(1);
                 }
 
                 dialog.dismiss();
@@ -151,7 +158,7 @@ public class WelcomeActivity extends Activity {
                     str="easy";
                     wordListLab.setNumberOfEmptyCell(1);
                 }else if(progress == 2){
-                    str="mediam";
+                    str="medium";
                     wordListLab.setNumberOfEmptyCell(4);
                 }else if(progress == 3){
                     str="hard";

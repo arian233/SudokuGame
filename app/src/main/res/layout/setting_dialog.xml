@@ -8,8 +8,8 @@ tools:context=".controller.WelcomeActivity">
 
     <ImageView
         android:id="@+id/dialog_imageview"
-        android:layout_width="277dp"
-        android:layout_height="615dp"
+        android:layout_width="291dp"
+        android:layout_height="728dp"
         android:background="#DA5F6A"
         android:gravity="center"
         android:scaleType="fitCenter"
@@ -220,6 +220,53 @@ tools:context=".controller.WelcomeActivity">
                 android:progress="3"
                 android:progressTint="@color/white"
                 android:thumbTint="@color/white" />
+
+            <TextView
+                android:id="@+id/theme_radio_group_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_horizontal"
+                android:text="@string/theme_option"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lan_radio_group"
+                app:layout_constraintVertical_bias="0.01999998" />
+
+            <RadioGroup
+                android:id="@+id/theme_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekBar2">
+
+                <RadioButton
+                    android:id="@+id/lightTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/white"
+                    android:text="@string/light_button"
+                    android:textColor="#FFFFFF"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/darkTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/white"
+                    android:text="@string/dark_button"
+                    android:textColor="#FFFFFF" />
+            </RadioGroup>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

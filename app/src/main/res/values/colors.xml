@@ -2,12 +2,12 @@
 <resources>
     <color name="colorPrimary">#00E7FF</color>
     <color name="colorPrimaryDark">#08C0D5</color>
-    <color name="colorAccent">#F3528A</color>
+    <color name="colorAccent">#F3DCE3</color>
     <color name="mBackgroundPaint_Color">#D9D4CF</color>
     <color name="presetGridPaint_Color">#ABD0CE</color>
     <color name="blankGridPaint_Color">#f0e5de</color>
     <color name="gridLinePaint_Color">#7C7877</color>
     <color name="gridTextPaint_Color">#534847</color>
-    <color name="typeInButtonPaint_Color">#fffcf0</color>
+    <color name="typeInButtonPaint_Color">#7E594B</color>
     <color name="white">#FFFFFF</color>
 </resources>

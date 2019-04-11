@@ -19,6 +19,7 @@ public class WordListLab implements Serializable {
     private int switchLanguageFlag = 1;//1 is 1st lan, -1 is second lan
     private int listeningModeFlag = -1;//-1 is normal mode, 1 is listening mode
     private int NumberOfEmptyCell = 3;
+    private int themeFlag = -1;//-1 is light, 1 is dark
 
     /**
      * get a new WordListLab singleton object
@@ -165,6 +166,14 @@ public class WordListLab implements Serializable {
 
     public void setNumberOfEmptyCell(int numberOfEmptyCell) {
         NumberOfEmptyCell = numberOfEmptyCell;
+    }
+
+    public int getThemeFlag() {
+        return themeFlag;
+    }
+
+    public void setThemeFlag(int themeFlag) {
+        this.themeFlag = themeFlag;
     }
 }
 

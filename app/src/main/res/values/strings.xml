@@ -38,6 +38,10 @@
     <string name="confirm_button">Confirm</string>
     <string name="cancel_button">Cancel</string>
 
+    <string name="theme_option">Choose a theme:</string>
+    <string name="light_button">Light</string>
+    <string name="dark_button">Dark</string>
+
     <string name="difficulty_seekbar">Choose a difficulty:</string>
 
 </resources>
