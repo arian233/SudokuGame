@@ -117,4 +117,18 @@ public class WordListLabTest {
         assertEquals("chapter2", testWordListLab.getListsOfWord().get(1).getWordListsName());
     }
 
+    @Test
+    public void testFlags()
+    {
+        testWordListLab.setSwitchLanguageFlag(1);
+        testWordListLab.setListeningModeFlag(1);
+        testWordListLab.setNumberOfEmptyCell(1);
+        testWordListLab.setThemeFlag(1);
+
+        assertEquals(1, testWordListLab.getThemeFlag());
+        assertEquals(1, testWordListLab.getNumberOfEmptyCell());
+        assertEquals(1, testWordListLab.getListeningModeFlag());
+        assertEquals(1, testWordListLab.getSwitchLanguageFlag());
+    }
+
 }

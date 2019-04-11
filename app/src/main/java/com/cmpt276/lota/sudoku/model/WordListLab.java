@@ -144,34 +144,58 @@ public class WordListLab implements Serializable {
         mWordListLab = null;
     }
 
+    /**
+     * getSwitchLanguageFlag
+     */
     public int getSwitchLanguageFlag() {
         return switchLanguageFlag;
     }
 
+    /**
+     * setSwitchLanguageFlag
+     */
     public void setSwitchLanguageFlag(int switchLanguageFlag) {
         this.switchLanguageFlag = switchLanguageFlag;
     }
 
+    /**
+     * getSwitchLanguageFlag
+     */
     public int getListeningModeFlag() {
         return listeningModeFlag;
     }
 
+    /**
+     * setListeningModeFlag
+     */
     public void setListeningModeFlag(int listeningModeFlag) {
         this.listeningModeFlag = listeningModeFlag;
     }
 
+    /**
+     * getNumberOfEmptyCell
+     */
     public int getNumberOfEmptyCell() {
         return NumberOfEmptyCell;
     }
 
+    /**
+     * setNumberOfEmptyCell
+     */
     public void setNumberOfEmptyCell(int numberOfEmptyCell) {
         NumberOfEmptyCell = numberOfEmptyCell;
     }
 
+    /**
+     * getThemeFlag
+     */
     public int getThemeFlag() {
         return themeFlag;
     }
 
+    /**
+     * setThemeFlag
+     */
     public void setThemeFlag(int themeFlag) {
         this.themeFlag = themeFlag;
     }
