@@ -24,8 +24,11 @@ public class WelcomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = new Intent(WelcomeActivity.this,MusicServer.class);
         super.onCreate(savedInstanceState);
+        startService(intent);
         setContentView(R.layout.activity_welcome);
+
         start = findViewById(R.id.initial_button);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +64,14 @@ public class WelcomeActivity extends Activity {
         });
     }
 
-    public void initial() {
+
+    protected void onStop() {
+        Intent intent = new Intent(WelcomeActivity.this, MusicServer.class);
+        stopService(intent);
+        super.onStop();
+    }
+
+        public void initial() {
         Intent intent = new Intent(this, SudokuActivity.class);
         startActivity(intent);
     }

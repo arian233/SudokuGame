@@ -24,6 +24,14 @@
         <activity android:name=".controller.GifActivity" />
         <activity android:name=".controller.WordsListsActivity" />
         <activity android:name=".controller.InputWordsActivity" />
+
+        <service android:name=".controller.MusicServer">
+            <intent-filter>
+                <action android:name="com.angel.Android.MUSIC"/>
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
