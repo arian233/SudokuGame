@@ -1,21 +1,18 @@
 package com.cmpt276.lota.sudoku.controller;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import com.cmpt276.lota.sudoku.R;
 import com.cmpt276.lota.sudoku.model.WordListLab;
+
 
 public class WelcomeActivity extends Activity {
     private WordListLab wordListLab = WordListLab.get(WelcomeActivity.this);
@@ -24,7 +21,7 @@ public class WelcomeActivity extends Activity {
     private Dialog dialog;
     private Button wordsListsButton;
     private Button addWordsButton;
-    TextView textView;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +31,6 @@ public class WelcomeActivity extends Activity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                int cx = start.getWidth() / 2;
-//                int cy = start.getHeight() / 2;
-//                float radius = start.getWidth();
-//                Animator anim = ViewAnimationUtils
-//                        .createCircularReveal(start, cx, cy, radius, 0);
-//                anim.addListener(new AnimatorListenerAdapter() {
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        super.onAnimationEnd(animation);
-//                        start.setVisibility(View.INVISIBLE);
-//                    }
-//                });
-//                anim.start();
                 initial();
             } });
 
@@ -183,7 +167,6 @@ public class WelcomeActivity extends Activity {
                 textView.setText("Choose a difficulty: "+ str);
             }
         });
-
 
     }
 

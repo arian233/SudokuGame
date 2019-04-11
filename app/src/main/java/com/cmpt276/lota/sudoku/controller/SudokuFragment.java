@@ -1,6 +1,7 @@
 package com.cmpt276.lota.sudoku.controller;
 
 import android.app.AlertDialog;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.support.v7.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +27,18 @@ import com.cmpt276.lota.sudoku.model.CheckResult;
 import com.cmpt276.lota.sudoku.model.Language;
 import com.cmpt276.lota.sudoku.model.PuzzleGenerator;
 import com.cmpt276.lota.sudoku.model.WordListLab;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
@@ -45,15 +59,12 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private static String lan1[];//Language one
     private static String lan2[];//Language two
     private static String lanDialog[];//Language to be shown in dialog
-   // private String changeGridSize[] = {"4*4","6*6","9*9","12*12"};
 
     private static int dialogChosenIndex = -1;//-1 is nothing to be chosen
     private int switchLanguageFlag = wordListLab.getSwitchLanguageFlag();//1 is 1st lan, -1 is second lan
     private int listeningModeFlag = wordListLab.getListeningModeFlag();//-1 is normal mode, 1 is listening mode
     private int highlightedButton = -1;
     private int erasedButtonId = -1; //to erase cell
-   // private int changeListeningLanguageFlag = -1;//-1 is second language(e.g. chinese), 1 is first language
-    //private int hasChangedSizeFlag = -1;
 
     private int familiarity[] = new int[mPUZZLESIZE];
     private View layout;
@@ -61,6 +72,11 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
     private ImageButton refreshButton;
     private Button eraseButton;
     private Button checkResultButton;
+    private ImageView imageView;
+
+    private String link;
+    String data = "";
+    String singleParsed = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +84,8 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         setRetainInstance(true);
         generator = new PuzzleGenerator();
         mPuzzle = generator.generateGrid();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     @Override
@@ -149,32 +167,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
 
         initialListeningTTS();
 
-//        //initialize button to change grid size
-//        changeGridSizeButton = layout.findViewById(R.id.change_grid_size_button);
-//        changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-//        changeGridSizeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showRadioDialogForChangeGridSize();
-//            }
-//        });
-//
-//        //initialize change listening language button
-//        changeListeningLanguageButton = layout.findViewById(R.id.change_listening_language_button);
-//        changeListeningLanguageButton.setEnabled(false);
-//        changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-//        changeListeningLanguageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                changeListeningLanguageFlag *= -1;
-//                textToSpeech.stop();
-//                textToSpeech.shutdown();
-//                initialListeningTTS();
-//                switchLanguageFlag *= -1;
-//                switchLanguageInDialog();
-//                changeButtobTextsforListening();
-//            }
-//        });
+        imageView = layout.findViewById(R.id.imgForWords);
 
         //initialize refreshButton and save 3 most unfamiliar words
         refreshButton = layout.findViewById(R.id.refresh_button);
@@ -200,18 +193,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 wordListLab.setUnfamiliarWord(str);
                 generator = new PuzzleGenerator();
                 mPuzzle = generator.generateGrid();
-//                if(hasChangedSizeFlag == 1){
-//                    mPUZZLESIZE = wordListLab.getPuzzleSize();
-//                    mPUZZLETOTALSIZE = mPUZZLESIZE * mPUZZLESIZE;
-//                    mCheckResult = new CheckResult();
-//                    familiarity = new int[mPUZZLESIZE];
-//                    hasChangedSizeFlag = -1;
-//                    initialPuzzle();
-//                    initial();
-//                    changeButtonTextforSwitchLanguage();
-//                }else{
-//
-//                }
                 initialPuzzle();
                 initialForRefresh();
             }
@@ -252,38 +233,6 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                 checkAnswer();
             }
         });
-
-//        //initialize switch language Button
-//        switchButton = layout.findViewById(R.id.switch_button);
-//        switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-//        switchButton.setTextSize(2*mFONTSIZE);
-//        switchButton.setPadding(10,10,10,10);
-//        switchButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switchLanguageFlag *= -1;
-//                switchLanguageInDialog();
-//                changeButtonTextforSwitchLanguage();
-//            }
-//        });
-
-
-
-
-//        //initialize listeningModeButton
-//        listeningModeButton = layout.findViewById(R.id.listening_mode_button);
-//        listeningModeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-//        listeningModeButton.setTextSize(2*mFONTSIZE);
-//        listeningModeButton.setPadding(10,10,10,10);
-//        listeningModeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listeningModeFlag *= -1;
-//                switchLanguageFlag *= -1;
-//                listeningModeControl();
-//                switchLanguageInDialog();
-//            }
-//        });
 
         //initialize gridLayout 9 rows and 9 columns
         GridLayout gridLayout = layout.findViewById(R.id.grid_layout);
@@ -341,6 +290,7 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
                                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                                 toast.show();
                                 familiarity[mPuzzle[y][x].getNumber()-1] += 1;//for familiarity
+                                searchImage(mPuzzle[y][x].getLanguageOne());
                             }
                         }else{
                             erasedButtonId = buttonId;
@@ -639,22 +589,8 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
      */
     public void listeningModeControl(){
         if(listeningModeFlag == 1){
-//            switchButton.setEnabled(false);
-//            changeGridSizeButton.setEnabled(false);
-//            changeListeningLanguageButton.setEnabled(true);
-//            switchButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-//            changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-//            changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-
             changeButtobTextsforListening();
         }else {
-//            switchButton.setEnabled(true);
-//            changeGridSizeButton.setEnabled(true);
-//            changeListeningLanguageButton.setEnabled(false);
-//            switchButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-//            changeGridSizeButton.setBackground(getResources().getDrawable(R.drawable.buttons));
-//            changeListeningLanguageButton.setBackground(getResources().getDrawable(R.drawable.disable_button));
-
             changeButtonTextforSwitchLanguage();
         }
     }
@@ -706,33 +642,40 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
         textToSpeech = new TextToSpeech(getActivity(), this);
     }
 
-//    /**
-//     * gibe a Dialog for user to input words
-//     */
-//    private void showRadioDialogForChangeGridSize(){
-//        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-//        alertDialog.setTitle(getString(R.string.dialog_radio_change_grid_size));
-//        alertDialog.setIcon(R.mipmap.ic_launcher_round);
-//        alertDialog.setItems(changeGridSize, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                int size;
-//                hasChangedSizeFlag = 1;
-//                if(which == 0){
-//                    size = 4;
-//                }else if(which == 1){
-//                    size = 6;
-//                }else if(which == 3){
-//                    size = 12;
-//                }else{
-//                    size = 9;
-//                }
-//
-//                if(size!=9)
-//                    highlightedButton = -1;
-//                wordListLab.setPuzzleSize(size);
-//            }
-//        }).create();
-//        alertDialog.show();
-//    }
+    /**
+     * search image
+     */
+    public void searchImage(String word){
+        try {
+            URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyD28SLAKHIjx2_Oj7hi36Phka3qD2vQQYU&cx=000791778389235616401:usdvzjekse0&q="+word+"&imgSize=large&num=1&searchType=image&fields=items(link)");
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+            data = "";
+            while(line != null){
+                line = bufferedReader.readLine();
+                data = data + line;
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+
+            JSONObject JO = new JSONObject(data);
+            singleParsed = JO.get("items") + "";
+            link = singleParsed.replaceAll("/", "");
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("hahahhahahahahahahahaha", "url= " + word);
+        Log.d("hahahhahahahahahahahaha", "index= " + link.substring(10,link.length()-3));
+
+        Picasso.get().load( link.substring(10,link.length()-3) ).into(imageView);
+    }
 }
