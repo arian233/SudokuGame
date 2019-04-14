@@ -186,7 +186,7 @@ As a user, I want to have a dark theme, so that it does not hurt my eyes in eith
 1. **[Complete]** **[final iteration]**
    - Given: on the setting of the welcome page
    - When: the student choose the light or dark **theme**
-   - Then: the program switch themes accordingly
+   - Then: the program switch game theme accordingly
 
 ------
 
@@ -214,5 +214,18 @@ As a user, I want to have a picture for each words, so that I can memorize the w
    - Given: on the normal text mode
    - When: the user clicks the **prefilled grid** 
    - Then: on the corner, the program will show a picture which relates to the selected word by getting image online
-     - (It will work for the existing wordlist "chapter 2" and other wordlist that the user import)
+     - (It works well for the existing wordlist "chapter 2" and other wordlist that the user import)
      - (But for wordlist "chapter 1", since the content of this wordlist is all numbers, it is too abstract for the app to find a picture and then match to the corresponding word)
+
+------
+
+**User Stories 11:**
+
+As a user, I want to a background music on the welcome page, so that I can relax.
+
+**TDD Example:**
+
+1. **[Complete]** **[final iteration]**
+   - Given: user launch the app
+   - When: on the welcome page
+   - Then: there's a background music on welcome page
