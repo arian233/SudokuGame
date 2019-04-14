@@ -707,8 +707,8 @@ public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListe
             e.printStackTrace();
         }
 
-        Log.d("hahahhahahahahahahahaha", "url= " + word);
-        Log.d("hahahhahahahahahahahaha", "index= " + link.substring(10,link.length()-3));
+
+       // Log.d("hahahhahahahahahahahaha", "index= " + link.substring(10,link.length()-3));
 
         Picasso.get().load( link.substring(10,link.length()-3) ).into(imageViewForWords);
     }
