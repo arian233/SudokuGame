@@ -229,5 +229,5 @@ As a user, I want to have a picture mode for each words, so that I can memorize 
    - Given: on the normal text mode
    - When: the user clicks the **prefilled grid** 
    - Then: the program pops up a picture which relates to the selected word
-     - (It will work for the existing wordlist "chapter 2" and other wordlist that the user import
+     - (It will work for the existing wordlist "chapter 2" and other wordlist that the user import)
      - (But for wordlist "chapter 1", since the content of this wordlist is all numbers, it is too abstract for the app to find a picture and then match to the corresponding word)
