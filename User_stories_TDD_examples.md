@@ -26,8 +26,8 @@ As a teacher, I want to help students to improve their Problem-solving skills wi
      - and then clicks on the **erase** button
    - Then: the cell will be erased and be empty
 5. **[Complete]**
-   - Given: that normal text mode is enabled
-   - When: the student clicks on **switch language button**
+   - Given: on the setting of the welcome page
+   - When: the student changes **language**
    - Then: the program will switch the languages it displays in the prefilled cell
 6. **[Complete]**
    - Given: that listening comprehension mode is enabled
@@ -54,29 +54,30 @@ As a student, I want to listen to the words I'm learning, so that I can practice
 
 **TDD Examples:**
 
-1. **[Complete]** ("then" is implemented in iter3 )
-   - Given: that normal text mode is enabled
-   - When: the student clicks **listening mode button**
+1. **[Complete]** 
+   - Given: on the setting of the welcome page
+   - When: the student changes **game mode** to listening mode
+        - and click start button
    - Then: the student sees a standard Sudoku grid with some prefilled cells showing digits in the range 1..9/1…4/1…6/1…12 accordingly and all other cells empty
-2. **[Complete]** ( implemented in iter3 )
-   - Given: that listening comprehension mode is enabled
-   - When: the student clicks **earphone button**
+2. **[Complete]** 
+   - Given: on the setting of the welcome page
+   - When: the student changes **language**
    - Then: the program switch the languages it speaks
-3. **[Complete]**( implemented in iter3 )
+3. **[Complete]**
    - Given: that listening comprehension mode is enabled
    - When: the student clicks **empty cells**
    - Then: the program will pops up a list answer for the student to enter into the cell
-4. **[Complete]** ( implemented in iter3 )
+4. **[Complete]** 
    - Given: that the student is filling in the grid in listening comprehension mode,
      - and that the grid includes a cell with the prefilled digit 4
      - and that word pair 4 is (green, 绿)
    - When: the student presses the **prefilled cell** having the digit 4
    - Then: the student hears the word "绿" read out and pronounced in Chinese.
-5. **[Complete]** ( implemented in iter3 )
+5. **[Complete]** 
    - Given: that the student is filling in the grid in listening comprehension mode,
    - When: the student presses a cell and hears the word "绿"
    - Then: the student does not see the word "绿" anywhere on the game grid.
-6. **[Complete]** ( implemented in iter3 )
+6. **[Complete]** 
    - Given: that the student is filling in the grid in listening comprehension mode,
      - and that the grid includes a cell with the prefilled digit 4
      - and that word pair 4 is (green, 绿)
@@ -92,14 +93,12 @@ As a teacher, I want to specify a list of word pairs for my students, so that th
 **TDD Examples:**
 
 1. **[Complete]**
-   - Given: that listening comprehension mode is enabled
-     - Or normal text mode is enabled
+   - Given: on the welcome page
    - When: the student click the **import button**
      - and  choose a **csv file** from his phone 
    - Then:  the app will import a list of words from the chosen csv file into the word list of app
 2. **[Complete]**
-   - Given: that listening comprehension mode is enabled
-     - Or normal text mode is enabled
+   - Given: on import file page
    - When: the student imports the **csv file**
    - Then:  the app will ask the student to enter a name for the word list
 
@@ -112,18 +111,15 @@ As a student, I want to work with a textbook, so that I can practice word from e
 **TDD Examples:**
 
 1. **[Complete]**
-   - Given: that listening comprehension mode is enabled
-     - Or normal text mode is enabled
+   - Given: on the welcome page
    - When: the student click the **words lists button**
      - and choose a **chapter** from words lists page
-     - and return to the puzzle page
-     - and click the **refresh button**
+     - and click the **start button**
    - Then:  the app will generate a new puzzle fill with the words which the user chose
 2. **[Complete]**
-   - Given: that listening comprehension mode is enabled
-     - Or normal text mode is enabled
+   - Given: on the setting of the welcome page
    - When: the student click the **words lists button**
-   - Then:  the wordlist page will be displayed, with preset word lists of each chapter
+   - Then: the wordlist page will be displayed, with preset word lists of each chapter
      - and the imported word list will be displayed by its name
 
 ------
@@ -154,11 +150,11 @@ As a vocabulary learner, I want to use my phone or tablet(different devices) for
      - Or normal text mode is enabled
    - When: the student rotate the **screen** 
    - Then:  the app will increase the font size accordingly, and the width of the grids
-2. **[Complete]** ( implemented in iter3 )
-   - Given: normal text mode is enabled
-   - When: the student click the **puzzle size button** 
+2. **[Complete]**
+   - Given: on the setting of the welcome page
+   - When: the student click the **puzzle size** 
      - and choose one of the 4x4, 6x6, 9x9, 12x12 puzzle sizes
-     - and click the **refresh button**
+     - and click start button
    - Then:  the app will change the puzzle size accordingly
 3. **[Complete]** 
    - Given: normal text mode is enabled
@@ -169,26 +165,15 @@ As a vocabulary learner, I want to use my phone or tablet(different devices) for
 
 **User Stories 7:**
 
-As a vocabulary learner, I want to have a more beatiful UI of the app, so that the places for the buttons and settings are arranged appropriately.
+As a vocabulary learner, I want to have a setting for the app, so that the places for the buttons are arranged appropriately.
 
 **TDD Examples:**
 
-1. **[Complete]**
-   - Given: that listening comprehension mode is enabled
-     - Or normal text mode is enabled
-   - When: the student rotate the **screen** 
-   - Then:  the app will increase the font size accordingly, and the width of the grids
-2. **[Complete]** ( implemented in iter3 )
-   - Given: normal text mode is enabled
-   - When: the student click the **puzzle size button** 
-     - and choose one of the 4x4, 6x6, 9x9, 12x12 puzzle sizes
-     - and click the **refresh button**
-   - Then:  the app will change the puzzle size accordingly
-3. **[Complete]** **[final iteration]**
+1. **[Complete]** **[final iteration]**
    - Given: user launched the app
-   - When: the user sees a welcome page with buttons
-     - and the user sees switch languages button, switch modes button, theme button, grid size button, import and words lists button
-   - Then:  the user can change the settings for the app on the welcome page by click the buttons
+   - When: the user sees a welcome page with setting button
+     - and the user sees import and words lists button
+   - Then:  the user can change the settings for the app, select word list, or import file on the welcome page 
 
 ------
 
@@ -199,7 +184,7 @@ As a user, I want to have a dark theme, so that it does not hurt my eyes in eith
 **TDD Example:**
 
 1. **[Complete]** **[final iteration]**
-   - Given: on the welcome page ( will implement in the final iteration)
+   - Given: on the setting of the welcome page
    - When: the student choose the light or dark **theme**
    - Then: the program switch themes accordingly
 
@@ -212,22 +197,22 @@ As a user, I want to change the puzzle difficulty, so that I won't be pushed awa
 **TDD Example:**
 
 1. **[Complete]** **[final iteration]**
-   - Given: on the welcome page ( will implement in the final iteration)
-   - When: the student choose the difficulty of the puzzle by **difficulty button**  ( will implement in the final iteration)
-     - and click **start button** to initials the game ( will implement in the final iteration)
+   - Given: on the setting of the welcome page
+   - When: the student choose the difficulty of the puzzle by **difficulty button**  
+     - and click **start button** to initials the game 
    - Then: the program generates a puzzles with different number of empty cells accordingly
 
 ------
 
 **User Stories 10:**
 
-As a user, I want to have a picture mode for each words, so that I can memorize the word by seeing a picture.
+As a user, I want to have a picture for each words, so that I can memorize the word by seeing a picture.
 
 **TDD Example:**
 
 1. **[Complete]** **[final iteration]**
    - Given: on the normal text mode
    - When: the user clicks the **prefilled grid** 
-   - Then: the program pops up a picture which relates to the selected word
+   - Then: on the corner, the program will show a picture which relates to the selected word by getting image online
      - (It will work for the existing wordlist "chapter 2" and other wordlist that the user import)
      - (But for wordlist "chapter 1", since the content of this wordlist is all numbers, it is too abstract for the app to find a picture and then match to the corresponding word)
