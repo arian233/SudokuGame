@@ -2,6 +2,9 @@ package com.cmpt276.lota.sudoku.model;
 
 import java.util.UUID;
 
+/**
+ * getter and setter functions for wordListLab.java file
+ */
 public class Words {
 
     private UUID mId = UUID.randomUUID();

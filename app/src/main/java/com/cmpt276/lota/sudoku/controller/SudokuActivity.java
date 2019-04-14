@@ -1,3 +1,6 @@
+/**
+ * Group IOTA Sudoku game project
+ */
 package com.cmpt276.lota.sudoku.controller;
 
 import android.os.Bundle;

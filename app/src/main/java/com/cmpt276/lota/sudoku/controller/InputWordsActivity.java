@@ -38,6 +38,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * This class is adds the functionality to import customized
+ * words from the device using CSV files
+ */
 public class InputWordsActivity extends AppCompatActivity {
     private TextView chosenFileName;
     private Button chooseFileBtn;

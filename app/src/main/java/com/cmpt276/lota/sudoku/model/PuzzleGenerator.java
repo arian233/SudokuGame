@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * this class generates the puzzle and fills it randomly
+ */
 public class PuzzleGenerator {
     private Context testContex;
     private WordListLab wordListLab = WordListLab.get(testContex);

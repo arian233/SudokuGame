@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * This class adds some predefined word lists to the game
+ */
 public class WordListLab implements Serializable {
     private static WordListLab mWordListLab;//class itself
     private List<ListsOfWords> mListsOfWord;//the big list of wordlists

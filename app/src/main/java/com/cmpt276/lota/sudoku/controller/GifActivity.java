@@ -6,6 +6,9 @@ import android.view.Window;
 
 import com.cmpt276.lota.sudoku.R;
 
+/**
+ * This class show a gif when user wins the game
+ */
 public class GifActivity extends AppCompatActivity {
 
     @Override

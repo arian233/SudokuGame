@@ -2,6 +2,11 @@ package com.cmpt276.lota.sudoku.model;
 
 import android.content.Context;
 
+/**
+ * this class is used when user taps check result button
+ * it checks for repetitions and reports appropriate message
+ * to the user
+ */
 public class CheckResult {
     private Context testContex;
     private WordListLab wordListLab = WordListLab.get(testContex);

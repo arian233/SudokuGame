@@ -1,3 +1,4 @@
+
 package com.cmpt276.lota.sudoku.controller;
 
 import android.app.AlertDialog;
@@ -43,6 +44,10 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
 
+/**
+ * This class builds the Sudoku game page and its functionalities
+ * such as check, highlight selected grids and show game timer
+ */
 public class SudokuFragment extends Fragment implements TextToSpeech.OnInitListener {
 
     private WordListLab wordListLab = WordListLab.get(getActivity());

@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.cmpt276.lota.sudoku.R;
 import com.cmpt276.lota.sudoku.model.WordListLab;
 
+/**
+ * This class runs first when user opens the app first
+ * contains setting, word list, import and start game
+ */
 public class WelcomeActivity extends Activity {
     private WordListLab wordListLab = WordListLab.get(WelcomeActivity.this);
     private Button start;

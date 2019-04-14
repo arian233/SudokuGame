@@ -7,7 +7,9 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import com.cmpt276.lota.sudoku.R;
 
-
+/**
+ *  This class adds background music to the main menu
+ *  */
 public class MusicServer extends Service {
     private MediaPlayer mediaPlayer;
     @Override
