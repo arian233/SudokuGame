@@ -184,7 +184,7 @@ As a vocabulary learner, I want to have a more beatiful UI of the app, so that t
      - and choose one of the 4x4, 6x6, 9x9, 12x12 puzzle sizes
      - and click the **refresh button**
    - Then:  the app will change the puzzle size accordingly
-3. **[To be implemented]** ***[final]***
+3. **[Complete]** **[final iteration]**
    - Given: user launched the app
    - When: the user sees a welcome page with buttons
      - and the user sees switch languages button, switch modes button, theme button, grid size button, import and words lists button
@@ -198,7 +198,7 @@ As a user, I want to have a dark theme, so that it does not hurt my eyes in eith
 
 **TDD Example:**
 
-1. **[To be implemented]** ***[final]***
+1. **[Complete]** **[final iteration]**
    - Given: on the welcome page ( will implement in the final iteration)
    - When: the student choose the light or dark **theme**
    - Then: the program switch themes accordingly
@@ -211,7 +211,7 @@ As a user, I want to change the puzzle difficulty, so that I won't be pushed awa
 
 **TDD Example:**
 
-1. **[To be implemented]** ***[final]***
+1. **[Complete]** **[final iteration]**
    - Given: on the welcome page ( will implement in the final iteration)
    - When: the student choose the difficulty of the puzzle by **difficulty button**  ( will implement in the final iteration)
      - and click **start button** to initials the game ( will implement in the final iteration)
@@ -225,7 +225,9 @@ As a user, I want to have a picture mode for each words, so that I can memorize 
 
 **TDD Example:**
 
-1. **[To be implemented]** ***[final]***
+1. **[Complete]** **[final iteration]**
    - Given: on the normal text mode
-   - When: the user long press **prefilled grid** 
+   - When: the user clicks the **prefilled grid** 
    - Then: the program pops up a picture which relates to the selected word
+     - (It will work for the existing wordlist "chapter 2" and other wordlist that the user import
+     - (But for wordlist "chapter 1", since the content of this wordlist is all numbers, it is too abstract for the app to find a picture and then match to the corresponding word)
