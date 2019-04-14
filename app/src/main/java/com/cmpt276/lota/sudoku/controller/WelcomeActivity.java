@@ -108,19 +108,21 @@ public class WelcomeActivity extends Activity {
                 RadioButton radioTheme = dialog.findViewById(R.id.lightTheme);
                 RadioButton radioTheme2 = dialog.findViewById(R.id.darkTheme);
 
-                //set the settings
+                //set the language pair
                 if(radioLan.isChecked()){
                     wordListLab.setSwitchLanguageFlag(-1);
                 }else if(radioLanDefault.isChecked()){
                     wordListLab.setSwitchLanguageFlag(1);
                 }
 
+                //change modes
                 if(radioMode.isChecked()){
                     wordListLab.setListeningModeFlag(1);
                 }else if(radioModeDefault.isChecked()){
                     wordListLab.setListeningModeFlag(-1);
                 }
 
+                //change puzzle size
                 if(radioSize4.isChecked()){
                     wordListLab.setPuzzleSize(4);
                 }else if(radioSize6.isChecked()){
@@ -131,6 +133,7 @@ public class WelcomeActivity extends Activity {
                     wordListLab.setPuzzleSize(9);
                 }
 
+                //change theme
                 if(radioTheme.isChecked()){
                     wordListLab.setThemeFlag(-1);
                 }else if(radioTheme2.isChecked()){
@@ -164,6 +167,7 @@ public class WelcomeActivity extends Activity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                //change difficulty
                 String str = "";
                 if(progress == 0){
                     str="very easy";
