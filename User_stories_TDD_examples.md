@@ -36,7 +36,7 @@ As a teacher, I want to help students to improve their Problem-solving skills wi
    - Then: studentcan know how much time has past
 7. **[Complete]**
    - Given: that normal text mode is enabled
-   - When: the student entered a repeat word
+   - When: the student entered a duplicate word
    - Then:  a instant caution pops up
      - and the program will prevent the student enter that answer
 8. **[Complete]**
@@ -62,7 +62,7 @@ As a student, I want to listen to the words I'm learning, so that I can practice
 2. **[Complete]** 
    - Given: on the setting of the welcome page
    - When: the student changes **language**
-   - Then: the program switch the languages it speaks
+   - Then: the program switch the languages in listening mode also
 3. **[Complete]**
    - Given: that listening comprehension mode is enabled
    - When: the student clicks **empty cells**
@@ -95,7 +95,7 @@ As a teacher, I want to specify a list of word pairs for my students, so that th
 1. **[Complete]**
    - Given: on the welcome page
    - When: the student click the **import button**
-     - and  choose a **csv file** from his phone 
+     - and  chooses a **csv file** from his phone 
    - Then:  the app will import a list of words from the chosen csv file into the word list of app
 2. **[Complete]**
    - Given: on import file page
@@ -206,7 +206,7 @@ As a user, I want to change the puzzle difficulty, so that I won't be pushed awa
 
 **User Stories 10:**
 
-As a user, I want to have a picture for each words, so that I can memorize the word by seeing a picture.
+As a user who is visual learner, I want to see a picture for each word I am learning, so that I can memorize the word by seeing a picture.
 
 **TDD Example:**
 
